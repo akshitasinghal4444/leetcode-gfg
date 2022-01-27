@@ -52,42 +52,5 @@ public:
         helper(n,k,i,vis,fact);
         return ans;
     }
-    
-//     void helper(int i,int n,int *k,string s,string &ans)
-//     {
-//         cout<<"helper("<<i<<","<<","<<*k<<","<<s<<")"<<endl;
-//         if(i==n)
-//         {
-//             (*k)--;
-//             if(*k==0)
-//             {
-//             ans=s;
-//             return;
-//             }
-//             return ;
-//         }
-            
-        
-        
-        
-//         int j;
-//         for(j=i;j<n;j++)
-//         {
-//             swap(s[i],s[j]);
-//             helper(i+1,n,k,s,ans);
-//             swap(s[i],s[j]);
-            
-//         }
-//     }
-    
-//     string getPermutation(int n, int k) {
-        
-//         string ans;   
-//         string s="";
-//         for(int i=1;i<=n;i++)
-//             s+=(i+'0');
-//         helper(0,n,&k,s,ans);
-//         return ans;
-        
-//     }
+ 
 };
