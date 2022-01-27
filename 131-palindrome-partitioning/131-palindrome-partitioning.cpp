@@ -4,7 +4,7 @@ public:
     vector<vector<string>> ans;
     vector<string> t;
     
-    bool isPalindrome(int l,int r,string s)
+    bool isPalindrome(int l,int r,string &s)
     {
         while(l<r)
         {
@@ -16,7 +16,7 @@ public:
         return 1;
     }
     
-    void helper(string s,int n,int st)
+    void helper(string &s,int n,int st)
     {
         if(st==n)
             ans.push_back(t);
