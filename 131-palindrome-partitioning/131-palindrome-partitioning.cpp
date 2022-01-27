@@ -2,6 +2,7 @@ class Solution {
 public:
     
     vector<vector<string>> ans;
+    vector<string> t;
     
     bool isPalindrome(int l,int r,string s)
     {
@@ -15,7 +16,7 @@ public:
         return 1;
     }
     
-    void helper(string s,int n,int st,vector<string> t)
+    void helper(string s,int n,int st)
     {
         if(st==n)
             ans.push_back(t);
@@ -25,7 +26,7 @@ public:
             if(isPalindrome(st,i,s))
             {
                 t.push_back(s.substr(st,i-st+1));
-                helper(s,n,i+1,t);
+                helper(s,n,i+1);
                 t.pop_back();
             }
         }
@@ -34,7 +35,7 @@ public:
     vector<vector<string>> partition(string s)
     {
         int n=s.size();
-        helper(s,n,0,{});
+        helper(s,n,0);
         return ans;
     }
 };
