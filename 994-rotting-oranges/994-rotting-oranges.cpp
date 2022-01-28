@@ -12,7 +12,7 @@ public:
         int i,j;
         queue<vector<int>> q;
         
-        int c=0;
+        int c=0,f=0;
         for(i=0;i<m;i++)
         {
             for(j=0;j<n;j++)
@@ -22,8 +22,13 @@ public:
                     q.push({i,j});
                     a[i][j]=0;
                 }
+                if(a[i][j]==1)
+                    f++;
             }
         }
+        
+        if(f==0)
+            return 0;
         
         while(!q.empty())
         {
@@ -37,21 +42,25 @@ public:
                 {
                     a[x-1][y]=0;
                     q.push({x-1,y});
+                    f--;
                 }
                 if(isValid(x+1,y,m,n,a))
                 {
                     a[x+1][y]=0;
                     q.push({x+1,y});
+                    f--;
                 }
                 if(isValid(x,y-1,m,n,a))
                 {
                     a[x][y-1]=0;
                     q.push({x,y-1});
+                    f--;
                 }
                 if(isValid(x,y+1,m,n,a))
                 {
                     a[x][y+1]=0;
                     q.push({x,y+1});
+                    f--;
                 }
             }
             c++;
@@ -59,14 +68,8 @@ public:
         if(c!=0)
             c=c-1;
         
-        for(i=0;i<m;i++)
-        {
-            for(j=0;j<n;j++)
-            {
-                if(a[i][j]==1)
-                    return -1;
-            }
-        }
+        if(f>0)
+            return -1;
         return c;
     }
 };
