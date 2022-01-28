@@ -5,48 +5,6 @@ public:
         return (i>=0 && j>=0 && i<m && j<n && a[i][j]==1);
     }
     
-    int bfs(vector<vector<int>>& a,int m,int n,int i,int j)
-    {
-        a[i][j]=0;
-        int c=0;
-        queue<vector<int>> q;
-        q.push({i,j});
-        
-        while(!q.empty())
-        {
-            
-            int s=q.size();
-            while(s--)
-            {
-                int x=q.front()[0],y=q.front()[1];
-                q.pop();
-                
-                if(isValid(x-1,y,m,n,a))
-                {
-                    a[x-1][y]=0;
-                    q.push({x-1,y});
-                }
-                if(isValid(x+1,y,m,n,a))
-                {
-                    a[x+1][y]=0;
-                    q.push({x+1,y});
-                }
-                if(isValid(x,y-1,m,n,a))
-                {
-                    a[x][y-1]=0;
-                    q.push({x,y-1});
-                }
-                if(isValid(x,y+1,m,n,a))
-                {
-                    a[x][y+1]=0;
-                    q.push({x,y+1});
-                }
-            }
-            c++;
-        }
-        return c-1;
-    }
-    
     int orangesRotting(vector<vector<int>>& a) {
         int m,n;
         m=a.size();
