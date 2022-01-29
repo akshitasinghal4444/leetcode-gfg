@@ -4,16 +4,12 @@ public:
     {
         int i,j;
         
-        //row
+        //row && col
         for(i=0;i<9;i++)
         {
             if(a[r][i]==k)
                 return 0;
-        }
-        
-        //col
-        for(i=0;i<9;i++)
-        {
+            
             if(a[i][c]==k)
                 return 0;
         }
