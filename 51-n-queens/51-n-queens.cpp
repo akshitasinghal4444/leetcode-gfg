@@ -41,10 +41,10 @@ public:
         }
         
         int i;
-        string s="";
+        string s(n,'.');
         
-        for(int i=0;i<n;i++)
-            s+='.';
+        // for(int i=0;i<n;i++)
+        //     s+='.';
 
         for(i=0;i<n;i++)
         {
