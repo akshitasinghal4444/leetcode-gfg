@@ -64,7 +64,7 @@ public:
                     
                     if(c<8)
                         f=solve(a,r,c+1);
-                    else if(r<8)
+                    else
                         f=solve(a,r+1,0);
                 
                     if(f)
@@ -81,7 +81,7 @@ public:
                     
             if(c<8)
                 f=solve(a,r,c+1);
-            else if(r<8)
+            else
                 f=solve(a,r+1,0);
             
             if(f)
