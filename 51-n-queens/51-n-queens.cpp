@@ -7,18 +7,22 @@ public:
     bool isSafe(vector<vector<int>> &a,int n,int r,int c)
     {
         int i,j;
+        
+        //same col
         for(i=r-1,j=c;i>=0;i--)
         {
             if(a[i][j]==1)
                 return 0;
         }
         
+        //left diagnol
         for(i=r-1,j=c-1;i>=0 && j>=0;i--,j--)
         {
             if(a[i][j]==1)
                 return 0;
         }
         
+        //right diagnol
         for(i=r-1,j=c+1;i>=0 && j<n;i--,j++)
         {
             if(a[i][j]==1)
@@ -49,7 +53,9 @@ public:
                 s[i]='Q';
                 t.push_back(s);
                 a[r][i]=1;
+                
                 solve(a,n,r+1); 
+                
                 a[r][i]=0;
                 t.pop_back();
                 s[i]='.';
