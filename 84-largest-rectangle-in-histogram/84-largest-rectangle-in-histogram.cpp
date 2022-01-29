@@ -32,13 +32,12 @@ public:
                 r[i]=s.top()-1;
             
             s.push(i);
-        }
-        
-        for(i=0;i<n;i++)
-        {
+            
             int w=r[i]-l[i]+1;
             ans=max(ans,a[i]*w);
         }
+        
+
         return ans;
     }
 };
