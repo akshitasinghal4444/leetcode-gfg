@@ -34,7 +34,7 @@ class Solution{
         {
             if(isValid(a,i+x[k],j+y[k],n))
             {
-                a[i+x[k]][j+y[k]]=0;
+                // a[i+x[k]][j+y[k]]=0;
                 s+=dir[k];
                 dfs(a,n,i+x[k],j+y[k],s);
                 s.pop_back();
