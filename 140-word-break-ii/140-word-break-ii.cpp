@@ -28,13 +28,13 @@ void wordBreak(string &s, vector<string> &d,int in,int n,string t)
     {
         if((i==0 || d[i]!=d[i-1]) && comp(s,in,n,d[i]))
         {
-            string x=t;
-            t+=d[i];
-            t+=' ';
+            // string x=t;
+            // t+=d[i];
+            // t+=' ';
             
-            wordBreak(s,d,in+d[i].length(),n,t);
+            wordBreak(s,d,in+d[i].length(),n,t+d[i]+" ");
             
-            t=x;
+            // t=x;
         }
     }
 }
