@@ -1,5 +1,24 @@
 class Solution {
 public:
+    int removeElement(vector<int>& a, int val)
+    {
+        int n=a.size();
+        int i=0,k=n;
+        
+        while(i<k)
+        {
+            if(a[i]==val)
+            {
+                a[i]=a[k-1];
+                k--;
+            }
+            else
+                i++;
+        }
+        return k;
+    }
+    
+    /*
     int removeElement(vector<int>& a, int val) {
         int n=a.size();
         int i=0,j=n-1;
@@ -22,4 +41,5 @@ public:
         }
         return i;
     }
+    */
 };
