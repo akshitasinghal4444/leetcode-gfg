@@ -17,18 +17,8 @@ public:
             
             for(i=0;i<r;i++)
             {
-                int l=0,h=c-1;
-                while(l<=h)
-                {
-                    int mid=(l+h)/2;
-                    if(a[i][mid]>=n+1)
-                    h=mid-1;
-                    else
-                    l=mid+1;
-                }
-                co+=l;
+                co+=upper_bound(a[i].begin(),a[i].begin()+c,n)-a[i].begin();
             }
-            // cout<<n<<" "<<co<<endl;
             return co;
         }
 
@@ -54,6 +44,52 @@ public:
         }
         return l;
     }
+
+        /*
+        int count(int n,vector<vector<int>> &a, int r, int c)
+        {
+            int co=0;
+            int i;
+            
+            for(i=0;i<r;i++)
+            {
+                int l=0,h=c-1;
+                while(l<=h)
+                {
+                    int mid=(l+h)/2;
+                    if(a[i][mid]>=n+1)
+                    h=mid-1;
+                    else
+                    l=mid+1;
+                }
+                co+=l;
+            }
+            return co;
+        }
+
+        int median(vector<vector<int>> &a, int r, int c){
+        // code here  
+        int l=a[0][0],h=a[0][c-1];
+        int i,j;
+        
+        for(i=0;i<r;i++)
+        {
+            l=min(l,a[i][0]);
+            h=max(h,a[i][c-1]);
+        }
+        
+        int x=(r*c/2)+1;
+        while(l<=h)
+        {
+            int mid=(l+h)/2;
+            if(count(mid,a,r,c)>=x)
+            h=mid-1;
+            else
+            l=mid+1;
+        }
+        return l;
+    }
+    */
 
     /*
     int median(vector<vector<int>> &a, int r, int c){
