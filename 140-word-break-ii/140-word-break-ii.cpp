@@ -1,5 +1,40 @@
 class Solution {
 public:
+    vector<string> wordBreak(string &s, vector<string> &d)
+    {
+        // Write your code here
+        int n=s.length();
+        unordered_set<string> d1(d.begin(),d.end());
+        vector<vector<string>> v(n);
+   	
+        int i,j;
+    
+        for(i=n-1;i>=0;i--)
+        {
+            string t="";
+            for(j=i;j<n;j++)
+            {
+                t+=s[j];
+                if(d1.find(t)!=d1.end())
+                {
+                    if(j==n-1)
+                        v[i].push_back(t);
+                    else if(v[j+1].size()!=0)
+                    {
+                      for(string str:v[j+1])
+                        {
+                            string x=t+" "+str;
+                            v[i].push_back(x);
+                        }
+                    }
+                }
+            }
+        }
+        return v[0];
+}
+    
+    
+    /*
     vector<string> ans;
 
     void wordBreak(string &s, unordered_set<string> &d,int in,int n,string &t)
@@ -39,7 +74,10 @@ public:
     	wordBreak(s,d1,0,n,t);
         return ans;
     }
-/*    
+    */
+    
+    
+    /*    
     vector<string> ans;
 
     bool comp(string &s,int in,int n,string &d)
