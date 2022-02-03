@@ -1,8 +1,7 @@
 class Solution {
 public:
     int search(vector<int>& a, int t) {
-        int n=a.size();
-        int l=0,h=n-1;
+        int l=0,h=a.size()-1;
         while(l<=h)
         {
         
