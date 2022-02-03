@@ -1,5 +1,23 @@
 class Solution {
 public:
+    int maxProfit(vector<int>& a)
+    {
+        int n=a.size();
+        int i,fb=INT_MAX,sb=INT_MAX,fp=0,sp=0;
+        
+        for(i=0;i<n;i++)
+        {
+            fb=min(fb,a[i]);
+            fp=max(fp,a[i]-fb);
+            
+            sb=min(sb,a[i]-fp);
+            sp=max(sp,a[i]-sb);
+        }
+        
+        return sp;
+    }
+    
+    /*
     int maxProfit(vector<int>& a) {
         int n=a.size();
         int i,mn=INT_MAX,mx=INT_MIN,ans=0,maxr=0;
@@ -29,6 +47,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     int maxProfit(vector<int>& a) {
