@@ -20,24 +20,4 @@ public:
         return s;
     }
     
-    /*
-    int maxProfit(vector<int>& a) {
-        int n=a.size();
-        int b=-a[0],s=0,c=0;
-        int nb,ns,nc;
-        int i;
-        
-        for(i=1;i<n;i++)
-        {
-            nb=c-a[i];
-            ns=b+a[i];
-            nc=s;
-            
-            b=max(nb,b);
-            s=max(ns,s);
-            c=max(nc,c);
-        }
-        return s;
-    }
-    */
 };
