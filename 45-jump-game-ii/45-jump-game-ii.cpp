@@ -12,8 +12,8 @@ public:
         for(i=0;i<n-1;i++)
         {
             max_reach=max(max_reach,i+a[i]);
-            // if(max_reach>=n-1)
-            //     return j+1;
+            if(max_reach>=n-1)
+                return j+1;
             
             if(i==curr_reach)
             {
