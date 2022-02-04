@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     int jump(vector<int>& a) {
         int n=a.size();
         vector<int> dp(n,INT_MAX);
@@ -21,8 +22,9 @@ public:
         }
         return dp[n-1];
     }
+    */
     
-    /*
+    
     int jump(vector<int>& a) {
         int n=a.size();
         vector<int> dp(n,INT_MAX);
@@ -35,9 +37,12 @@ public:
             {
                 if(dp[i+j]!=INT_MAX)
                 dp[i]=min(dp[i],dp[i+j]+1);
+                
+                if(i+j==0)
+                    return dp[0];
             }
         }
         return dp[0];
     }
-    */
+    
 };
