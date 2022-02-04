@@ -15,6 +15,10 @@ public:
             while(l<r)
             {
                 int s=a[i]+a[l]+a[r];
+                
+                if(s==t)
+                    return s;
+                
                 if(abs(t-s)<abs(t-ans))
                     ans=s;
                 
