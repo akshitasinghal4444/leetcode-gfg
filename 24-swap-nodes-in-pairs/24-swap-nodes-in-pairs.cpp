@@ -10,6 +10,20 @@
  */
 class Solution {
 public:
+    ListNode* swapPairs(ListNode* head)
+    {
+        if(!head || !head->next)
+            return head;
+        
+        ListNode* t=head->next;
+        t->next=swapPairs(t->next);
+        head->next=t->next;
+        t->next=head;
+        
+        return t;
+    }
+    
+    /*
     ListNode* swapPairs(ListNode* head) {
         ListNode* t1=head,*t2,*t3;
         
@@ -33,4 +47,5 @@ public:
         
         return head;
     }
+    */
 };
