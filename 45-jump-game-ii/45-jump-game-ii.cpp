@@ -9,11 +9,11 @@ public:
         int j=0,curr_reach=0,max_reach=0;
         int i;
         
-        for(i=0;i<n;i++)
+        for(i=0;i<n-1;i++)
         {
             max_reach=max(max_reach,i+a[i]);
-            if(max_reach>=n-1)
-                return j+1;
+            // if(max_reach>=n-1)
+            //     return j+1;
             
             if(i==curr_reach)
             {
