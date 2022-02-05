@@ -8,6 +8,43 @@ class Solution{
     public:
     int kthElement(int a1[], int a2[], int n1, int n2, int k)
     {
+        if(n1>n2)
+        return kthElement(a2,a1,n2,n1,k);
+        
+        int l,h,cut1,cut2;
+        h=min(n1,k);
+        if(k<=n2)
+        l=0;
+        else
+        l=k-n2;
+        
+        while(l<=h)
+        {
+            cut1=(l+h)/2;
+            cut2=k-cut1;
+            
+            int l1,l2,r1,r2;
+            
+            l1=(cut1==0)?INT_MIN:a1[cut1-1];
+            l2=(cut2==0)?INT_MIN:a2[cut2-1];
+            
+            r1=(cut1==n1)?INT_MAX:a1[cut1];
+            r2=(cut2==n2)?INT_MAX:a2[cut2];
+            
+            if(l1<=r2 && l2<=r1)
+            return max(l1,l2);
+            
+            if(l1>r2)
+            h=cut1-1;
+            else
+            l=cut1+1;
+        }
+        return -1;
+    }
+    
+    /*
+    int kthElement(int a1[], int a2[], int n1, int n2, int k)
+    {
         int i=0,j=0;
         
         while(i<n1 && j<n2)
@@ -44,6 +81,7 @@ class Solution{
         }
         return -1;
     }
+    */
 };
 
 // { Driver Code Starts.
