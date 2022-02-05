@@ -10,6 +10,51 @@
  */
 class Solution {
 public:
+    class Compare
+    {
+        public:
+        bool operator()(ListNode *a,ListNode *b)
+        {
+            return a->val>=b->val;
+        }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& a)
+    {
+        int n=a.size();
+        
+        if(n==0)
+            return NULL;
+        if(n==1)
+            return a[0];
+        
+        priority_queue<ListNode*,vector<ListNode*>,Compare> q;
+        ListNode *ans,*t;
+        t=new ListNode(0);
+        ans=t;
+        
+        int i;
+        for(i=0;i<n;i++)
+        {
+            if(a[i])
+                q.push(a[i]);
+        }
+        
+        while(!q.empty())
+        {
+            t->next=q.top();
+            q.pop();
+            
+            if(t->next->next)
+                q.push(t->next->next);
+            
+            t=t->next;
+        }
+        
+        return ans->next;
+    }
+    
+    /*
     ListNode* merge(ListNode *a,ListNode *b)
     {
         ListNode *t=new ListNode(0),*ans;
@@ -35,12 +80,6 @@ public:
         else
             t->next=b;
         
-        // while(ans->next)
-        // {
-        //     cout<<ans->next->val<<" ";
-        //     ans=ans->next;
-        // }
-        // cout<<endl;
         return ans->next;
     }
     
@@ -61,6 +100,7 @@ public:
         }
         return ans;
     }
+    */
     
     /*
     ListNode* merge(ListNode* a,ListNode* b)
