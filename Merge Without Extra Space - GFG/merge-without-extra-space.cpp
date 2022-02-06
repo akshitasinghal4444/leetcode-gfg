@@ -7,6 +7,8 @@ using namespace std;
 class Solution{
     public:
         //Function to merge the arrays.
+        
+        /*
         void merge(long long a1[], long long a2[], int n1, int n2) 
         { 
             // code here 
@@ -31,6 +33,63 @@ class Solution{
             sort(a1,a1+n1);
             sort(a2,a2+n2);
         } 
+        */
+        
+        void merge(long long a1[], long long a2[], int n1, int n2)
+        {
+            int gap=(n1+n2+1)/2;
+    
+            while(gap>0)
+            {
+                int i,j;
+                i=0;
+                j=(i+gap);
+        
+                while(j<n1)
+                {
+                    if(a1[i]>a1[j])
+                    {
+                        int t=a1[i];
+                        a1[i]=a1[j];
+                        a1[j]=t;
+                    }
+                    i++;
+                    j++;
+                }
+        
+                j-=n1;
+                while(i<n1 && j<n2)
+                {
+                    if(a1[i]>a2[j])
+                    {
+                        int t=a1[i];
+                        a1[i]=a2[j];
+                        a2[j]=t;
+                    }
+                    i++;
+                    j++;
+                }
+        
+                i=0;
+                while(j<n2)
+                {
+                    if(a2[i]>a2[j])
+                    {
+                        int t=a2[i];
+                        a2[i]=a2[j];
+                        a2[j]=t;
+                    }
+                    i++;
+                    j++;
+                }
+        
+                if(gap==1)
+                break;
+        
+                gap=(gap+1)/2;
+            }
+        }
+        
 };
 
 // { Driver Code Starts.
