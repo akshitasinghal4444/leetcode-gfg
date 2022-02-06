@@ -3,12 +3,15 @@ public:
     int removeDuplicates(vector<int>& a)
     {
         int n=a.size();
-        int i,j;
-        j=0;
+        if(n<3)
+            return n;
         
-        for(i=0;i<n;i++)
+        int i,j;
+        j=2;
+        
+        for(i=2;i<n;i++)
         {
-            if(j<2 || a[i]>a[j-2])
+            if(a[i]>a[j-2])
             {
                 a[j]=a[i];
                 j++;
