@@ -1,5 +1,19 @@
 class Solution {
 public:
+    char findTheDifference(string s, string t)
+    {
+        int n=s.length();
+        int sum=0,i;
+        
+        for(i=0;i<n;i++)
+        {
+            sum+=t[i]-s[i];
+        }
+        sum+=t[i];
+        return sum;
+    }
+    
+    /*
     char findTheDifference(string s, string t) {
         int f[26]={0};
         
@@ -18,4 +32,5 @@ public:
         }
         return 'a';
     }
+    */
 };
