@@ -3,6 +3,20 @@ public:
     char findTheDifference(string s, string t)
     {
         int n=s.length();
+        int x=0,i;
+        
+        for(i=0;i<n;i++)
+        {
+            x^=t[i]^s[i];
+        }
+        x^=t[i];
+        return x;
+    }
+    
+    /*
+    char findTheDifference(string s, string t)
+    {
+        int n=s.length();
         int sum=0,i;
         
         for(i=0;i<n;i++)
@@ -12,6 +26,7 @@ public:
         sum+=t[i];
         return sum;
     }
+    */
     
     /*
     char findTheDifference(string s, string t) {
