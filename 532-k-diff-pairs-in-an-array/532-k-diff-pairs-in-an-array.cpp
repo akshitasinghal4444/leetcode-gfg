@@ -3,6 +3,37 @@ public:
     int findPairs(vector<int>& a, int k)
     {
         int n=a.size();
+        int i,j,ans=0;
+        sort(a.begin(),a.end());
+        
+        i=0,j=1;
+        
+        while(i<n && j<n)
+        {
+            if(i!=j && a[j]-a[i]==k)
+            {
+                ans++;
+                
+                i++;
+                j++;
+                
+                while(i<n && a[i]==a[i-1])
+                    i++;
+                while(j<n && a[j]==a[j-1])
+                    j++;
+            }
+            else if(a[j]-a[i]>k)
+                i++;
+            else
+                j++;
+        }
+        return ans;
+    }
+    
+    /*
+    int findPairs(vector<int>& a, int k)
+    {
+        int n=a.size();
         unordered_map<int,int> m;
         int i,ans=0;
         
@@ -28,6 +59,7 @@ public:
         return ans;
         
     }
+    */
     
     /*
     int findPairs(vector<int>& a, int k) {
