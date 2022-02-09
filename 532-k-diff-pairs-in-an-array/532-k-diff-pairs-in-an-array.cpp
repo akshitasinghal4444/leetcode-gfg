@@ -1,5 +1,35 @@
 class Solution {
 public:
+    int findPairs(vector<int>& a, int k)
+    {
+        int n=a.size();
+        unordered_map<int,int> m;
+        int i,ans=0;
+        
+        for(i=0;i<n;i++)
+            m[a[i]]++;
+        
+        if(k==0)
+        {
+            for(auto it=m.begin();it!=m.end();it++)
+            {
+                if(it->second>1)
+                    ans++;
+            }
+            return ans;
+        }
+        
+        for(auto it=m.begin();it!=m.end();it++)
+        {
+            int x=it->first;
+            if(m.find(x+k)!=m.end())
+                ans++;
+        }
+        return ans;
+        
+    }
+    
+    /*
     int findPairs(vector<int>& a, int k) {
         int n=a.size();
         int i,ans=0;
@@ -30,4 +60,5 @@ public:
         }
         return ans;
     }
+    */
 };
