@@ -5,6 +5,33 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
+	    
+	    vector<string> AllPossibleStrings(string s)
+	    {
+	        int n=s.length();
+	        vector<string> ans;
+	        long x=(1<<n);
+	        long i,j;
+	        
+	        for(i=0;i<x;i++)
+	        {
+	            string t="";
+	            for(j=0;j<n;j++)
+	            {
+	                if(i & (1<<j))
+	                {
+	                    t+=s[j];
+	                }
+	            }
+	            if(t.size()!=0)
+	            ans.push_back(t);
+	        }
+	        
+	        sort(ans.begin(),ans.end());
+	        return ans;
+	    }
+	
+	/*
 	    vector<string> ans;
 	    string t;
 	    
@@ -35,6 +62,7 @@ class Solution{
 		    
 		    return ans;
 		}
+		*/
 };
 
 // { Driver Code Starts.
