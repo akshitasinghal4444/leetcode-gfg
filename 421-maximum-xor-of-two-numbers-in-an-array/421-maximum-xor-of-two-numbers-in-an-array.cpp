@@ -1,69 +1,49 @@
-struct trie{
-    trie* next[2];
-    trie()
-    {
-        next[0]=NULL;
-        next[1]=NULL;
-    }
-};
-class TrieNode{
-    private:
-        trie* root;
-    public:
-        TrieNode()
-        {
-            root=new trie();
-        }
-    
-    void insert(int num)
-    {
-        trie* curr=root;
-        
-        for(int i=31;i>=0;i--)
-        {
-            int bit=(num>>i)&1;
-            if(curr->next[bit]==NULL)
-            {
-                curr->next[bit]=new trie();
-            }
-            curr=curr->next[bit];
-        }
-    }
-    
-    int max_xor(int num)
-    {
-        trie* curr=root;
-        int ans=0;
-        for(int i=31;i>=0;i--)
-        {
-            int bit=(num>>i)&1;
-            
-            if(curr->next[!bit])
-            {
-                ans+=(1<<i);
-                curr=curr->next[!bit];
-            }
-            else
-            {
-                curr=curr->next[bit];
-            }
-        }
-        return ans;
-    }   
-};
 class Solution {
 public:
-    int findMaximumXOR(vector<int>& nums) {
-        int max_ans=0;
-        int n=nums.size();
-        
-        TrieNode* t=new TrieNode();
-        
-        for(int i=0;i<n;i++)
+    struct trie
+    {
+        int end;
+        trie *next[2];
+    }*root;
+    
+    void insert(int n)
+    {
+        trie *t=root;
+        for(int i=31;i>=0;i--)
         {
-            t->insert(nums[i]);
-            max_ans=max(max_ans,t->max_xor(nums[i]));
+            int x=(n>>i)&1;
+            if(!t->next[x])
+                t->next[x]=new trie();
+            t=t->next[x];
         }
-        return max_ans;
+        t->end=n;
+    }
+    
+    int getxor(int n)
+    {
+        trie *t=root;
+        for(int i=31;i>=0;i--)
+        {
+            int x=!((n>>i)&1);
+            if(!t->next[x])
+            t=t->next[!x];
+            else
+            t=t->next[x];
+        }
+        return (n^t->end);
+    }
+    
+    int findMaximumXOR(vector<int>& a) {
+        int n=a.size();
+        root=new trie();
+        int ans=0;
+        
+        for(int x:a)
+            insert(x);
+        
+        for(int x:a)
+            ans=max(ans,getxor(x));
+        
+        return ans;
     }
 };
