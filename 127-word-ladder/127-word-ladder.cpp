@@ -20,7 +20,6 @@ public:
             while(qs--)
             {
                 string s1=q.front();
-                string s2=s1;
                 q.pop();
                 
                 int i;
@@ -29,6 +28,7 @@ public:
                 
                 for(i=0;i<l;i++)
                 {
+                    char x=s1[i];
                     for(j='a';j<='z';j++)
                     {
                         if(s1[i]==j)
@@ -43,7 +43,7 @@ public:
                             s.erase(s1);
                         }
                     }
-                    s1=s2;
+                    s1[i]=x;
                 }
             }
         }
