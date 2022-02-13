@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     vector<vector<int>> subsets(vector<int>& a)
     {
         int n=a.size();
@@ -22,8 +23,9 @@ public:
         return ans;
         
     }
+    */
     
-    /*
+    
     vector<vector<int>> ans;
     vector<int> t;
     
@@ -50,5 +52,5 @@ public:
         
         return ans;
     }
-    */
+    
 };
