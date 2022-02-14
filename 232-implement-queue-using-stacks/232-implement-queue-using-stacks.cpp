@@ -1,5 +1,43 @@
 class MyQueue {
 public:
+    stack<int> s;
+    
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        
+        if(s.empty())
+        {
+            s.push(x);
+            return;
+        }
+        
+        int t=s.top();
+        s.pop();
+        push(x);
+        s.push(t);
+    }
+    
+    int pop() {
+        int x=s.top();
+        s.pop();
+        return x;
+    }
+    
+    int peek() {
+        return s.top();
+    }
+    
+    bool empty() {
+        return s.empty();
+    }
+};
+
+/*
+class MyQueue {
+public:
     
     stack<int> s1,s2;
     
@@ -37,6 +75,7 @@ public:
         return s1.empty();
     }
 };
+*/
 
 /*
 class MyQueue {
@@ -95,7 +134,6 @@ public:
     }
 };
 */
-
 /**
  * Your MyQueue object will be instantiated and called as such:
  * MyQueue* obj = new MyQueue();
