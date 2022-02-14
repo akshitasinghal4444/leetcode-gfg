@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     vector<int> factors(int n)
     {
         vector<int> a;
@@ -37,10 +38,10 @@ public:
         }
         return dp[n];
     }
-    
-    /*
+    */
+   
     bool divisorGame(int n) {
         return (n%2==0);
     }
-    */
+    
 };
