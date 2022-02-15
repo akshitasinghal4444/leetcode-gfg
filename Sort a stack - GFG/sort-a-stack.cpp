@@ -72,12 +72,39 @@ void SortedStack :: sort()
    }
    
    s=s2;
-//   while(!s2.empty())
-//   {
-//       s.push(s2.top());
-//       s2.pop();
-//   }
+
 }
+
+/*
+void SortedStack :: sort()
+{
+   //Your code here
+   if(s.size()==0 || s.size()==1)
+   return ;
+   
+   stack<int> s2;
+   
+   while(!s.empty())
+   {
+       int x=s.top();
+       s.pop();
+       
+       while(!s2.empty() && s2.top()<x)
+       {
+           s.push(s2.top());
+           s2.pop();
+       }
+       
+       s2.push(x);
+   }
+   
+  while(!s2.empty())
+  {
+      s.push(s2.top());
+      s2.pop();
+  }
+}
+*/
 
 /*
 void insert(int x,stack<int> &s)
