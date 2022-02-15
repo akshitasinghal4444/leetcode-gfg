@@ -36,33 +36,6 @@ public:
         
         return mx;
     }
-
-/*
-    int maximumPath(int n, vector<vector<int>> a)
-    {
-        // code here
-        int i,j;
-        int m;
-        for(i=1;i<n;i++)
-        {
-            for(j=0;j<n;j++)
-            {
-                m=a[i-1][j];
-                
-                if(j-1>=0)
-                m=max(m,a[i-1][j-1]);
-                if(j+1<n)
-                m=max(m,a[i-1][j+1]);
-                a[i][j]+=m;
-            }
-        }
-        m=a[n-1][0];
-        for(j=1;j<n;j++)
-        m=max(m,a[n-1][j]);
-        
-        return m;
-    }
-    */
 };
 
 // { Driver Code Starts.
