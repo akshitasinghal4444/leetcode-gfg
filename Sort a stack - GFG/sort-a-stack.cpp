@@ -62,7 +62,7 @@ void SortedStack :: sort()
        int x=s.top();
        s.pop();
        
-       while(!s2.empty() && s2.top()<x)
+       while(!s2.empty() && s2.top()>x)
        {
            s.push(s2.top());
            s2.pop();
@@ -71,11 +71,12 @@ void SortedStack :: sort()
        s2.push(x);
    }
    
-   while(!s2.empty())
-   {
-       s.push(s2.top());
-       s2.pop();
-   }
+   s=s2;
+//   while(!s2.empty())
+//   {
+//       s.push(s2.top());
+//       s2.pop();
+//   }
 }
 
 /*
