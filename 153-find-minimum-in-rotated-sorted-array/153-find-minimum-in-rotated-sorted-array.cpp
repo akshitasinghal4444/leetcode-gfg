@@ -2,6 +2,23 @@ class Solution {
 public:
     int findMin(vector<int>& a)
     {
+        int l=0,r=a.size()-1,mid;
+        
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+            
+            if(a[mid]>=a[r])
+                l=mid+1;
+            else
+                r=mid;
+        }
+        return a[mid];
+    }
+    
+    /*
+    int findMin(vector<int>& a)
+    {
         int l=0,r=a.size()-1;
         if(a[l]<a[r])
             return a[l];
@@ -24,6 +41,7 @@ public:
         
         return a[0];
     }
+    */
     
     /*
     int binSearch(vector<int>& a,int l,int h)
