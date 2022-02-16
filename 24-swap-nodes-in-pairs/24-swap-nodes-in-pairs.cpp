@@ -15,6 +15,19 @@ public:
         if(!head || !head->next)
             return head;
         
+        ListNode *t=head->next;
+        head->next=swapPairs(t->next);
+        t->next=head;
+        
+        return t;
+    }
+    
+    /*
+    ListNode* swapPairs(ListNode* head)
+    {
+        if(!head || !head->next)
+            return head;
+        
         ListNode* t=head->next;
         t->next=swapPairs(t->next);
         head->next=t->next;
@@ -22,6 +35,7 @@ public:
         
         return t;
     }
+    */
     
     /*
     ListNode* swapPairs(ListNode* head) {
