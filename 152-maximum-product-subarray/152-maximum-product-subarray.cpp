@@ -24,28 +24,4 @@ public:
         return ans;
     }
     
-    /*
-    int maxProduct(vector<int>& a) {
-        int n=a.size();
-        int l=0,r=n-1,mp=a[0],p1=1,p2=1;
-        if(n==1)
-            return a[0];
-        
-        while(l<n)
-        {
-            if(p1==0)
-                p1=1;
-            if(p2==0)
-                p2=1;
-            p1*=a[l];
-            p2*=a[r];
-            mp=max(mp,p1);
-            mp=max(mp,p2);
-            r--;
-            l++;
-        }
-        
-        return mp;
-    }
-    */
 };
