@@ -1,6 +1,39 @@
 class Solution {
 public:
     int countSubstrings(string s, string t) {
+        int ns,nt,i,j,c=0;
+        ns=s.length();
+        nt=t.length();
+        
+        for(i=0;i<ns;i++)
+        {
+            for(j=0;j<nt;j++)
+            {
+                int d=0;
+                int x,y;
+                x=i;
+                y=j;
+                while(x<ns && y<nt)
+                {
+                    if(s[x]!=t[y])
+                        d++;
+                    if(d==1)
+                       c++;
+                    if(d==2)
+                        break;
+                    
+                    x++;
+                    y++;
+                }
+            }
+        }
+        
+        return c;
+    }
+    
+    
+    /*
+    int countSubstrings(string s, string t) {
         int ns,nt,i,j,k,l;
         ns=s.length();
         nt=t.length();
@@ -39,4 +72,5 @@ public:
         
         return c;
     }
+    */
 };
