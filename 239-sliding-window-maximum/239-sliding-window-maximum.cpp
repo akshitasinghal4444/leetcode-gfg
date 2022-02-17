@@ -23,6 +23,7 @@ public:
             while(!q.empty() && q.front()<a[i])
                 q.pop_front();
             q.push_front(a[i]);
+            
             ans.push_back(q.back());
         }
         
