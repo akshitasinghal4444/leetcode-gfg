@@ -23,7 +23,7 @@ public:
             }
         }
         
-        if(q.empty())
+        if(q.empty() || f==0)
             return f>0?-1:0;
             
         while(!q.empty())
