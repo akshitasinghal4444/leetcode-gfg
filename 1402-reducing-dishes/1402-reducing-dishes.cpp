@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     int maxSatisfaction(vector<int>& a)
     {
         int n=a.size();
@@ -31,8 +32,8 @@ public:
         
         return ans;
     }
+    */
     
-    /*
     int maxSatisfaction(vector<int>& a) {
         sort(a.begin(),a.end());
         int i,j,n,s=0;
@@ -53,5 +54,5 @@ public:
         return s;
         
     }
-    */
+   
 };
