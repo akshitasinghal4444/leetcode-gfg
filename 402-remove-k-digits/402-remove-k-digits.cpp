@@ -1,5 +1,31 @@
 class Solution {
 public:
+    string removeKdigits(string s, int k)
+    {
+        string t="";
+        
+        for(char c:s)
+        {
+            while(k && t.size() && t.back()>c)
+            {
+                t.pop_back();
+                k--;
+            }
+                
+            if(t.size() || c!='0')
+                t+=c;
+        }
+        
+        while(t.size() && k--)
+            t.pop_back();
+        
+        if(t.size()==0)
+            return "0";
+        
+        return t;
+    }
+    
+    /*
     string removeKdigits(string a, int k)
     {
         stack<int> s;
@@ -36,6 +62,7 @@ public:
         }
         return t;
     }
+    */
     
     /*
     string removeKdigits(string num, int k) {
