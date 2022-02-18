@@ -25,7 +25,6 @@ public:
             s.pop();
         
         n=s.size();
-        cout<<n<<" "<<k<<endl;
         if(n<=k || n==0)
             return "0";
         
