@@ -12,6 +12,7 @@ class Solution
     public:
     //Function to find if there is a celebrity in the party or not.
     
+    /*
     int celebrity(vector<vector<int> >& a, int n)
     {
         int c=0,d=1,i=2;
@@ -52,6 +53,42 @@ class Solution
         }
         
         return ans;
+    }
+    */
+    
+    int celebrity(vector<vector<int> >& a, int n) 
+    {
+        stack<int> s;
+        
+        for(int i=0;i<n;i++)
+        s.push(i);
+        
+        while(s.size()>1)
+        {
+            int x=s.top();
+            s.pop();
+            int y=s.top();
+            s.pop();
+            
+            if(a[x][y])
+            s.push(y);
+            else
+            s.push(x);
+        }
+        
+        int x=s.top();
+        s.pop();
+        
+        for(int i=0;i<n;i++)
+        {
+            if(a[x][i])
+            return -1;
+            
+            if(i!=x && !a[i][x])
+            return -1;
+        }
+        
+        return x;
     }
     
     /*
