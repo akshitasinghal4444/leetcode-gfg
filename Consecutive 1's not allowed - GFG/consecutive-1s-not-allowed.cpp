@@ -26,24 +26,6 @@ public:
         return (e1+e0)%m;
     }
 	
-	/*
-	int m=1e9+7;
-	ll countStrings(int n) {
-	    // code here
-	    ll ew0=1,ew1=1;
-	    int i;
-	    for(i=2;i<=n;i++)
-	    {
-	        int n0,n1;
-	        n0=(ew0+ew1)%m;
-	        n1=ew0;
-	        
-	        ew0=n0;
-	        ew1=n1;
-	    }
-	    return (ew1+ew0)%m;
-	}
-	*/
 };
 
 // { Driver Code Starts.
