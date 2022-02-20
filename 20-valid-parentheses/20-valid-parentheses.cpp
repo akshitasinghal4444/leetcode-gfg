@@ -2,26 +2,24 @@ class Solution {
 public:
     bool isValid(string s)
     {
-        stack<char> st;
+        stack<int> st;
         
         for(char c:s)
         {
             switch(c)
             {
                 case '(':st.push(')');
-                          break;
-                case '{':st.push('}');
-                          break;
+                        break;
                 case '[':st.push(']');
-                          break;
-                    
+                        break;
+                case '{':st.push('}');
+                        break;
                 case ')':
-                case '}':
-                case ']':if(st.empty() || st.top()!=c)
-                            return 0;
-                         else
-                             st.pop();
-                             
+                case ']':
+                case '}':if(st.empty() || st.top()!=c)
+                            return 0;   
+                        else
+                            st.pop();        
             }
         }
         return st.empty();
