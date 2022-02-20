@@ -13,18 +13,13 @@ public:
         sort(a.begin(),a.end(),comp);
         
         int c=n;
-        int s=a[n-1][0],e=a[n-1][1];
+        int s=a[n-1][0];
         for(int i=n-2;i>=0;i--)
         {
-            if(a[i][0]>=s && a[i][1]<=e)
-            {
+            if(a[i][0]>=s)
                 c--;
-            }
-            else if(a[i][0]<=s) 
-            {
+            else
                 s=a[i][0];
-                e=a[i][1];
-            }
         }
         return c;
     }
