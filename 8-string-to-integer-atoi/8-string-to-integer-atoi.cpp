@@ -27,10 +27,13 @@ public:
             else
                 break;
             
-            if(sign==1 && ans>=INT_MAX)
-                return INT_MAX;
-            else if(sign==-1 && -ans<=INT_MIN)
-                return INT_MIN;
+            if(ans>INT_MAX)
+            {
+                if(sign==1)
+                    return INT_MAX;
+                else
+                    return INT_MIN;
+            }                
         }
         
         if(sign==1)
