@@ -9,17 +9,15 @@ public:
             sort(s.begin(),s.end());
         
         
-        if(n>0)
+        if(n>0 && s[0]=='0')
         {
             int i=0;
             while(i<s.length() && s[i]=='0')
                 i++;
+    
+            s[0]=s[i];
+            s[i]='0';
             
-            if(s[0]=='0')
-            {
-                s[0]=s[i];
-                s[i]='0';
-            }
         }
         
         if(n>=0)
