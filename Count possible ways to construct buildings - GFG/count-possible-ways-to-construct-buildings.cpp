@@ -25,23 +25,6 @@ class Solution{
 	    
 	}
 	
-	/*
-	int TotalWays(int n)
-	{
-	    // Code here
-	    long ob=1,os=1,nb,ns,i;
-	    for(i=2;i<=n;i++)
-	    {
-	        nb=os;
-	        ns=(ob+os)%m;
-	        
-	        ob=nb;
-	        os=ns;
-	    }
-	    
-	    return ((os+ob)%m*(os+ob)%m)%m;
-	}
-	*/
 };
 
 // { Driver Code Starts.
