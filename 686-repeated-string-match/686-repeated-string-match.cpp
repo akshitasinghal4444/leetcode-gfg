@@ -1,5 +1,26 @@
 class Solution {
 public:
+    int repeatedStringMatch(string a, string b) {
+        
+        int n=b.length();
+        int x=1;
+        string t=a;
+        
+        while(a.length()<n)
+        {
+            a+=t;
+            x++;
+        }
+        
+        if(a.find(b)!=string::npos)
+            return x;
+        a+=t;
+        if(a.find(b)!=string::npos)
+          return x+1;
+        return -1;
+    }
+    
+    /*
     bool match(string a,string b)
     {
         int na=a.length(),nb=b.length();
@@ -37,4 +58,5 @@ public:
           return x+1;
         return -1;
     }
+    */
 };
