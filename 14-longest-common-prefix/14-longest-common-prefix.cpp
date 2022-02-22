@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+    /*
     string longestCommonPrefix(vector<string>& str)
     {
         sort(str.begin(),str.end());
@@ -19,8 +19,8 @@ public:
         }
         return ans;
     }
+    */
     
-    /*
     string longestCommonPrefix(vector<string>& str) {
         string ans="";
         bool f=0;
@@ -51,5 +51,5 @@ public:
         }
         return ans;
     }
-    */
+    
 };
