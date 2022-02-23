@@ -1,5 +1,71 @@
 class Solution {
 public:
+    void createlps(string &n,int nn,int *lps)
+    {
+        int i,j;
+        i=-1;
+        j=1;
+        lps[0]=-1;
+        
+        while(j<nn)
+        {
+            if(n[j]==n[i+1])
+            {
+                lps[j]=i+1;
+                i++;
+                j++;
+            }
+            else if(i==-1)
+            {
+                lps[j]=-1;
+                j++;
+            }
+            else
+            {
+                i=lps[i];
+            }
+        }
+    }
+    
+    int strStr(string h, string n)
+    {
+        if(n=="")
+            return 0;
+        
+        int nh=h.length(),nn=n.length();
+        if(nn>nh)
+            return -1;
+        
+        int lps[nn];
+        createlps(n,nn,lps);
+        
+        int i,j=-1;
+        
+//         for(i=0;i<nn;i++)
+//             cout<<lps[i]<<" ";
+//         cout<<endl;
+        
+        for(i=0;i<nh;i++)
+        {
+            if(h[i]==n[j+1])
+            {
+                j++;
+            }
+            else if(j!=-1)
+            {
+                j=lps[j];
+                i--;
+            }
+            
+            if(j==nn-1)
+                return i-nn+1;
+        }
+        if(j==nn)
+         return i-nn;
+        return -1;
+    }
+    
+    /*
     bool comp(string &s1,string &s2,int in,int n)
     {
         for(int i=0;i<n;i++)
@@ -46,4 +112,5 @@ public:
         }
         return -1;
     }
+    */
 };
