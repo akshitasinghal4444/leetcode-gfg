@@ -41,10 +41,6 @@ public:
         
         int i,j=-1;
         
-//         for(i=0;i<nn;i++)
-//             cout<<lps[i]<<" ";
-//         cout<<endl;
-        
         for(i=0;i<nh;i++)
         {
             if(h[i]==n[j+1])
