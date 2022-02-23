@@ -21,6 +21,35 @@ public:
 
 class Solution {
 public:
+    
+    Node* dfs(Node *node,unordered_map<int,Node*> &m)
+    {
+        if(node==NULL)
+            return NULL;
+        
+        if(m.find(node->val)==m.end())
+        {
+            Node *t=new Node(node->val);
+            m[node->val]=t;
+            for(Node *n:node->neighbors)
+            {
+                t->neighbors.push_back(dfs(n,m));
+            }
+        }
+        return m[node->val];
+    }
+    
+    Node* cloneGraph(Node* node) {
+        
+        if(node==NULL)
+            return NULL;
+        
+        unordered_map<int,Node*> m;
+        
+        return dfs(node,m);
+    }
+    
+    /*
     Node* dfs(Node *node,unordered_map<Node*,Node*> &m)
     {
         if(node==NULL)
@@ -47,4 +76,5 @@ public:
         
         return dfs(node,m);
     }
+    */
 };
