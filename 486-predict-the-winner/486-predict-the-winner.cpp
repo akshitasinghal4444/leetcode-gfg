@@ -1,5 +1,27 @@
 class Solution {
 public:
+     bool PredictTheWinner(vector<int>& a) {
+        
+        int n=a.size();
+        vector<vector<int>> dp(n,vector<int>(n,-1));
+        
+        int i,j;
+         
+        for(i=n-1;i>=0;i--)
+        {
+            for(j=i;j<n;j++)
+            {
+                if(i==j)
+                    dp[i][j]=a[i];
+                else
+                    dp[i][j]=max(a[i]-dp[i+1][j],a[j]-dp[i][j-1]);
+            }
+            
+        }
+         return dp[0][n-1]>=0;
+    }
+    
+    /*
     int score(vector<int>& a,int l,int r,vector<vector<int>> &dp)
     {
         if(l>r)
@@ -18,6 +40,7 @@ public:
         
         return score(a,0,n-1,dp)>=0;
     }
+    */
     
     /*
     int score(vector<int>& a,int l,int r)
