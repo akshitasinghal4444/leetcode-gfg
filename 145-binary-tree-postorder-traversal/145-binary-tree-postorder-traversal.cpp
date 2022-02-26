@@ -17,6 +17,40 @@ public:
             return {};
         
         vector<int> ans;
+        stack<TreeNode*> s;
+        s.push(root);
+        
+        while(!s.empty())
+        {
+            TreeNode *n=s.top();
+            
+            if(n==NULL)
+            {
+                s.pop();
+                ans.push_back(s.top()->val);
+                s.pop();
+            }
+            else
+            {
+                s.push(NULL);
+                
+                if(n->right)
+                    s.push(n->right);
+                
+                if(n->left)
+                    s.push(n->left);
+            }
+        }
+        return ans;
+    }
+    
+    /*
+    vector<int> postorderTraversal(TreeNode* root)
+    {
+        if(!root)
+            return {};
+        
+        vector<int> ans;
         stack<TreeNode*> s1,s2;
         
         s1.push(root);
@@ -43,6 +77,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     vector<int> ans;
