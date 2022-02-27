@@ -25,7 +25,7 @@ public:
             long st=q.front().second;
             long end=q.back().second;
             
-            for(int i=0;i<s;i++)
+            while(s--)
             {
                 TreeNode *t=q.front().first;
                 long in=q.front().second-st;
