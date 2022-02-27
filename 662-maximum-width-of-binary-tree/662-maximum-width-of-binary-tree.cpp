@@ -11,31 +11,41 @@
  */
 class Solution {
 public:
-    int max(int x,int y){
-        return (x>y?x:y);
-    }
     int widthOfBinaryTree(TreeNode* root) {
-        if(!root) return 0;
-        queue<pair<TreeNode*,unsigned long long int>>q;
+        if(!root)
+            return 0;
+        
+        queue<pair<TreeNode*,int>> q;
         q.push({root,0});
-        int width=0;
-        while(!q.empty()){
-            unsigned long long int l=q.front().second;
-            unsigned long long int r=0;
-            int n=q.size();
-            for(auto i=0;i<n;i++){
-                pair<TreeNode*,unsigned long long int >ptr=q.front();
+        long ans=0;
+        
+        while(!q.empty())
+        {
+            int s=q.size();
+            long st,end;
+            
+            for(int i=0;i<s;i++)
+            {
+                TreeNode *t=q.front().first;
+                long in=q.front().second;
                 q.pop();
-                r=ptr.second;
-                if(ptr.first->left){
-                    q.push({ptr.first->left,2*r+1});
-                }
-                if(ptr.first->right){
-                    q.push({ptr.first->right,2*r+2});
-                }
+                
+                if(i==0)
+                    st=in;
+                
+                if(i==s-1)
+                    end=in;
+                
+                if(t->left)
+                    q.push({t->left,2*in+1});
+                if(t->right)
+                    q.push({t->right,2*in+2});
+                
             }
-            width=max(width,(r-l+1));
+            
+            ans=max(ans,end-st+1);
         }
-        return width;
+        
+        return ans;
     }
 };
