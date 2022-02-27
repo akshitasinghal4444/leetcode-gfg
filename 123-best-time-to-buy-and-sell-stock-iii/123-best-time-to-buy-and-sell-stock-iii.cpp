@@ -30,7 +30,7 @@ public:
     int maxProfit(vector<int>& a)
     {
         int i,n=a.size();
-        int fb=-a[0],fs=INT_MIN,sb=INT_MIN,ss=INT_MIN;
+        int fb=-a[0],fs=0,sb=INT_MIN,ss=0;
         
         for(i=1;i<n;i++)
         {
@@ -41,7 +41,7 @@ public:
             ss=max(ss,sb+a[i]);
         }
         
-        return max(ss,0);
+        return ss;
     }
     
     /*
