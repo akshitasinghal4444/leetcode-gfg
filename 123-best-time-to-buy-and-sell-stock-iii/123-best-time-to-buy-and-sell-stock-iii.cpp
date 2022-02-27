@@ -2,6 +2,32 @@ class Solution {
 public:
     int maxProfit(vector<int>& a)
     {
+        int i,n=a.size(),ans=0;
+        int maxpl[n],maxpr[n];
+        maxpl[0]=0;
+        
+        int mn=a[0];
+        for(i=1;i<n;i++)
+        {
+            mn=min(mn,a[i]);
+            maxpl[i]=max(maxpl[i-1],a[i]-mn);
+        }
+        
+        int mx=a[n-1];
+        maxpr[n-1]=0;
+        for(i=n-2;i>=0;i--)
+        {
+            mx=max(mx,a[i]);
+            maxpr[i]=max(maxpr[i+1],mx-a[i]);
+            
+            ans=max(ans,maxpl[i]+maxpr[i]);
+        }
+        return ans;
+    }
+    
+    /*
+    int maxProfit(vector<int>& a)
+    {
         int n=a.size();
         int i,fb=INT_MAX,sb=INT_MAX,fp=0,sp=0;
         
@@ -16,6 +42,7 @@ public:
         
         return sp;
     }
+    */
     
     /*
     int maxProfit(vector<int>& a) {
