@@ -21,19 +21,19 @@ public:
         
         if(c!=0)
         {
-        c=0;
-        for(i=n-1;i>=0;i--)
-        {
-            if(s[i]==')')
-                c++;
-            else if(s[i]=='(')
+            c=0;
+            for(i=n-1;i>=0;i--)
             {
-                if(c==0)
-                    s[i]='*';
-                else
-                    c--;
+                if(s[i]==')')
+                    c++;
+                else if(s[i]=='(')
+                {
+                    if(c==0)
+                        s[i]='*';
+                    else
+                        c--;
+                }
             }
-        }
         }
         
         for(i=0;i<n;i++)
