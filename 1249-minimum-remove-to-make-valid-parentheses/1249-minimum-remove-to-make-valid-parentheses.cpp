@@ -19,6 +19,8 @@ public:
             }
         }
         
+        if(c!=0)
+        {
         c=0;
         for(i=n-1;i>=0;i--)
         {
@@ -31,6 +33,7 @@ public:
                 else
                     c--;
             }
+        }
         }
         
         for(i=0;i<n;i++)
