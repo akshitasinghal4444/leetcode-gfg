@@ -1,5 +1,48 @@
 class Solution {
 public:
+    string minRemoveToMakeValid(string s)
+    {
+        int c=0;
+        int i,n=s.length();
+        string t="";
+        
+        for(i=0;i<n;i++)
+        {
+            if(s[i]=='(')
+                c++;
+            else if(s[i]==')')
+            {
+                if(c==0)
+                    s[i]='*';
+                else
+                    c--;
+            }
+        }
+        
+        c=0;
+        for(i=n-1;i>=0;i--)
+        {
+            if(s[i]==')')
+                c++;
+            else if(s[i]=='(')
+            {
+                if(c==0)
+                    s[i]='*';
+                else
+                    c--;
+            }
+        }
+        
+        for(i=0;i<n;i++)
+        {
+            if(s[i]!='*')
+                t+=s[i];
+        }
+        
+        return t;
+    }
+    
+    /*
     string minRemoveToMakeValid(string s) {
         int l=0,r=0;
         string t="";
@@ -52,4 +95,5 @@ public:
         reverse(t.begin(),t.end());
         return t;
     }
+    */
 };
