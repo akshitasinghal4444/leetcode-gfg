@@ -104,6 +104,42 @@ class Solution
     public:
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
+    
+    void traverse(Node *root,int i,int l,map<int,pair<int,int>> &m)
+    {
+        if(!root)
+        return;
+        
+        if(m.find(i)==m.end() || m[i].first>l)
+        m[i]={l,root->data};
+        
+        traverse(root->left,i-1,l+1,m);
+        traverse(root->right,i+1,l+1,m);
+    }
+    
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        if(!root)
+        return {};
+        
+        vector<int> ans;
+        map<int,pair<int,int>> m;
+        
+        m[0]={0,root->data};
+        
+        traverse(root->left,-1,1,m);
+        traverse(root->right,1,1,m);
+        
+        for(auto i:m)
+        {
+            ans.push_back(i.second.second);
+        }
+        return ans;
+    }
+    
+    
+    /*
     vector<int> topView(Node *root)
     {
         //Your code here
@@ -143,7 +179,7 @@ class Solution
         }
         return ans;
     }
-
+    */
 };
 
 
