@@ -1,5 +1,24 @@
 class Solution {
-public:
+public:    
+    vector<int> productExceptSelf(vector<int>& a)
+    {
+        int n=a.size(),i;
+        vector<int> ans(n,1);
+        int l=1,r=1;
+        
+        for(i=0;i<n;i++)
+        {
+            ans[i]*=l;
+            ans[n-1-i]*=r;
+            
+            l*=a[i];
+            r*=a[n-i-1];
+        }
+        
+        return ans;
+    }
+    
+    /*
     vector<int> productExceptSelf(vector<int>& a)
     {
         int n=a.size(),i;
@@ -18,6 +37,7 @@ public:
         }
         return ans;
     }
+    */
     
     /*
     vector<int> productExceptSelf(vector<int>& a)
