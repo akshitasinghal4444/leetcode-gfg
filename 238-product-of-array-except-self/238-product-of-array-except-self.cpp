@@ -3,6 +3,26 @@ public:
     vector<int> productExceptSelf(vector<int>& a)
     {
         int n=a.size(),i;
+        vector<int> ans(n,1);
+        
+        for(i=1;i<n;i++)
+        {
+            ans[i]=ans[i-1]*a[i-1];
+        }
+        
+        int r=1;
+        for(i=n-2;i>=0;i--)
+        {
+            r=r*a[i+1];
+            ans[i]*=r;
+        }
+        return ans;
+    }
+    
+    /*
+    vector<int> productExceptSelf(vector<int>& a)
+    {
+        int n=a.size(),i;
         int l[n],r[n];
         vector<int> ans(n);
         
@@ -25,6 +45,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     vector<int> productExceptSelf(vector<int>& a) {
