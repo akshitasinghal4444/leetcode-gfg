@@ -1,5 +1,30 @@
 class Solution {
 public:
+    int numberOfArithmeticSlices(vector<int>& a)
+    {
+        int n=a.size();
+        
+        if(n<3)
+            return 0;
+        
+        int i,c=0,d=a[1]-a[0],len=0;
+        
+        for(i=2;i<n;i++)
+        {
+            if(a[i]-a[i-1]==d)
+                len++;
+            else
+            {
+                len=0;
+                d=a[i]-a[i-1];
+            }
+            
+            c+=len;
+        }
+        return c;
+    }
+    
+    /*
     int numberOfArithmeticSlices(vector<int>& a) {
         int n=a.size();
         
@@ -24,7 +49,7 @@ public:
         int x=i-st;
         if(x>=3)
         c+=((x+1)*(x-3+1))-((x*(x+1))/2-3);
-        // cout<<x<<endl;
         return c;
     }
+    */
 };
