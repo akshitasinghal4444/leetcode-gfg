@@ -1,6 +1,6 @@
 class Solution {
 public:
-    /*
+    
     int l,r;
     unordered_set<string> st,vis;
     
@@ -11,24 +11,23 @@ public:
         for(char ch:s)
         {
             if(ch=='(')
+            {
+                l++;
                 st.push(ch);
+            }
             else if(ch==')')
             {
                 if(!st.empty() && st.top()=='(')
+                {
                     st.pop();
+                    l--;
+                }
                 else
+                {
                     st.push(ch);
+                    r++;
+                }
             }
-        }
-        
-        while(!st.empty())
-        {
-            if(st.top()==')')
-                r++;
-            else
-                l++;
-            
-            st.pop();
         }
     }
     
@@ -94,8 +93,9 @@ public:
         
         return ans;
     }
-    */
     
+    
+    /*
     unordered_set<string> st,vis;
     
     int countmin(string &s)
@@ -155,4 +155,5 @@ public:
         
         return ans;
     }
+    */
 };
