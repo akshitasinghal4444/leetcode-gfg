@@ -134,8 +134,10 @@ public:
         int n=s.length();
         
         for(int i=0;i<n;i++)
-            removemin(s.substr(0,i)+s.substr(i+1),c-1);
-       
+        {
+            if(s[i]=='(' || s[i]==')')
+                removemin(s.substr(0,i)+s.substr(i+1),c-1);
+        }       
     }
     
     vector<string> removeInvalidParentheses(string s) {
