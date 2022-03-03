@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+    /*
     int l,r;
     unordered_set<string> st,vis;
     
@@ -94,12 +94,11 @@ public:
         
         return ans;
     }
+    */
     
-    /*
-    int l,r;
     unordered_set<string> st,vis;
     
-    void countmin(string &s)
+    int countmin(string &s)
     {
         stack<int> st;
         
@@ -116,24 +115,15 @@ public:
             }
         }
         
-        while(!st.empty())
-        {
-            if(st.top()==')')
-                r++;
-            else
-                l++;
-            
-            st.pop();
-        }
+        return st.size();
     }
     
     void removemin(string s,int c)
     {
-        if(vis.find(s)==vis.end())
-            vis.insert(s);
-        else
+        if(vis.find(s)!=vis.end())
             return;
-
+            
+        vis.insert(s);
         
         if(c==0)
         {
@@ -144,46 +134,23 @@ public:
         int n=s.length();
         
         for(int i=0;i<n;i++)
-        {
             removemin(s.substr(0,i)+s.substr(i+1),c-1);
-        }     
-    }
-    
-    bool isValid(string s)
-    {
-        int c=0;
-        
-        for(char ch:s)
-        {
-            if(ch=='(')
-                c++;
-            else if(ch==')')
-            {
-                if(c>0)
-                    c--;
-                else return 0;
-            }
-        }
-        return c==0;
+       
     }
     
     vector<string> removeInvalidParentheses(string s) {
-        l=0;
-        r=0;
-        vector<string> ans;
-        countmin(s);
         
-        removemin(s,l+r);
+        vector<string> ans;
+        int c=countmin(s);
+        
+        removemin(s,c);
         
         for(string str:st)
         {
-            // cout<<str<<endl;
-            if(isValid(str))
+            if(!countmin(str))
                 ans.push_back(str);
         }
         
         return ans;
     }
-    
-    */
 };
