@@ -1,5 +1,6 @@
 class Solution {
 public:
+    
     int l,r;
     unordered_set<string> st,vis;
     
@@ -87,7 +88,6 @@ public:
         
         for(string str:st)
         {
-            // cout<<str<<endl;
             if(isValid(str))
                 ans.push_back(str);
         }
