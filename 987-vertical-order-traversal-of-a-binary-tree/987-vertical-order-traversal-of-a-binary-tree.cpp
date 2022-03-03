@@ -16,8 +16,8 @@ public:
         if(!root)
             return {};
         
-        map<int,vector<pair<int,int>>> m;
-        queue<pair<TreeNode*,int>> q;
+        map<int,vector<pair<int,int>>> m;       // vertical index : (level,value)
+        queue<pair<TreeNode*,int>> q;           // node,vertical index
         
         int l=0;
         
@@ -30,17 +30,17 @@ public:
             
             while(s--)
             {
-            root=q.front().first;
-            int i=q.front().second;
-            q.pop();
+                root=q.front().first;
+                int i=q.front().second;
+                q.pop();
             
-            m[i].push_back({l,root->val});
+                m[i].push_back({l,root->val});
             
-            if(root->left)
-                q.push({root->left,i-1});
-            
-            if(root->right)
-                q.push({root->right,i+1});
+                if(root->left)
+                    q.push({root->left,i-1});
+                
+                if(root->right)
+                    q.push({root->right,i+1});
             }
             
         }
