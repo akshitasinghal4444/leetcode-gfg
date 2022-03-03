@@ -40,38 +40,4 @@ public:
         }
         return s;
     }
-    
-    /*
-    ListNode *detectCycle(ListNode *head) {
-        if(!head)
-            return NULL;
-        
-        ListNode *f,*s;
-        f=s=head;
-        bool cycle=0;
-        
-        while(f->next && f->next->next)
-        {
-            s=s->next;
-            f=f->next->next;
-            if(s==f)
-            {
-                cycle=1;
-                break;
-            }
-                
-        }
-        
-        if(!cycle)
-        return NULL;
-        
-        s=head;
-        while(s!=f)
-        {
-            s=s->next;
-            f=f->next;
-        }
-        return s;
-    }
-    */
 };
