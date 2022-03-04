@@ -10,6 +10,65 @@
  */
 class Solution {
 public:
+    ListNode *merge(ListNode *a,ListNode *b)
+    {
+        if(!a)
+            return b;
+        
+        if(!b)
+            return a;
+        
+        ListNode *t,*h;
+        
+        if(a->val<=b->val)
+        {
+            t=a;
+            a=a->next;
+        }
+        else
+        {
+            t=b;
+            b=b->next;
+        }
+        
+        h=t;
+        
+        while(a && b)
+        {
+            if(a->val<=b->val)
+            {
+                t->next=a;
+                a=a->next;
+            }
+            else
+            {
+                t->next=b;
+                b=b->next;
+            }
+            t=t->next;
+        }
+        
+        if(a)
+            t->next=a;
+        else
+            t->next=b;
+        
+        return h;
+    }
+    
+    ListNode* mergeKLists(vector<ListNode*>& l) {
+        int n=l.size();
+        int i;
+        ListNode* ans=NULL;
+        
+        for(i=0;i<n;i++)
+        {
+            ans=merge(ans,l[i]);
+        }
+        return ans;
+    }
+    
+    /*
     class Compare
     {
         public:
@@ -53,6 +112,7 @@ public:
         
         return ans->next;
     }
+    */
     
     /*
     ListNode* merge(ListNode *a,ListNode *b)
