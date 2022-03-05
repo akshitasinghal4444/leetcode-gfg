@@ -1,5 +1,27 @@
 class MyCalendar {
 public:
+    
+    map<int,int> m;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int s, int e) {
+        
+        auto it=m.lower_bound(e);
+        
+        if(it==m.begin() || (--it)->second<=s)
+        {
+            m[s]=e;
+            return 1;
+        }
+        return 0;
+    }
+};
+
+/*
+class MyCalendar {
+public:
     vector<pair<int,int>> v;
     
     MyCalendar() {
@@ -21,8 +43,7 @@ public:
         return 1;
     }
 };
-
-
+*/
 
 /**
  * Your MyCalendar object will be instantiated and called as such:
