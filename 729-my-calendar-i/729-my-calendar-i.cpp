@@ -14,6 +14,9 @@ public:
         
         for(auto it:m)
         {
+            if(it.first>e)
+                break;
+            
             t+=it.second;
             
             if(t>1)
