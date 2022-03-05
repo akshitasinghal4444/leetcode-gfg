@@ -1,5 +1,36 @@
 class Solution {
 public:
+    vector<int> findDiagonalOrder(vector<vector<int>>& a)
+    {
+        map<int,vector<int>> mp;
+        int m,n,i,j;
+        m=a.size();
+        n=a[0].size();
+        vector<int> ans;
+        
+        for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                mp[i+j].push_back(a[i][j]);
+            }
+        }
+        
+        for(auto [s,v]:mp)
+        {
+            if(s%2==0)
+                reverse(v.begin(),v.end());
+            
+            for(auto x:v)
+            {
+                ans.push_back(x);
+            }
+        }
+        
+        return ans;
+    }
+    
+    /*
     vector<int> findDiagonalOrder(vector<vector<int>>& a) {
         int m,n,i,j;
         
@@ -47,4 +78,5 @@ public:
         }
         return ans;
     }
+    */
 };
