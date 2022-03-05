@@ -1,21 +1,41 @@
 class Solution {
 public:
+    int deleteAndEarn(vector<int>& a)
+    {
+        int mx=*(max_element(a.begin(),a.end()));
+        int mn=*(min_element(a.begin(),a.end()));
+        int n=mx-mn+1;
+                 
+        vector<int> dp(n,0);
+        
+        for(int x:a)
+            dp[x-mn]+=x; 
+                 
+        int inc=0,exc=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int ninc,nexc;
+            ninc=exc+dp[i];
+            nexc=max(inc,exc);
+            
+            inc=ninc;
+            exc=nexc;
+        }
+        return max(inc,exc);
+    }
+    
+    /*
     int deleteAndEarn(vector<int>& a) {
         int n=a.size();
         int i,ans=0;
         
-        int mn=a[0],mx=a[0];
-        for(i=0;i<n;i++)
-        {
-            mx=max(mx,a[i]);
-            mn=min(mn,a[i]);
-        }
+        int mx=*(max_element(a.begin(),a.end()));
+        int mn=*(min_element(a.begin(),a.end()));
         
         vector<int> dp(mx-mn+1,0);
         for(i=0;i<n;i++)
-        {
             dp[a[i]-mn]+=a[i];
-        }
         
         n=mx-mn+1;
         if(n>1)
@@ -26,4 +46,5 @@ public:
         }
         return dp[n-1];
     }
+    */
 };
