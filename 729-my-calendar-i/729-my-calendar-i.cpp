@@ -1,9 +1,39 @@
 class MyCalendar {
 public:
+    map<int,int> m;
+    
+    MyCalendar() {}
+    
+    bool book(int s, int e) {
+        if(m[s]==1)
+            return 0;
+        
+        m[s]++;
+        m[e]--;
+        int t=0;
+        
+        for(auto it:m)
+        {
+            t+=it.second;
+            
+            if(t>1)
+            {
+                m[s]--;
+                m[e]++;
+                return 0;
+            }
+        }
+        return 1;
+    }
+};
+
+/*
+class MyCalendar {
+public:
     
     map<int,int> m;
-    MyCalendar() {
-        
+    
+    MyCalendar() {    
     }
     
     bool book(int s, int e) {
@@ -18,6 +48,7 @@ public:
         return 0;
     }
 };
+*/
 
 /*
 class MyCalendar {
