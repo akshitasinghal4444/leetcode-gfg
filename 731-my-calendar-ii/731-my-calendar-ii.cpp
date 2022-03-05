@@ -1,6 +1,39 @@
 class MyCalendarTwo {
 public:
     
+    map<int,int> m;
+    
+    MyCalendarTwo() {}
+    
+    bool book(int s, int e) {
+        if(m[s]==2)
+            return 0;
+        
+        m[s]++;
+        m[e]--;
+        int t=0;
+        
+        for(auto it:m)
+        {
+            if(it.first>=e)
+                break;
+            
+            t+=it.second;
+            if(t>2)
+            {
+                m[s]--;
+                m[e]++;
+                return 0;
+            }
+        }
+        return 1;
+    }
+};
+
+/*
+class MyCalendarTwo {
+public:
+
     vector<pair<int,int>> once,twice;
     
     MyCalendarTwo() {}
@@ -25,6 +58,7 @@ public:
         return 1;
     }
 };
+*/
 
 /**
  * Your MyCalendarTwo object will be instantiated and called as such:
