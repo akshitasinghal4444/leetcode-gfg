@@ -38,7 +38,7 @@ public:
                     q.push(root->right);
             }
             
-            ans.push_back(t);
+            ans.push_back(move(t));
         }
         
         return ans;
