@@ -16,6 +16,15 @@ public:
         if(!root)
             return 0;
         
+        return max(maxDepth(root->left),maxDepth(root->right))+1;
+    }
+    
+    /*
+    int maxDepth(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        
         int d=0;
         queue<TreeNode*> q;
         q.push(root);
@@ -36,6 +45,7 @@ public:
         }
         return d;
     }
+    */
 
     /*
     int maxDepth(TreeNode* root) {
