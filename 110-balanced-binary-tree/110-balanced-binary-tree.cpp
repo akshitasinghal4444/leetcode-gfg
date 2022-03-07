@@ -18,6 +18,8 @@ public:
         
         int l,r;
         l=height(root->left);
+        
+        if(l!=-1)
         r=height(root->right);
         
         if(l==-1 || r==-1 || abs(l-r)>1)
