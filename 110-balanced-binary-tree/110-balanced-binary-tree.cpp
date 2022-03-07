@@ -11,6 +11,36 @@
  */
 class Solution {
 public:
+    bool bal;
+    
+    int check(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        
+        int l,r;
+        l=check(root->left);
+        r=check(root->right);
+        
+        if(abs(l-r)>1)
+            bal=0;
+        
+        return max(l,r)+1;
+    }
+    
+    bool isBalanced(TreeNode* root)
+    {
+        if(!root)
+            return 1;
+        
+        bal=1;
+        
+        int h=check(root);
+        
+        return bal;
+    }
+    
+    /*
     unordered_map<TreeNode*,int> m;
     
     int height(TreeNode* root)
@@ -52,4 +82,5 @@ public:
         }
         return 1;
     }
+    */
 };
