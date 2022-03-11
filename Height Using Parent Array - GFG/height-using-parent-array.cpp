@@ -9,10 +9,24 @@ using namespace std;
 
 class Solution{
 public:
+    int findHeight(int *a,int i)
+    {
+        if(a[i]==-1)
+        return 1;
+        
+        return 1+findHeight(a,a[i]);
+    }
+
+    int findHeight(int n, int a[])
+    {
+        return findHeight(a,n-1);
+    }
+
+/*
     int findHeight(int n, int a[]){
         // code here
         vector<int> v(n);
-        int i,mx=0;
+        int i;
         
         for(i=0;i<n;i++)
         {
@@ -20,12 +34,11 @@ public:
             v[i]=1;
             else
             v[i]=v[a[i]]+1;
-            
-            // mx=max(mx,v[i]);
         }
         
         return v[n-1];
     }
+*/
 };
 
 // { Driver Code Starts.
