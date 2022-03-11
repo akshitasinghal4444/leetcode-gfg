@@ -21,10 +21,10 @@ public:
             else
             v[i]=v[a[i]]+1;
             
-            mx=max(mx,v[i]);
+            // mx=max(mx,v[i]);
         }
         
-        return mx;
+        return v[n-1];
     }
 };
 
