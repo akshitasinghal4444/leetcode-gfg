@@ -15,10 +15,10 @@ public:
         if(!root)
             return 0;
         
+         t-=root->val;
         if(!root->left && !root->right)
-            return t==root->val;
-            
-        t-=root->val;
+            return t==0;
+        
         return hasPathSum(root->left,t) || hasPathSum(root->right,t);
     }
 };
