@@ -11,6 +11,58 @@
  */
 class Solution {
 public:
+    int in_successor(TreeNode* root)
+    {
+        TreeNode* t=root->right;
+        int x;
+        
+        if(!t->left)
+        {
+            x=t->val;
+            root->right=deleteNode(t,x);
+        }
+        else
+        {
+            while(t->left->left)
+            t=t->left;
+            
+            x=t->left->val;
+            t->left=deleteNode(t->left,x);
+        }
+        
+        return x;
+    }
+    
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root)
+            return root;
+        
+        if(root->val==key)
+        {
+            if(!root->left && !root->right)
+                return NULL;
+            
+            if(!root->right)
+                return root->left;
+            
+            if(!root->left)
+                return root->right;
+            
+            root->val=in_successor(root);
+
+            return root;
+        }
+        
+        if(root->val>key)
+            root->left=deleteNode(root->left,key);
+        else
+            root->right=deleteNode(root->right,key);
+        
+        return root;
+    }
+    
+    
+    /*
     TreeNode* in_successor(TreeNode* root)
     {
         TreeNode* t=root->right;
@@ -48,4 +100,5 @@ public:
         
         return root;
     }
+    */
 };
