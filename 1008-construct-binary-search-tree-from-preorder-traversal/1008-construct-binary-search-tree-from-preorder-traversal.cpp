@@ -12,6 +12,30 @@
 class Solution {
 public:
     int i;
+    
+    TreeNode* bstFromPreorder(vector<int>& p,int n,int mx)
+    {
+        if(i==n || p[i]>mx)
+            return NULL;
+        
+        TreeNode *root=new TreeNode(p[i]);
+        i++;
+        
+        root->left=bstFromPreorder(p,n,p[i-1]);
+        root->right=bstFromPreorder(p,n,mx);
+        
+        return root;
+    }
+    
+    TreeNode* bstFromPreorder(vector<int>& p) 
+    {
+        i=0;
+        int n=p.size();
+        return bstFromPreorder(p,n,INT_MAX);
+    }
+    
+    /*
+    int i;
     unordered_map<int,int> m;
     
     
@@ -42,4 +66,5 @@ public:
     
         return helper(p,in,0,in.size()-1);
     }
+    */
 };
