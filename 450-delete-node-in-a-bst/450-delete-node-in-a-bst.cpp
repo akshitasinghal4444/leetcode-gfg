@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    /*
     int in_successor(TreeNode* root)
     {
         TreeNode* t=root->right;
@@ -59,16 +60,15 @@ public:
         
         return root;
     }
+    */
     
     
-    /*
-    TreeNode* in_successor(TreeNode* root)
+    int in_successor(TreeNode* root)
     {
-        TreeNode* t=root->right;
-        while(t->left)
-            t=t->left;
+        while(root->left)
+            root=root->left;
         
-        return t;
+        return root->val;
     }
     
     TreeNode* deleteNode(TreeNode* root, int key) {
@@ -86,9 +86,8 @@ public:
             if(!root->left)
                 return root->right;
             
-            TreeNode *t=in_successor(root);
-            root->val=t->val;
-            root->right=deleteNode(root->right,t->val);
+            root->val=in_successor(root->right);
+            root->right=deleteNode(root->right,root->val);
             return root;
         }
         
@@ -99,5 +98,4 @@ public:
         
         return root;
     }
-    */
 };
