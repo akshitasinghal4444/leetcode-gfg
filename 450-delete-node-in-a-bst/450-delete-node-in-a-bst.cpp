@@ -49,7 +49,6 @@ public:
                 return root->right;
             
             root->val=in_successor(root);
-
             return root;
         }
         
