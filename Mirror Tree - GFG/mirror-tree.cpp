@@ -110,6 +110,21 @@ struct Node
 class Solution {
   public:
     // Function to convert a binary tree into its mirror tree.
+    void mirror(Node* node) {
+        // code here
+        if(!node)
+        return ;
+        
+        mirror(node->left);
+        mirror(node->right);
+        
+        Node *t=node->left;
+        node->left=node->right;
+        node->right=t;
+    }
+    
+    
+    /*
     Node* change(Node* root)
     {
         if(!root)
@@ -132,6 +147,7 @@ class Solution {
         
         change(node);
     }
+    */
 };
 
 // { Driver Code Starts.
