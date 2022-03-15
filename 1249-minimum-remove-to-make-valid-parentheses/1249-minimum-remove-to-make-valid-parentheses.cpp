@@ -3,8 +3,8 @@ public:
     string minRemoveToMakeValid(string s)
     {
         int c=0;
+        string ans="";
         int i,n=s.length();
-        string t="";
         
         for(i=0;i<n;i++)
         {
@@ -13,7 +13,7 @@ public:
             else if(s[i]==')')
             {
                 if(c==0)
-                    s[i]='*';
+                   s[i]='*';
                 else
                     c--;
             }
@@ -39,10 +39,10 @@ public:
         for(i=0;i<n;i++)
         {
             if(s[i]!='*')
-                t+=s[i];
+                ans+=s[i];
         }
         
-        return t;
+        return ans;
     }
     
     /*
