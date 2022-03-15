@@ -1,5 +1,49 @@
 class Solution {
 public:
+    string simplifyPath(string p)
+    {
+        int i,n=p.length();
+        string s="/";
+        
+        for(i=1;i<n;i++)
+        {
+            if(p[i]=='/' && (p[i-1]=='/' || s.back()=='/'))
+                continue;
+            else if(p[i]=='.' && p[i-1]=='/')
+            {
+                int c=0;
+                while(i<n && p[i]=='.')
+                {
+                    i++;
+                    c++;
+                }
+                
+                if(c>2 || (i<n && p[i]!='/'))
+                {
+                    while(c--)
+                        s+='.';
+                }                
+                else if(c==2 && s.size()>1)
+                {
+                    s.pop_back();
+                    
+                    while(s.back()!='/')
+                        s.pop_back();
+                }
+
+                i--;
+            }
+            else
+                s+=p[i];
+        }
+        
+        if(s.size()>1 && s.back()=='/')
+            s.pop_back();
+        
+        return s;
+    }
+    
+    /*
     string simplifyPath(string path) {
         
         stack<string> st;
@@ -43,4 +87,5 @@ public:
         
         return res;
     }
+    */
 };
