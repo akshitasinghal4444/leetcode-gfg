@@ -1,5 +1,24 @@
 class Solution {
 public:
+    static bool comp(vector<int> a,vector<int> b)
+    {
+        long d1,d2;
+        d1=a[0]*a[0]+a[1]*a[1];
+        d2=b[0]*b[0]+b[1]*b[1];
+        
+        return d1<d2;
+    }
+    
+    vector<vector<int>> kClosest(vector<vector<int>>& a, int k)
+    {
+        int n=a.size();        
+        sort(a.begin(),a.end(),comp);
+        vector<vector<int>> ans(a.begin(),a.begin()+k);
+        
+        return ans;
+    }
+    
+    /*
     vector<vector<int>> kClosest(vector<vector<int>>& a, int k)
     {
         int n=a.size(),i;
@@ -22,6 +41,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     void swap(vector<int> &a,vector<int> &b)
@@ -73,25 +93,4 @@ public:
     }
     */
     
-    /*
-    vector<vector<int>> kClosest(vector<vector<int>>& a, int k) {
-        vector<vector<int>> ans;
-        int n=a.size();
-        vector<int> dis[n];
-        int i;
-        
-        for(i=0;i<n;i++)
-        {
-            int x=a[i][0],y=a[i][1];
-            dis[i]={x*x+y*y,i};
-        }
-        
-        sort(dis,dis+n);
-        for(i=0;i<k;i++)
-        {
-            ans.push_back(a[dis[i][1]]);
-        }
-        return ans;
-    }
-*/
 };
