@@ -103,6 +103,34 @@ struct Node
 
 class Solution{
     public:
+    
+    int isSumProperty(Node *root)
+    {
+     // Add your code here
+        if(!root)
+        return 1;
+        
+        if(root->left || root->right)
+        {
+            int l=0,r=0;
+            
+            if(root->left)
+            l=root->left->data;
+            
+            if(root->right)
+            r=root->right->data;
+            
+            if(root->data!=l+r)
+            return 0;
+        }
+        
+        if(isSumProperty(root->left) && isSumProperty(root->right))
+        return 1;
+        
+        return 0;
+    }
+    
+    /*
     int f=1;
     //Function to check whether all nodes of a tree have the value 
     //equal to the sum of their child nodes.
@@ -135,6 +163,7 @@ class Solution{
         int x=sum(root);
         return f;
     }
+    */
 };
 
 // { Driver Code Starts.
