@@ -16,6 +16,29 @@ public:
         if(!root)
             return;
         
+        flatten(root->left);
+        flatten(root->right);
+        
+        if(root->left)
+        {
+            TreeNode *l=root->left;
+            while(l->right)
+                l=l->right;
+            
+            l->right=root->right;
+            
+            root->right=root->left;
+            root->left=NULL;
+        }
+        
+    }
+    
+    /*
+    void flatten(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
         while(root)
         {
             TreeNode *r=root->right;
@@ -31,6 +54,7 @@ public:
             root=root->right;
         }
     }
+    */
     
     /*
     TreeNode *t;
