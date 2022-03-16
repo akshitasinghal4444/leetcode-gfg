@@ -20,6 +20,51 @@ class Solution {
 public:
     Node* connect(Node* root)
     {
+        Node *t1=root;
+        
+        while(t1)
+        {
+            Node *t2=t1;
+            
+            while(t2)
+            {
+                if(t2->left)
+                    t2->left->next=t2->right;
+                
+                if(t2->right && t2->next)
+                    t2->right->next=t2->next->left;
+                
+                t2=t2->next;
+            }
+            
+            t1=t1->left;
+        }
+        
+        return root;
+    }
+    
+    /*
+    Node* connect(Node* root)
+    {
+        if(!root)
+            return NULL;
+        
+        if(root->left)
+            root->left->next=root->right;
+        
+        if(root->right && root->next)
+            root->right->next=root->next->left;
+        
+        root->left=connect(root->left);
+        root->right=connect(root->right);
+        
+        return root;
+    }
+    */
+    
+    /*
+    Node* connect(Node* root)
+    {
         if(!root)
             return NULL;;
         
@@ -48,54 +93,6 @@ public:
         
         return root;
     }
-    
-    /*
-    Node* connect(Node* root)
-    {
-        if(!root)
-            return root;
-        if(root->left)
-            root->left->next=root->right;
-        if(root->next && root->right)
-            root->right->next=root->next->left;
-
-        root->left=connect(root->left);
-        root->right=connect(root->right);
-        return root;
-    }
     */
     
-    /*
-    Node* connect(Node* root) {
-        if(!root)
-            return root;
-        
-        queue<Node*> q;
-        q.push(root);
-        
-        while(!q.empty())
-        {
-            Node* t;
-            int n=q.size();
-            for(int i=0;i<n-1;i++)
-            {
-                t=q.front();
-                q.pop(); 
-                t->next=q.front();
-                if(t->left)
-                    q.push(t->left);
-                if(t->right)
-                    q.push(t->right);
-            }
-            t=q.front();
-            q.pop(); 
-            t->next=NULL;
-            if(t->left)
-                q.push(t->left);
-            if(t->right)
-                q.push(t->right);
-        }
-        return root;
-    }
-    */
 };
