@@ -10,6 +10,34 @@ using namespace std;
 
 class Solution
 {
+    public:
+    
+    vector<vector<int> > subsets(vector<int>& a)
+    {
+        vector<vector<int>> ans;
+        
+        int n=a.size();
+        long temp=(1<<n);
+        int i,j;
+        
+        for(i=0;i<temp;i++)
+        {
+            vector<int> t;
+            
+            for(j=0;j<n;j++)
+            {
+                if(i & (1<<j))
+                t.push_back(a[j]);
+            }
+            
+            ans.push_back(t);
+        }
+        
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+    
+    /*
     vector<vector<int>> ans;
     vector<int> t;
     
@@ -27,7 +55,6 @@ class Solution
         t.pop_back();
     }
     
-    public:
     vector<vector<int> > subsets(vector<int>& a)
     {
         //code here
@@ -37,6 +64,7 @@ class Solution
         sort(ans.begin(),ans.end());
         return ans;
     }
+    */
 };
 
 // { Driver Code Starts.
