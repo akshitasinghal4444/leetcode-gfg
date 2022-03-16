@@ -1,6 +1,97 @@
 class LRUCache {
 public:
+    struct node
+    {
+        int key,val;
+        node *next,*prev;
+        
+    }*head,*tail;
     
+    unordered_map<int,node*> m;
+    int sz;
+    
+    void movefront(node *t)
+    {
+        if(t==head)
+            return;
+        
+        if(tail==t)
+            tail=tail->prev;
+        
+        if(t->prev)
+            t->prev->next=t->next;
+        
+        if(t->next)
+            t->next->prev=t->prev;
+        
+        t->prev=NULL;
+        t->next=head;
+        head->prev=t;
+        
+        head=t;
+        
+        
+    }
+    
+    LRUCache(int capacity) {
+        sz=capacity;
+        head=tail=NULL;
+    }
+    
+    int get(int key) {
+        
+        if(m.find(key)==m.end())
+            return -1;
+        
+        int val=m[key]->val;
+        movefront(m[key]);
+        m[key]=head;
+        return val;
+    }
+    
+    void put(int key, int value) {
+        
+        if(m.find(key)!=m.end())
+        {
+            movefront(m[key]);
+            m[key]=head;
+            head->val=value;
+        }
+        else
+        {
+            node *t=new node();
+            t->val=value;
+            t->key=key;
+            
+            if(!head)
+                head=tail=t;
+            else
+            {
+                t->next=head;
+                head->prev=t;
+                head=t;
+            }
+            
+            m[key]=head;
+            
+            if(sz<m.size())
+            {
+                node *t=tail;
+                tail=tail->prev;
+                tail->next=NULL;
+                m.erase(t->key);
+                t->prev=NULL;
+                
+                // if(!tail)
+                //     head=NULL;
+            }
+        }
+    }
+};
+
+/*
+class LRUCache {
+public:
     int sz;
     list<pair<int,int>> l;
     unordered_map<int,list<pair<int,int>>::iterator> m;
@@ -37,6 +128,7 @@ public:
         }
     }
 };
+*/
 
 /*
 class LRUCache {
@@ -77,98 +169,6 @@ public:
             l.pop_back();
             m1.erase(k);
             m2.erase(k);
-        }
-    }
-};
-*/
-
-    /*
-    list<pair<int,int>> l;
-    unordered_map<int,list<pair<int,int>>::iterator> m;
-    int s,mx;
-    
-    LRUCache(int c) {
-        s=0;
-        mx=c;
-    }
-    
-    int get(int k) {
-        
-        if(m.find(k)!=m.end())
-        {
-            int v=m[k]->second;
-            l.erase(m[k]);
-            l.push_front({k,v});
-            m[k]=l.begin();
-            return v;
-        }
-        return -1;
-    }
-    
-    void put(int k, int v) {
-        
-        if(m.find(k)!=m.end())
-        {
-            l.erase(m[k]);
-            s--;
-        }
-        
-        l.push_front({k,v});
-        m[k]=l.begin();
-        s++;
-        
-        if(s>mx)
-        {
-            m.erase(l.back().first);
-            l.pop_back();
-            s--;
-        }
-    }
-};
-*/
-
-/*
-class LRUCache {
-public:
-    list<pair<int,int>> l;
-    unordered_map<int,list<pair<int,int>>::iterator> m;
-    int size;
-    
-    LRUCache(int capacity) {
-        size=capacity;
-    }
-    
-    void moveToFront(int key,int val)
-    {
-        l.erase(m[key]);
-        l.push_front({key,val});
-        m[key]=l.begin();
-    }
-    
-    int get(int key) {
-        if(m.find(key)==m.end())
-            return -1;
-        int val=m[key]->second;
-        moveToFront(key,val);
-        return val;
-    }
-    
-    void put(int key, int value) {
-        if(m.find(key)!=m.end())
-        {
-            moveToFront(key,value);           
-        }
-        else
-        {
-            l.push_front({key,value});
-            m[key]=l.begin();
-            if(l.size()>size)
-            {
-                int k=l.rbegin()->first;
-                l.pop_back();
-                m.erase(k);
-            }
-                
         }
     }
 };
