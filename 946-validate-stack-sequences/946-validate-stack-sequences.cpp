@@ -13,10 +13,10 @@ public:
         
             
         int i,j;
-        i=1,j=0;
+        i=0,j=0;
         
         stack<int> st;
-        st.push(pushed[0]);
+        // st.push(pushed[0]);
         
         while(i<n1 && j<n2)
         {
