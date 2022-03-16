@@ -8,16 +8,11 @@ public:
         if(n1!=n2)
             return 0;
         
-        // if(n1==1 && n2==1 && pushed[0]==popped[0])
-        //     return 1;
-        
-            
         int i,j;
         i=0,j=0;
         
         stack<int> st;
-        // st.push(pushed[0]);
-        
+
         while(i<n1 && j<n2)
         {
             while(i<n1 && (st.empty() || st.top()!=popped[j]))
