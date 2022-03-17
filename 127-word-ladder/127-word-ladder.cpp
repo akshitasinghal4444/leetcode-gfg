@@ -1,5 +1,62 @@
 class Solution {
 public:
+    int ladderLength(string b, string e, vector<string>& a)
+    {
+        unordered_set<string> words;
+        queue<string> q;
+        int ans=0;
+        
+        for(string s:a)
+            words.insert(s);
+        
+        if(words.find(e)==words.end())
+            return 0;
+        
+        q.push(b);
+        
+        while(!q.empty())
+        {
+            int qs=q.size();
+            ans++;
+            
+            while(qs--)
+            {
+                string s=q.front();
+                q.pop();
+                int n=s.length();
+                int i,j;
+                
+                for(i=0;i<n;i++)
+                {
+                    char ch=s[i];
+                    
+                    for(char j='a';j<='z';j++)
+                    {
+                        if(s[i]==j)
+                            continue;
+                        
+                        s[i]=j;
+                        
+                        if(s==e)
+                            return ans+1;
+                        
+                        if(words.find(s)!=words.end())
+                        {
+                            q.push(s);
+                            words.erase(s);
+                        }
+                        
+                    }
+                    
+                    s[i]=ch;
+                }
+            }
+        }
+        
+        return 0;
+    }
+    
+    /*
     int ladderLength(string b, string e, vector<string>& a) {
         
         unordered_set<string> s;
@@ -49,4 +106,5 @@ public:
         }
         return 0;
     }
+    */
 };
