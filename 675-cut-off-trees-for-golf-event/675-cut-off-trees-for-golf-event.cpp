@@ -1,5 +1,7 @@
 class Solution {
 public:
+    
+    /*
     int min_steps(vector<vector<int>>& a,int sr,int sc,int er,int ec,int m,int n)
     {
         
@@ -103,53 +105,74 @@ public:
         
         return ans;
     }
+    */
     
-    /*
-    int min_steps(vector<vector<int>>& a,int i,int j,int x,int y,int m,int n)
+    
+    int min_steps(vector<vector<int>>& a,int sr,int sc,int er,int ec,int m,int n)
     {
         
-        if(i==x && j==y)
+        if(sr==er && sc==ec)
             return 0;
         
-        if(a[i][j]==0)
+        if(a[sr][sc]==0)
             return INT_MAX;
         
-        int temp=a[i][j];
-        a[i][j]=-1;
+        vector<vector<bool>> vis(m,vector<bool>(n,0));
+        queue<pair<int,int>> q;
+        q.push({sr,sc});
+        vis[sr][sc]=1;
+        int ans=0;
         
-        int ans=INT_MAX;
-        
-        if(i-1>=0 && a[i-1][j]>0)
+        while(!q.empty())
         {
-            int t=min_steps(a,i-1,j,x,y,m,n);
-            if(t!=INT_MAX)
-                ans=min(ans,1+t);
+            int s=q.size();
+            ans++;
+            
+            while(s--)
+            {
+                sr=q.front().first;
+                sc=q.front().second;
+                q.pop();
+                
+                if(sr-1>=0 && a[sr-1][sc]>0 && !vis[sr-1][sc])
+                {
+                    if(sr-1==er && sc==ec)
+                        return ans;
+                    
+                    vis[sr-1][sc]=1;
+                    q.push({sr-1,sc});
+                }
+                
+                if(sc-1>=0 && a[sr][sc-1]>0 && !vis[sr][sc-1])
+                {
+                    if(sr==er && sc-1==ec)
+                        return ans;
+                    
+                    vis[sr][sc-1]=1;
+                    q.push({sr,sc-1});
+                }
+                
+                if(sr+1<m && a[sr+1][sc]>0 && !vis[sr+1][sc])
+                {
+                    if(sr+1==er && sc==ec)
+                        return ans;
+                    
+                    vis[sr+1][sc]=1;
+                    q.push({sr+1,sc});
+                }
+                
+                if(sc+1<n && a[sr][sc+1]>0 && !vis[sr][sc+1])
+                {
+                    if(sr==er && sc+1==ec)
+                        return ans;
+                    
+                    vis[sr][sc+1]=1;
+                    q.push({sr,sc+1});
+                }
+            }
         }
-
         
-        if(j-1>=0 && a[i][j-1]>0)
-        {
-            int t=min_steps(a,i,j-1,x,y,m,n);
-            if(t!=INT_MAX)
-                ans=min(ans,1+t);
-        }
-        
-        if(i+1<m && a[i+1][j]>0)
-        {
-            int t=min_steps(a,i+1,j,x,y,m,n);
-            if(t!=INT_MAX)
-                ans=min(ans,1+t);
-        }
-        
-        if(j+1<n && a[i][j+1]>0)
-        {
-            int t=min_steps(a,i,j+1,x,y,m,n);
-            if(t!=INT_MAX)
-                ans=min(ans,1+t);
-        }
-        
-        a[i][j]=temp;
-        return ans;
+        return INT_MAX;
     }
     
     int dfs(vector<vector<int>>& a,int i,int j,vector<pair<int,pair<int,int>>> &v,int m,int n)
@@ -192,5 +215,4 @@ public:
         
         return dfs(a,0,0,v,m,n);
     }
-    */
 };
