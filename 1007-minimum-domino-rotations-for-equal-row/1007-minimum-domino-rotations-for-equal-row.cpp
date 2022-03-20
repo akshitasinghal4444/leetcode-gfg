@@ -1,6 +1,40 @@
 class Solution {
 public:
-        int minDominoRotations(vector<int>& t, vector<int>& b) {
+    int check(vector<int>& t, vector<int>& b,int j,int n)
+    {
+        int tc=0,bc=0;
+            
+        for(int i=0;i<n;i++)
+        {
+            if(t[i]!=j && b[i]!=j)
+                return INT_MAX;
+            
+            if(t[i]==j)
+                tc++;
+                
+            if(b[i]==j)
+                bc++;
+        
+        }
+            
+        return n-max(tc,bc);
+    }
+    
+    int minDominoRotations(vector<int>& t, vector<int>& b) {
+        int n=t.size();
+        int i,j,ans=INT_MAX;
+        
+        ans=min(ans,check(t,b,t[0],n));
+        ans=min(ans,check(t,b,b[0],n));
+        
+        if(ans==INT_MAX)
+            return -1;
+        
+        return ans;
+    }
+    
+    /*
+    int minDominoRotations(vector<int>& t, vector<int>& b) {
         int n=t.size();
         int i,j,ans=INT_MAX;
         
@@ -35,6 +69,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     int minDominoRotations(vector<int>& t, vector<int>& b) {
