@@ -107,7 +107,6 @@ public:
     }
     */
     
-    
     int min_steps(vector<vector<int>>& a,int sr,int sc,int er,int ec,int m,int n)
     {
         
@@ -175,30 +174,9 @@ public:
         return INT_MAX;
     }
     
-    int dfs(vector<vector<int>>& a,int i,int j,vector<pair<int,pair<int,int>>> &v,int m,int n)
-    {
-        if(v.empty())
-            return 0;
-        
-        int x=v.back().second.first;
-        int y=v.back().second.second;
-        v.pop_back();
-                
-        int ans;
-        ans=min_steps(a,i,j,x,y,m,n);
-        
-        if(ans==INT_MAX)
-            return -1;
-        
-        int t=dfs(a,x,y,v,m,n);
-        if(t!=-1)
-        return ans+t;
-        
-        return -1;
-    }
     
     int cutOffTree(vector<vector<int>>& a) {
-        vector<pair<int,pair<int,int>>> v;
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> q;
         int i,j;
         int m=a.size(),n=a[0].size();
         
@@ -207,12 +185,31 @@ public:
             for(j=0;j<n;j++)
             {
                 if(a[i][j]>1)
-                v.push_back({a[i][j],{i,j}});
+                q.push({a[i][j],{i,j}});
             }
         }
         
-        sort(v.begin(),v.end(),greater<pair<int,pair<int,int>>>());
+        int ans=0;
+        int cr=0,cc=0;
         
-        return dfs(a,0,0,v,m,n);
+        while(!q.empty())
+        {
+            int er,ec;
+            er=q.top().second.first;
+            ec=q.top().second.second;
+            q.pop();
+            
+            int t=min_steps(a,cr,cc,er,ec,m,n);
+            
+            if(t==INT_MAX)
+                return -1;
+            
+            ans+=t;
+            
+            cr=er;
+            cc=ec;
+        }
+        
+        return ans;
     }
 };
