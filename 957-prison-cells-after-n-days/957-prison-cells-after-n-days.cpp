@@ -1,5 +1,6 @@
 class Solution {
 public:
+    
     vector<int> prisonAfterNDays(vector<int>& cells, int n)
     {
         int i,j;
@@ -16,12 +17,7 @@ public:
             }
             
             if(i!=0 && t==a[0])
-            {
-                if(n%a.size()>0)
-                    return a[n%a.size()-1];
-                
-                return a.back();
-            }
+                return a[(n-1)%a.size()];
             else
                 a.push_back(t);
             
