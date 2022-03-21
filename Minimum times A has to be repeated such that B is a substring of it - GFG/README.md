@@ -1,5 +1,5 @@
 # Minimum times A has to be repeated such that B is a substring of it
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given two strings <strong>A </strong>and<strong> B. </strong>Find minimum number of times A has to be repeated such that B is a Substring of it. If <strong>B</strong> can never be a substring then return <strong>-1</strong>.</span></p>
 
