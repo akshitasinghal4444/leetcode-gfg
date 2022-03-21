@@ -20,7 +20,7 @@ public:
                 e=last[s[i]];
             }
             else if(last[s[i]]>e)
-                    e=last[s[i]];
+                e=last[s[i]];
             
         }
         
