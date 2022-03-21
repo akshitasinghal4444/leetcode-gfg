@@ -1,76 +1,70 @@
 class Solution {
 public:
-    /*
-    void advance(int &cr,int &cc,int sr,int sc,int n)
+    int find(int x,vector<vector<int>>& a,int n)
     {
+        int cr,cc;
+        x--;
+        cr=n-x/n-1;
+        cc=x%n;
+        
         bool rev=0;
-        rev=(cr%2==0);
+        if(n%2==0)
+            rev=(cr%2==0);
+        else
+            rev=(cr%2!=0);
         
         if(rev)
-        {
-            if(cc>0)
-                cc--;
-            else if(cr>0)
-                cr--;
-            else
-            {
-                cc=n;
-                cr=n;
-            }
-        }
+            cc=n-cc-1;
+        
+        if(a[cr][cc]!=-1)
+            return a[cr][cc];
         else
-        {
-            if(cc<n-1)
-                cc++;
-            else if(cr>0)
-                cr--;
-            else
-            {
-                cc=n;
-                cr=n;
-            }
-        }
+            return x+1;
     }
     
-    int minsteps(vector<vector<int>>& a,int sr,int sc,int n,int er,int ec)
+    int snakesAndLadders(vector<vector<int>>& a)
     {
-        if(sr==er && sc==ec)
+        int n=a.size();
+        if(n==1)
             return 0;
         
-        if(a[sr][sc]!=-1)
-            
-        int i;
-        int ans=INT_MAX;
+        unordered_set<int> vis;
+        queue<int> q;
+        q.push(1);
+        vis.insert(1);
         
-        for(i=1;i<=6;i++)
+        int ans=0;
+        
+        
+        while(!q.empty())
         {
-            int cr,cc;
-            advance(cr,cc,sr,sc,n);
+            int s=q.size();
+            ans++;
             
-            if(cr!=n && cc!=n)
-                ans=min(ans,1+minsteps(a,cr,cc,n,er,ec));
+            while(s--)
+            {
+                int beg=q.front();
+                q.pop();
+                
+                for(int i=1;i<7 && beg+i<=n*n;i++)
+                {
+                    int end=find(beg+i,a,n);
+                    if(end==n*n)
+                        return ans;
+                    
+                    if(vis.find(end)==vis.end())
+                    {
+                        q.push(end);
+                        vis.insert(end);
+                    }
+                }
+            }
         }
-        return ans;
+        
+        return -1;
     }
-    
-    int snakesAndLadders(vector<vector<int>>& a) {
-        int n=a.size();
-        int i,j;
-        int er=0,ec;
-        
-        if(n%2==0)
-            ec=0;
-        else
-            ec=n-1;
-        
-        int x=minsteps(a,n-1,0,n,er,ec);
-        
-        if(x==INT_MAX)
-            return -1;
-        
-        return x;
-    }
-    */
+
+    /*
     void advance(int &cr,int &cc,int n,int i)
     {
         bool rev=0;
@@ -168,8 +162,6 @@ public:
                 sr=q.front().first;
                 sc=q.front().second;
                 q.pop();
-                
-                // cout<<sr<<" "<<sc<<":";
 
                 for(i=1;i<=6;i++)
                 {
@@ -181,9 +173,7 @@ public:
                     
                     if(a[cr][cc]>0)
                         find(cr,cc,a,n);
-                    
-                    // cout<<cr<<","<<cc<<"|";
-                    
+                                        
                     if(cr==er && cc==ec)
                         return ans;
                     
@@ -193,10 +183,9 @@ public:
                         vis[cr][cc]=1;
                     }
                 }
-                // cout<<endl;
             }
-            // cout<<endl;
         }
         return -1;
     }
+    */
 };
