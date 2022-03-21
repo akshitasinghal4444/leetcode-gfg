@@ -56,7 +56,6 @@ public:
                 int i;
                 char j;
                 
-                cout<<s1<<":";
                 for(i=0;i<n;i++)
                 {
                     char ch=s1[i];
@@ -71,30 +70,24 @@ public:
                         {   
                             if(level.find(s1)==level.end())
                             {
-                                cout<<s1<<",";
                                 level[s1]=c;
                                 q.push(s1);
                                 g[s2].push_back(s1);                            
                             }
                             else if(level[s1]==c)
                             {
-                                cout<<s1<<",";
                                 level[s1]=c;
                                 g[s2].push_back(s1);    
                             }
                             
                             if(s1==e)
                                 found=1;
-                            // else
-                            //     words.erase(s1);
                         }
                     }
                     
                     s1[i]=ch;
                 }
-                cout<<endl;
             }
-            cout<<endl;
             if(found)
                 break;
         }
