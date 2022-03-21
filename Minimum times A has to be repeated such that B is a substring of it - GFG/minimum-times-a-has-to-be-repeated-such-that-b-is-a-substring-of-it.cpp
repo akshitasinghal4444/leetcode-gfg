@@ -8,6 +8,34 @@ using namespace std;
 
 class Solution {
   public:
+  
+    int minRepeats(string a, string b)
+    {
+        int na=a.length(),nb=b.length();
+        int i,j,k,c;
+        
+        for(k=0;k<na;k++)
+        {
+            i=k;
+            j=0;
+            c=1;
+            
+            while(a[i]==b[j])
+            {
+                j++;
+                i=(i+1)%na;
+                
+                if(j==nb)
+                return c;
+                
+                if(i==0)
+                c++;
+            }
+        }
+        return -1;
+    }
+  
+  /*
     int minRepeats(string a, string b) {
         // code here
         int na=a.length(),nb=b.length();
@@ -28,6 +56,7 @@ class Solution {
         
         return -1;
     }
+    */
 };
 
 // { Driver Code Starts.
