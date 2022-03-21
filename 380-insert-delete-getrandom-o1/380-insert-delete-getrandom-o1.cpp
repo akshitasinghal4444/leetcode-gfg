@@ -1,4 +1,4 @@
-/*
+
 class RandomizedSet {
 public:
     unordered_map<int,int> m;
@@ -24,38 +24,46 @@ public:
             return 0;
         
         int i=m[val];
-        m.erase(val);
-        
-        if(v.size()>1)
-        {
-            v[i]=v.back();
-            m[v.back()]=i;
-        }
+        v[i]=v.back();
+        m[v.back()]=i;
         
         v.pop_back();
+        m.erase(val);
+
         return 1;
     }
+    
+    //     bool remove(int val) {
+    //         int last=a.back();  // back() fetches last element of the array vector
+    //         a[m[val]]=a.back(); // m[val] locates the index of val in the array vector.
+    // // Then we copy array last element value to the val location in the array
+    //         a.pop_back();	    // Delete the last element of the array 
+    //         m[last]=m[val];	    // In hashmap, assign index of val in array to the index of the last element   
+    //         m.erase(val);	    // Delete the val entry from map
+    //         return true;
+    //     }
+    // }
     
     int getRandom() {
         int x=rand()%(v.size());
         return v[x];
     }
 };
-*/
 
+
+/*
 class RandomizedSet {
 	// Optimal Solution Time O(1) & Auxiliary Space O(N)
 private:
     vector<int> a; // array vector
     unordered_map<int,int> m; // Unordered Map does searching, insertion & deletion of element in O(1) time
 public:
-    /** Initialize your data structure here. */
+
     RandomizedSet() {
     // No need to initialise a & m as they are initialised automatically
 	// to 0 as and when their container size increases.
     }
     
-    /** Inserts a value to the array vector. Returns true if the array did not already contain the specified element. */
     bool insert(int val) {
         if(m.find(val)!=m.end())
 	        // If val is not already present in the map, find() function  
@@ -71,7 +79,6 @@ public:
         }
     }
     
-    /** Removes a value from the array vector. Returns true if the array contained the specified element. */
     bool remove(int val) {
         if(m.find(val)==m.end()) // val not present in the array vector
             return false;
@@ -92,7 +99,6 @@ public:
         }
     }
     
-    /** Get a random element from the array vector */
     int getRandom() {
 	    // rand() function gives random value in the range of 0 to RAND_MAX(whose value is 32767). x%y gives 
  	    // remainder when x is divided by y and this remainder is in the range of 0 to y-1.
@@ -101,6 +107,7 @@ public:
         return a[rand()%a.size()];
     }
 };
+*/
 
 /*
 class RandomizedSet {
