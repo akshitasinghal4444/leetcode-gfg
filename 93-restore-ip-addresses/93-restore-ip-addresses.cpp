@@ -8,10 +8,10 @@ public:
         if(in==n)
         {
             t.pop_back();
-            // cout<<t<<endl;
+            
             if(dots==4)
                 ans.push_back(t);
-            t+='.';
+            
             return;
         }
         
@@ -19,14 +19,14 @@ public:
             return;
         
         string num="";
+        string x=t;
         
         if(s[in]=='0')
         {
             t+=s[in];
             t+='.';
             restore(in+1,s,n,dots+1);
-            t.pop_back();
-            t.pop_back();
+            t=x;
             return;
         }
         
@@ -38,7 +38,6 @@ public:
             if(stoi(num)>255)
             return;
             
-            string x=t;
             t+=num;
             t+='.';
             restore(i+1,s,n,dots+1);
