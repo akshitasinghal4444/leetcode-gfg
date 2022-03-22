@@ -35,7 +35,24 @@ int main() {
 	return 0;
 }// } Driver Code Ends
 
+vector<int> Smallestonleft(int a[], int n)
+{
+    map<int,int> m;
+    vector<int> ans(n,-1);
+    int i;
+    
+    for(i=0;i<n;i++)
+    {
+        m[a[i]]++;
+        
+        auto it=m.find(a[i]);
+        if(it!=m.begin())
+        ans[i]=(--it)->first;
+    }
+    return ans;
+}
 
+/*
 vector<int> Smallestonleft(int a[], int n)
 {
     // Complete the function
@@ -54,3 +71,4 @@ vector<int> Smallestonleft(int a[], int n)
     
     return ans;
 }
+*/
