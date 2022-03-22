@@ -1,6 +1,54 @@
 class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int nc) {
+        if(img[sr][sc]==nc)
+            return img;
+        
+        int m=img.size(),n=img[0].size();
+        
+        queue<pair<int,int>> q;
+        q.push({sr,sc});        
+        int col=img[sr][sc];
+        img[sr][sc]=nc;
+        
+        while(!q.empty())
+        {
+            sr=q.front().first;
+            sc=q.front().second;
+            q.pop();
+            
+            if(sr-1>=0 && img[sr-1][sc]==col)
+            {
+                img[sr-1][sc]=nc;
+                q.push({sr-1,sc});
+            }
+                
+        
+            if(sc-1>=0 && img[sr][sc-1]==col)
+            {
+                img[sr][sc-1]=nc;
+                q.push({sr,sc-1});
+            }    
+        
+            if(sr+1<m && img[sr+1][sc]==col)
+            {
+                img[sr+1][sc]=nc;
+                q.push({sr+1,sc});
+            }    
+        
+            if(sc+1<n && img[sr][sc+1]==col)
+            {
+                img[sr][sc+1]=nc;
+                q.push({sr,sc+1});
+            }    
+        
+        }
+        
+        return img;
+    }
+
+    /*
+    vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int nc) {
         
         int m=img.size(),n=img[0].size();
         
@@ -51,6 +99,7 @@ public:
         
         return img;
     }
+    */
     
     /*
     void dfs(vector<vector<int>>& img,vector<vector<bool>> &vis,int m,int n,int i,int j,int nc)
