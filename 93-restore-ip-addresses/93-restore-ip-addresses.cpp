@@ -47,6 +47,8 @@ public:
     
     vector<string> restoreIpAddresses(string s) {
         int n=s.length();
+        if(n>12)
+            return ans;
         
         restore(0,s,n,0);
         
