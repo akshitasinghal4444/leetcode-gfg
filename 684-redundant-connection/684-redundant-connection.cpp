@@ -1,5 +1,79 @@
 class Solution {
 public:
+    
+//     void remove_leaves(unordered_map<int,unordered_set<int>> &graph)
+//     {
+//         int n = graph.size();
+//     vector<int> remove = {};
+//     for (auto& kv : graph) {
+//       int node = kv.first;
+//       auto& adjlist = kv.second;
+//       if (adjlist.size() == 1) { // leaf node
+//         remove.push_back(node);
+//         auto it = adjlist.begin();
+//         graph[*it].erase(node);
+//       }
+//     }
+
+//     if (remove.empty()) return;
+//     else {
+//       for (int node : remove) graph.erase(node);
+//       remove_leaves(graph);
+//     }
+//     }
+        
+
+    
+    void remove_leaves(unordered_map<int,unordered_set<int>> &g)
+    {
+        int i,n=g.size();
+        vector<int> leaf;
+        
+        for(auto it:g)
+        {
+            int i=it.first;
+            if(g[i].size()==1)
+            {
+                auto it=g[i].begin();
+                g[(*it)].erase(i);
+                leaf.push_back(i);  
+            }
+        }
+        
+        n=leaf.size();
+        for(i=0;i<n;i++)
+        {
+            g.erase(leaf[i]);
+        }
+        
+        if(n>0)
+            remove_leaves(g);
+    }
+    
+    vector<int> findRedundantConnection(vector<vector<int>>& e)
+    {
+        int n=e.size();
+        int i;
+        unordered_map<int,unordered_set<int>> g;
+        
+        for(i=0;i<n;i++)
+        {
+            g[e[i][0]].insert(e[i][1]);
+            g[e[i][1]].insert(e[i][0]);
+        }
+        
+        remove_leaves(g);
+        
+        for(i=n-1;i>=0;i--)
+        {
+            if(g.find(e[i][0])!=g.end() && g.find(e[i][1])!=g.end())
+                return e[i];
+        }
+        
+        return {};
+    }
+    
+    /*
     int find(int i,vector<int> &parent)
     {
         if(parent[i]<0)
@@ -43,6 +117,7 @@ public:
         }
         return {};
     }
+    */
     
     /*
     unordered_set<int> cycle;
@@ -187,4 +262,7 @@ public:
         return {};
     }
     */
+    
+    //archit91
+
 };
