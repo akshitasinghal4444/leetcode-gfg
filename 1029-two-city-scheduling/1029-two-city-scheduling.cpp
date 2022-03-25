@@ -1,6 +1,27 @@
 class Solution {
 public:
+    static bool comp(vector<int> a,vector<int> b)
+    {
+        return (a[1]-a[0])<(b[1]-b[0]);
+    }
     
+    int twoCitySchedCost(vector<vector<int>>& cost)
+    {
+        int n=cost.size(),i;
+        int ans=0;
+        
+        sort(cost.begin(),cost.end(),comp);
+        
+        for(i=0;i<n/2;i++)
+            ans+=cost[i][1];
+        
+        for(i;i<n;i++)
+            ans+=cost[i][0];
+        
+        return ans;
+    }
+    
+    /*
     int twoCitySchedCost(vector<vector<int>>& cost)
     {
         int n=cost.size(),i;
@@ -20,6 +41,7 @@ public:
         
         return ans;
     }
+    */
     
    /* 
     int mincost(vector<vector<int>>& cost,int in,int a,int b,vector<vector<vector<int>>> &dp)
