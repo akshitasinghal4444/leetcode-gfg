@@ -1,5 +1,32 @@
 class Solution {
 public:
+    int mincost(vector<vector<int>>& cost,int in,int a,int b,vector<vector<int>> &dp)
+    {
+        if(a==0 && b==0)
+            return 0;
+        
+        if(dp[a][b]==INT_MAX)
+        {
+            if(a>0)
+                dp[a][b]=min(dp[a][b],cost[in][0]+mincost(cost,in+1,a-1,b,dp));
+        
+            if(b>0)
+                dp[a][b]=min(dp[a][b],cost[in][1]+mincost(cost,in+1,a,b-1,dp));
+        
+        }
+        
+        return dp[a][b];
+    }
+    
+    int twoCitySchedCost(vector<vector<int>>& cost) {
+        int n=cost.size();
+
+        vector<vector<int>> dp(n/2+1,vector<int> (n/2+1,INT_MAX));
+        
+        return mincost(cost,0,n/2,n/2,dp);
+    }
+    
+    /*
     static bool comp(vector<int> a,vector<int> b)
     {
         return (a[1]-a[0])<(b[1]-b[0]);
@@ -20,6 +47,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     int twoCitySchedCost(vector<vector<int>>& cost)
