@@ -1,0 +1,60 @@
+class Solution {
+public:
+    
+    int find(int u,vector<int> &parent)
+    {
+        if(parent[u]<0)
+            return u;
+        
+        parent[u]=find(parent[u],parent);
+        return parent[u];
+    }
+    
+    bool ubw(int u,int v,vector<int> &parent)
+    {
+        int pu=find(u,parent);
+        int pv=find(v,parent);
+        
+        if(pu==pv)
+            return 0;
+        
+        parent[pu]+=parent[pv];
+        parent[pv]=pu;
+        
+        return 1;
+    }
+    
+    vector<int> findRedundantDirectedConnection(vector<vector<int>>& e) {
+        
+        int i,n=e.size();
+        vector<int> parent(n+1,-1);
+        vector<int> in(n+1,-1);
+        int e1=-1,e2=-1;
+        
+        for(i=0;i<n;i++)
+        {
+            if(in[e[i][1]]!=-1)
+            {
+                e2=in[e[i][1]];
+                e1=i;
+                break;
+            }
+            in[e[i][1]]=i;    
+        }
+    
+        for(i=0;i<n;i++)
+        {
+            if(i==e1)
+                continue;
+            
+            if(!ubw(e[i][0],e[i][1],parent))
+            {
+                if(e1!=-1)
+                    return e[e2];
+                else
+                    return e[i];
+            }
+        }
+        return e[e1];
+    }
+};
