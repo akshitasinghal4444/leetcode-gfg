@@ -31,7 +31,25 @@ int main()
 }
 // } Driver Code Ends
 
+int* greaterElement(int a[], int n)
+{
+    // Complete the function
+    vector<int> v(a,a+n);
+    int i;
+    sort(v.begin(),v.end());
+    for(i=0;i<n;i++)
+    {
+        auto it=upper_bound(v.begin(),v.end(),a[i]);
+        if(it!=v.end())
+        a[i]=*it;
+        else
+        a[i]=-1e7;
+        
+    }
+    return a;
+}
 
+/*
 int* greaterElement(int a[], int n)
 {
     // Complete the function
@@ -54,3 +72,4 @@ int* greaterElement(int a[], int n)
     }
     return ans;
 }
+*/
