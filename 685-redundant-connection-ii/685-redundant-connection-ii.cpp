@@ -10,7 +10,7 @@ public:
         return parent[u];
     }
     
-    bool ubw(int u,int v,vector<int> &parent)
+    bool union_by_weight(int u,int v,vector<int> &parent)
     {
         int pu=find(u,parent);
         int pv=find(v,parent);
@@ -18,9 +18,16 @@ public:
         if(pu==pv)
             return 0;
         
-        parent[pu]+=parent[pv];
-        parent[pv]=pu;
-        
+        if(parent[pu]<parent[pv])
+        {
+            parent[pu]+=parent[pv];
+            parent[pv]=pu;   
+        }
+        else
+        {
+            parent[pv]+=parent[pu];
+            parent[pu]=pv;
+        }
         return 1;
     }
     
@@ -47,7 +54,7 @@ public:
             if(i==e1)
                 continue;
             
-            if(!ubw(e[i][0],e[i][1],parent))
+            if(!union_by_weight(e[i][0],e[i][1],parent))
             {
                 if(e1!=-1)
                     return e[e2];
