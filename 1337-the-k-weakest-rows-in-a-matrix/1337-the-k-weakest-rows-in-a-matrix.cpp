@@ -1,5 +1,23 @@
 class Solution {
 public:
+    vector<int> kWeakestRows(vector<vector<int>>& a, int k)
+    {
+        vector<int> ans;
+        int m=a.size(),n=a[0].size();
+        int i,j;
+        
+        for(i=0;i<m;i++)
+            a[i].push_back(i);
+        
+        sort(a.begin(),a.end());
+        
+        for(i=0;i<k;i++)
+            ans.push_back(a[i][n]);
+        
+        return ans;
+    }
+    
+    /*
     vector<int> kWeakestRows(vector<vector<int>>& a, int k) {
         map<int,vector<int>> mp;
         vector<int> ans;
@@ -39,4 +57,5 @@ public:
         
         return ans;
     }
+    */
 };
