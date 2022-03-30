@@ -16,13 +16,13 @@ public:
                 int j=s.top();
                 s.pop();
                 
-                int h=a[j],w;
+                int w;
                 if(s.empty())
                     w=i;
                 else
                     w=(i-s.top()-1);
                 
-                ans=max(ans,w*h);
+                ans=max(ans,w*a[j]);
             }
             
             s.push(i);
