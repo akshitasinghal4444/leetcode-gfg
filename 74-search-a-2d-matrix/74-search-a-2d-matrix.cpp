@@ -1,5 +1,24 @@
 class Solution {
 public:
+    bool searchMatrix(vector<vector<int>>& a, int t)
+    {
+        int m=a.size(),n=a[0].size();
+        int i=0,j=n-1;
+        
+        while(i<m && j>=0)
+        {
+            if(a[i][j]==t)
+                return 1;
+            
+            if(a[i][j]<t)
+                i++;
+            else 
+                j--;
+        }
+        
+        return 0;
+    }
+    
     /*
     bool searchMatrix(vector<vector<int>>& a, int t)
     {
@@ -49,6 +68,7 @@ public:
     }
     */
     
+    /*
     bool binSearch(vector<int> &a,int k)
     {
         int l=0,r=a.size()-1,mid;
@@ -83,5 +103,8 @@ public:
         }
         return 0;
     }
+    */
+    
+    
 
 };
