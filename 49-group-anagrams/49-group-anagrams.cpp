@@ -1,6 +1,25 @@
 class Solution {
 public:
+    vector<vector<string>> groupAnagrams(vector<string>& str)
+    {
+        unordered_map<string,vector<string>> m;
+        vector<vector<string>> ans;
+        
+        for(string s:str)
+        {   
+            string t=s;
+            sort(t.begin(),t.end());
+            
+            m[t].push_back(s);
+        }
+        
+        for(auto it:m)
+            ans.push_back(it.second);
+        
+        return ans;
+    }
     
+    /*
     vector<vector<string>> groupAnagrams(vector<string>& str)
     {
         unordered_map<string,vector<string>> m;
@@ -25,6 +44,6 @@ public:
         
         return ans;
     }
-    
+    */
     
 };
