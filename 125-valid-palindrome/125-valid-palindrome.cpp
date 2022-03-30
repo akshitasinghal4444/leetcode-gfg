@@ -6,25 +6,11 @@ public:
         
         while(l<=r)
         {
-            if(!isdigit(s[l]) && !isalpha(s[l]))
-            {
-                l++;
-                continue;
-            }
-                            
-            if(!isdigit(s[r]) && !isalpha(s[r]))
-            {
+            if(!isalnum(s[l]))
+                l++;        
+            else if(!isalnum(s[r]))
                 r--;
-                continue;
-            }   
-            
-            if(s[l]>='A' && s[l]<='Z')
-                s[l]+=32;
-            
-            if(s[r]>='A' && s[r]<='Z')
-                s[r]+=32;
-            
-            if(s[l]!=s[r])
+            else if(tolower(s[l])!=tolower(s[r]))
                 return 0;
             else
             {
@@ -32,6 +18,7 @@ public:
                 r--;
             }
         }
+        
         return 1;
     }
     
