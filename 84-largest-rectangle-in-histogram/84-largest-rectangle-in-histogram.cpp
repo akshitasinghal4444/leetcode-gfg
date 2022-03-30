@@ -3,6 +3,38 @@ public:
     int largestRectangleArea(vector<int>& a)
     {
         int n=a.size();
+        int ans=0;
+        int i;
+        
+        stack<int> s;
+        a.push_back(0);
+        
+        for(i=0;i<=n;i++)
+        {
+            while(!s.empty() && a[s.top()]>a[i])
+            {
+                int j=s.top();
+                s.pop();
+                
+                int h=a[j],w;
+                if(s.empty())
+                    w=i;
+                else
+                    w=(i-s.top()-1);
+                
+                ans=max(ans,w*h);
+            }
+            
+            s.push(i);
+        }
+        
+        return ans;
+    }
+    
+    /*
+    int largestRectangleArea(vector<int>& a)
+    {
+        int n=a.size();
         int i,j;
         
         vector<int> lmin(n),rmin(n);
@@ -33,6 +65,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     int largestRectangleArea(vector<int>& a)
