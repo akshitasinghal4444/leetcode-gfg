@@ -28,6 +28,9 @@ public:
         
         l=0,r=n-1,i=mid;
         
+        if(t<a[i][0] || t>a[i][n-1])
+            return 0;
+        
         while(l<=r)
         {
             mid=(l+r)/2;
