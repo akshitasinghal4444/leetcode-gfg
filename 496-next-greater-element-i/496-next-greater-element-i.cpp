@@ -8,13 +8,10 @@ public:
         
         for(int n:a2)
         {
-            if(!s.empty() && n>s.top())
+            while(!s.empty() && n>s.top())
             {
-                while(!s.empty() && n>s.top())
-                {
-                    m[s.top()]=n;
-                    s.pop();
-                }
+                m[s.top()]=n;
+                s.pop();
             }
             s.push(n);
         }
