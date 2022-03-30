@@ -1,13 +1,20 @@
 class Solution {
 public:
     
-    void expand(string &s,int &l,int &r,int &len,int n)
+    void expand(string &s,int l,int r,int len,int n,int &b,int &e,int &mx)
     {
         while(l>=0 && r<n && s[l]==s[r])
         {
             l--;
             r++;
             len+=2;
+        }
+        
+        if(len>mx)
+        {
+            mx=len;
+            b=l+1;
+            e=r-1;
         }
     }
     
@@ -19,27 +26,8 @@ public:
         
         for(i=0;i<n-1;i++)
         {
-            int l=i;
-            int r=i+1;
-            int len=0;
-            expand(s,l,r,len,n);
-            if(len>mx)
-            {
-                mx=len;
-                b=l+1;
-                e=r-1;
-            }
-            
-            l=i-1;
-            r=i+1;
-            len=1;
-            expand(s,l,r,len,n);
-            if(len>mx)
-            {
-                mx=len;
-                b=l+1;
-                e=r-1;
-            }            
+            expand(s,i,i+1,0,n,b,e,mx);
+            expand(s,i-1,i+1,1,n,b,e,mx);
         }
         
         string ans="";
