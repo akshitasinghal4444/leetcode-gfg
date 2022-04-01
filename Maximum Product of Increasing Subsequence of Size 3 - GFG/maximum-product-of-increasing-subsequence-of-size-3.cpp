@@ -25,12 +25,12 @@ class Solution{
         rmax[i]=max(rmax[i+1],a[i]);
         
         set<long long> s;
-        for(i=0;i<n;i++)
+        for(i=0;i<n-1;i++)
         {
             auto x=s.insert(a[i]);
             auto it=x.first;
             
-            if(it!=s.begin() && i!=n-1 && rmax[i+1]>a[i])
+            if(it!=s.begin() &&  rmax[i+1]>a[i])
             {
                 --it;
                 if((*it)*a[i]*rmax[i+1]>p)
