@@ -1,22 +1,22 @@
 class Solution {
 public:
-    bool validPalindrome(string s,bool f=0) {
-        int j=s.length()-1;
-        int i=0;
-
-        while(i<j)
+    bool validPalindrome(string s,bool f=0)
+    {
+        int l=0,r=s.length()-1;
+        
+        while(l<r)
         {
-            if(s[i]==s[j])
+            if(s[l]==s[r])
             {
-                i++;
-                j--;
+                l++;
+                r--;
+                continue;
             }
-            else if(f)
+            
+            if(f==1)
                 return 0;
-            else
-            {
-                return validPalindrome(s.substr(i,j-1-i+1),1) || validPalindrome(s.substr(i+1,j-i-1+1),1);
-            }
+            
+            return validPalindrome(s.substr(l,r-l),1) || validPalindrome(s.substr(l+1,r-l),1);
         }
         return 1;
     }
