@@ -10,6 +10,32 @@
  */
 class Solution {
 public:
+    
+    ListNode* swapNodes(ListNode* head, int k)
+    {
+        ListNode *t,*t1,*t2;
+        t=head;
+        
+        while(--k)
+            t=t->next;
+        
+        t1=t;
+        t2=head;
+        
+        while(t->next)
+        {
+            t=t->next;
+            t2=t2->next;
+        }
+        
+        int x=t1->val;
+        t1->val=t2->val;
+        t2->val=x;
+        
+        return head;
+    }
+    
+    /*
     ListNode* swapNodes(ListNode* head, int k) {
         
         ListNode* t=head,*t1,*t2;
@@ -59,4 +85,5 @@ public:
         
         return head;
     }
+    */
 };
