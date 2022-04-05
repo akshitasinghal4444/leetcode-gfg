@@ -5,6 +5,42 @@ using namespace std;
  // } Driver Code Ends
 class Solution{   
 public:
+    string previousNumber(string s)
+    {
+        int n=s.length();
+        int i,j,in=-1;
+        
+        for(i=n-1;i>0;i--)
+        {
+            if(s[i]<s[i-1])
+            {
+                in=i-1;
+                break;
+            }
+        }
+        
+        if(in==-1)
+        return "-1";
+        
+        j=i;
+        
+        for(i=in+2;i<n;i++)
+        {
+            if(s[i]<s[in] && s[i]>s[j])
+            j=i;
+        }
+        
+        if(s[j]=='0' && in==0)
+        return "-1";
+        
+        swap(s[in],s[j]);
+        
+        // sort(s.begin()+in+1,s.end(),greater<char>());
+        
+        return s;
+    }
+
+    /*
     string previousNumber(string s){
         int ind1 = -1, ind2 = -1;
         int temp = INT_MIN;
@@ -38,7 +74,7 @@ public:
         
         return s;
     }
-
+    */
 };
 
 
