@@ -11,7 +11,7 @@ public:
             int y=q.top();
             q.pop();
             
-            y=abs(x-y);
+            y=x-y;
             if(y!=0)
                 q.push(y);
         }
