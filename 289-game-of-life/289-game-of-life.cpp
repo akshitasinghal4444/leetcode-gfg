@@ -1,5 +1,62 @@
 class Solution {
 public:
+    // 1 -> 0 = -1
+    // 0 -> 1 = 2
+    
+    int dx[8]={-1,-1,-1,0,0,1,1,1};
+    int dy[8]={-1,0,1,-1,1,-1,0,1};
+    
+    bool isvalid(int i,int j,int m,int n)
+    {
+        return (i>=0 && j>=0 && i<m && j<n);
+    }
+    
+    void check(vector<vector<int>>& b,int i,int j,int m,int n)
+    {
+        int k,c=0;
+        
+        for(k=0;k<8;k++)
+        {
+            if(isvalid(i+dx[k],j+dy[k],m,n) && (b[i+dx[k]][j+dy[k]]==1 || b[i+dx[k]][j+dy[k]]==-1))
+                c++;
+        }
+        
+        if(b[i][j]==0)
+        {
+            if(c==3)
+                b[i][j]=2;
+        }
+        else
+        {
+            if(c<2 || c>3)
+                b[i][j]=-1;
+        }
+    }
+    
+    void gameOfLife(vector<vector<int>>& b) {
+        int m=b.size(),n=b[0].size();
+        int i,j;
+        
+        for(i=0;i<m;i++)
+            for(j=0;j<n;j++)
+                check(b,i,j,m,n);
+        
+        for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                if(b[i][j]==-1)
+                    b[i][j]=0;
+                else if(b[i][j]==2)
+                    b[i][j]=1;
+            }
+        }
+    }
+};
+
+/*
+class Solution {
+public:
     int dx[8]={-1,-1,-1,0,0,1,1,1};
     int dy[8]={-1,0,1,-1,1,-1,0,1};
     
@@ -51,3 +108,4 @@ public:
         b=ans;
     }
 };
+*/
