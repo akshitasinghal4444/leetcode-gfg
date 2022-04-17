@@ -11,31 +11,21 @@
  */
 class Solution {
 public:
+    
     TreeNode* r2;
     
-    void helper(TreeNode* root)
+    void inorder(TreeNode* root)
     {
         if(!root)
             return;
         
-        helper(root->left);
+        inorder(root->left);
         
-        root->left=NULL;
-        r2->right=root;
+        // root->left=NULL;
+        r2->right=new TreeNode(root->val);
         r2=r2->right;
         
-        
-//         cout<<root->val<<":";
-        
-//         if(root->left)
-//         cout<<root->left->val;
-//         cout<<" ";
-        
-//         if(root->right)
-//         cout<<root->right->val;
-//         cout<<endl;
-        
-        helper(root->right);
+        inorder(root->right);
     }
     
     TreeNode* increasingBST(TreeNode* root) {
@@ -43,8 +33,36 @@ public:
         r2=new TreeNode();
         TreeNode* r3=r2;
         
-        helper(root);
+        inorder(root);
         
         return r3->right;
     }
+    
+    /*
+    TreeNode* r2;
+    
+    void inorder(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
+        inorder(root->left);
+        
+        root->left=NULL;
+        r2->right=root;
+        r2=r2->right;
+        
+        inorder(root->right);
+    }
+    
+    TreeNode* increasingBST(TreeNode* root) {
+        
+        r2=new TreeNode();
+        TreeNode* r3=r2;
+        
+        inorder(root);
+        
+        return r3->right;
+    }
+    */
 };
