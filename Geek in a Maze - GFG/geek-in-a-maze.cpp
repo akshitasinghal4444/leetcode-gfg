@@ -7,74 +7,58 @@ using namespace std;
 class Solution{
  
 	public:
-	int numberOfCells(int n, int m, int r, int c, int u, int d, vector<vector<char>> &mat)
+	int numberOfCells(int n, int m, int r, int c, int u, int d, vector<vector<char>> &a)
 	{
 		// Your code goes here
-		if (mat[r][c] == '#')
-	return 0;
-	
-queue<vector<int>> que;
-int cnt = 0;
-int i = 0;
-int j = 0;
-
-mat[r][c] = '#';
-que.push({r, c, u, d});
-
-while (que.size())
-{
-	auto &f = que.front();
-	int rr = f[0];
-	int cc = f[1];
-	int uu = f[2];
-	int dd = f[3];
-	que.pop();
-	
-	++ cnt;
-	
-	// left
-	i = rr;
-	j = cc - 1;
-	
-	if (0 <= j && mat[i][j] == '.')
-	{
-		mat[i][j] = '#';
-		que.push({i, j, uu, dd});
-	}
-	
-	// right
-	i = rr;
-	j = cc + 1;
-	
-	if (j < m && mat[i][j] == '.')
-	{
-		mat[i][j] = '#';
-		que.push({i, j, uu, dd});
-	}
-	
-	// up
-	i = rr - 1;
-	j = cc;
-	
-	if (0 <= i && mat[i][j] == '.' && uu)
-	{
-		mat[i][j] = '#';
-		que.push({i, j, uu - 1, dd});
-	}
-	
-	// down
-	i = rr + 1;
-	j = cc;
-	
-	if (i < n && mat[i][j] == '.' && dd)
-	{
-		mat[i][j] = '#';
-		que.push({i, j, uu, dd - 1});
-	}
-}
-
-return cnt;
-
+		int ans=0;
+		queue<vector<int>> q;
+		
+		if(a[r][c]=='.')
+		{
+		    q.push({r,c,u,d});
+    		a[r][c]='#';
+	    	ans++;
+		}
+		
+		while(!q.empty())
+		{
+		    r=q.front()[0];
+		    c=q.front()[1];
+		    u=q.front()[2];
+		    d=q.front()[3];
+		    q.pop();
+		    
+		    if(c-1>=0 && a[r][c-1]=='.')
+		    {
+		        ans++;
+		        q.push({r,c-1,u,d});
+		        a[r][c-1]='#';
+		    }
+		    
+		    if(c+1<m && a[r][c+1]=='.')
+		    {
+		        ans++;
+		        q.push({r,c+1,u,d});
+		        a[r][c+1]='#';
+		    }
+		    
+		    if(u>0 && r-1>=0 && a[r-1][c]=='.')
+		    {
+		        ans++;
+		        q.push({r-1,c,u-1,d});
+		        a[r-1][c]='#';
+		    }
+		    
+		    if(d>0 && r+1<n && a[r+1][c]=='.')
+		    {
+		        ans++;
+		        q.push({r+1,c,u,d-1});
+		        a[r+1][c]='#';
+		    }
+		    
+		}
+		
+		return ans;
 	}
 
 };
