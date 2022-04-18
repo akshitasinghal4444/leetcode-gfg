@@ -60,29 +60,4 @@ public:
     }
     */
     
-    /*
-    int inorder(TreeNode* root, int *k)
-    {
-        int ans=-1;
-        
-        if(root->left)
-            ans=inorder(root->left,k);
-        if(ans!=-1)
-            return ans;
-        
-        (*k)--;
-        if(*k==0)
-            return root->val;
-        
-        if(root->right)
-            ans=inorder(root->right,k);
-        return ans;
-    }
-    
-    int kthSmallest(TreeNode* root, int k) {
-        if(!root)
-            return -1;
-        return inorder(root,&k);
-    }
-    */
 };
