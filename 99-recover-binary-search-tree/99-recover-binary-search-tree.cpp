@@ -11,7 +11,36 @@
  */
 class Solution {
 public:
+    TreeNode *first,*second;
+    TreeNode *prev;
     
+    void inorder(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
+        inorder(root->left);
+        
+        if(prev && root->val<prev->val)
+        {
+            if(!first)
+                first=prev;
+            
+            second=root;
+        }
+        prev=root;
+        
+        inorder(root->right);
+    }
+    
+    void recoverTree(TreeNode* root)
+    {
+        first=second=prev=NULL;
+        inorder(root);
+        swap(first->val,second->val);
+    }
+    
+    /*
     vector<int> v;
     int i;
     
@@ -41,4 +70,5 @@ public:
         i=0;
         change_inorder(root);
     }
+    */
 };
