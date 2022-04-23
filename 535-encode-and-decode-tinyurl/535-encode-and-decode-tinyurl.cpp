@@ -2,6 +2,34 @@ class Solution {
 public:
 
     unordered_map<string,int> freq;
+    unordered_map<string,string> s_to_l;
+    
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+        
+        string t="";
+        for(int i=0;i<10;i++)
+            t+=(rand()%256);
+        
+        freq[t]++;
+        t+=to_string(freq[t]);
+        
+        s_to_l[t]=longUrl;
+        
+        return t;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        return s_to_l[shortUrl];
+    }
+};
+
+/*
+class Solution {
+public:
+
+    unordered_map<string,int> freq;
     unordered_map<string,string> l_to_s,s_to_l;
     
     // Encodes a URL to a shortened URL.
@@ -28,7 +56,7 @@ public:
         return s_to_l[shortUrl];
     }
 };
-
+*/
 
 /*
 class Solution {
