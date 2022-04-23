@@ -26,7 +26,7 @@ class Solution{
                 r=mid-1;
         }
         
-        if(a[l]==k || a[l]>k)
+        if(a[l]>=k)
         return l;
         
         return l+1;
