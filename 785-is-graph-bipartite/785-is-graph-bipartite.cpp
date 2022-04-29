@@ -1,6 +1,48 @@
 class Solution {
 public:
     
+    bool bfs(vector<vector<int>>& g,int in,int n,vector<int> &color)
+    {
+        color[in]=1;
+        queue<int> q;
+        q.push(in);
+        
+        while(!q.empty())
+        {
+            in=q.front();
+            q.pop();
+            
+            for(int i:g[in])
+            {
+                if(color[i]==color[in])
+                    return 0;
+                
+                if(color[i]==0)
+                {
+                    color[i]=-color[in];
+                    q.push(i);
+                }
+            }
+        }
+        
+        return 1;
+    }
+    
+    bool isBipartite(vector<vector<int>>& g)
+    {
+        int i,n=g.size();
+        vector<int> color(n,0);
+        
+        for(i=0;i<n;i++)
+        {
+            if(color[i]==0 && !bfs(g,i,n,color))
+                return 0;
+        }
+        
+        return 1;
+    }
+    
+    /*
     bool dfs(vector<vector<int>>& g,vector<int> &color,int in,int col)
     {
         int nc=(col==0)?1:0;
@@ -33,6 +75,7 @@ public:
         
         return 1;
     }
+    */
     
     /*
     bool bfs(vector<vector<int>>& g,vector<int> &color,int in)
