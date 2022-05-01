@@ -33,10 +33,7 @@ public:
 	    
 	    for(int i=5;i<=n;i++)
 	    {
-	        if(!prime[i])
-	        continue;
-	        
-	        if(prime[i-2])
+	        if(prime[i] && prime[i-2])
 	        c++;
 	    }
 	    
