@@ -1,5 +1,24 @@
 class Solution {
 public:
+    vector<int> sortArrayByParity(vector<int>& a)
+    {
+        int l=0,r=a.size()-1;
+        
+        while(l<r)
+        {
+            while(l<r && a[l]%2==0)
+                l++;
+            
+            while(r>l && a[r]%2!=0)
+                r--;
+            
+            if(l<r)
+                swap(a[l],a[r]);
+        }
+        return a;
+    }
+    
+    /*
     vector<int> sortArrayByParity(vector<int>& a) {
         int i,j,n=a.size();
         
@@ -12,4 +31,5 @@ public:
         
         return a;
     }
+    */
 };
