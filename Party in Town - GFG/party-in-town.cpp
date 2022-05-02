@@ -12,6 +12,60 @@ public:
 
     int maxdis=INT_MAX;
 
+    int bfs(int u,vector<vector<int>> &a,int n)
+    {
+        queue<int> q;
+        q.push(u);
+        
+        vector<bool>  vis(n+1,0);
+        vis[u]=1;
+        int dis=0;
+        
+        while(!q.empty())
+        {
+            dis++;
+            
+            if(dis>maxdis)
+            return dis;
+            
+            int s=q.size();
+            
+            while(s--)
+            {
+                u=q.front();
+                q.pop();
+                
+                for(int v:a[u])
+                {
+                    if(!vis[v])
+                    {
+                        q.push(v);
+                        vis[v]=1;
+                    }
+                }
+            }
+            
+        }
+        
+        return dis-1;
+    }
+
+    int partyHouse(int n, vector<vector<int>> &a){
+        // code here
+        int i,j;
+        
+        for(i=1;i<=n;i++)
+        {
+            int mx=bfs(i,a,n);
+            maxdis=min(maxdis,mx);
+        }
+        
+        return maxdis;
+    }
+
+    /*
+    int maxdis=INT_MAX;
+
     void dfs(int u,vector<int> &dis,vector<vector<int>> &a)
     {
         if(dis[u]==maxdis)
@@ -54,6 +108,7 @@ public:
         
         return maxdis;
     }
+    */
 };
 
 // { Driver Code Starts.
