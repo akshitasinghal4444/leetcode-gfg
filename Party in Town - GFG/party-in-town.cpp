@@ -11,8 +11,7 @@ class Solution{
 public:
 
     int maxdis=INT_MAX;
-    int ans;
-    
+
     void dfs(int u,vector<int> &dis,vector<vector<int>> &a)
     {
         if(dis[u]==maxdis)
@@ -38,11 +37,9 @@ public:
             dis[i]=0;
             dfs(i,dis,a);
             
-            // cout<<i<<":";
             int mx=INT_MIN;
             for(j=1;j<=n;j++)
             {
-                // cout<<dis[j]<<",";
                 if(dis[j]>maxdis)
                 {
                     mx=INT_MAX;
@@ -52,12 +49,7 @@ public:
                 mx=max(mx,dis[j]);
             }
             
-            // cout<<" "<<mx<<endl;
-            if(mx<maxdis)
-            {
-                maxdis=mx;
-                // ans=i;
-            }
+            maxdis=min(maxdis,mx);
         }
         
         return maxdis;
