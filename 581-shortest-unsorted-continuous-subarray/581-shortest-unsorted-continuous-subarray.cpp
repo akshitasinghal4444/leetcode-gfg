@@ -1,5 +1,32 @@
 class Solution {
 public:
+    
+    int findUnsortedSubarray(vector<int>& a)
+    {
+        int i=0,j=a.size()-1;
+        int mx=INT_MIN,mn=INT_MAX;
+        int s=-1,e=j+1;
+        
+        for(;j>=0;j--,i++)
+        {
+            if(a[j]<=mn)
+                mn=a[j];
+            else
+                s=j;
+            
+            if(a[i]>=mx)
+                mx=a[i];
+            else
+                e=i;
+        }
+        
+        if(s==-1)
+            return 0;
+        
+        return e-s+1;
+    }
+    
+    /*
     int findUnsortedSubarray(vector<int>& a)
     {
         int n=a.size(),i,j;
@@ -21,35 +48,6 @@ public:
         
         if(s==-1)
             return 0;
-        
-        return e-s+1;
-    }
-    
-    /*
-    int findUnsortedSubarray(vector<int>& a)
-    {
-        int n=a.size(),i;
-        int s=-1,e=n;
-        int mn=INT_MAX,mx=INT_MIN;
-        
-        for(i=n-1;i>=0;i--)
-        {
-            if(a[i]<=mn)
-                mn=a[i];
-            else
-                s=i;
-        }
-        
-        if(s==-1)
-            return 0;
-        
-        for(i=0;i<n;i++)
-        {
-            if(a[i]>=mx)
-                mx=a[i];
-            else
-                e=i;
-        }
         
         return e-s+1;
     }
