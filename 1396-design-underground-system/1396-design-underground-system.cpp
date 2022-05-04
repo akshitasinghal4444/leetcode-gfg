@@ -1,65 +1,31 @@
 class UndergroundSystem {
 public:
-    unordered_map<int, pair<string, int>> checkins;
-    unordered_map<string, pair<int, int>> routes;
     
-    void checkIn(int id, string stationName, int t) {
-        checkins[id] = {stationName, t};
-    }
-    
-    void checkOut(int id, string stationName, int t) {
-        auto [stn, start] = checkins[id];
-        // checkins.erase(id);
-        string route = stn + "," + stationName;
-        routes[route].first++, routes[route].second += t - start;
-    }
-    
-    double getAverageTime(string startStation, string endStation) {
-        auto& [count, sum] = routes[startStation + "," + endStation];
-        return (double)sum / count;
-    }
-};
-
-/*
-class UndergroundSystem {
-public:
-    
-    unordered_map<string,unordered_set<int>> in_station,out_station;
-    unordered_map<string,double> in_id,out_id;
-    
+    unordered_map<int,pair<string,int>> checkin;
+    unordered_map<string,pair<int,int>> route;
     
     UndergroundSystem() {
         
     }
     
     void checkIn(int id, string stationName, int t) {
-        in_station[stationName].insert(id);
-        in_id[to_string(id)+stationName]=t;
+        checkin[id]={stationName,t};
     }
     
     void checkOut(int id, string stationName, int t) {
-        out_station[stationName].insert(id);
-        out_id[to_string(id)+stationName]=t;
+        auto [start,t1]=checkin[id];
+        
+        route[start+","+stationName].first++;
+        route[start+","+stationName].second+=t-t1;
     }
     
     double getAverageTime(string startStation, string endStation) {
-             
-        double sum=0,n=0;
-        for(int id:in_station[startStation])
-        {
-            if(out_station[endStation].find(id)!=out_station[endStation].end())
-            {
-                double st,et;
-                st=in_id[to_string(id)+startStation];
-                et=out_id[to_string(id)+endStation];
-                sum+=et-st;
-                n++;
-            }
-        }
-        return sum/n;
+        double time=route[startStation+","+endStation].second;
+        int n=route[startStation+","+endStation].first;
+        
+        return time/n;
     }
 };
-*/
 
 /**
  * Your UndergroundSystem object will be instantiated and called as such:
