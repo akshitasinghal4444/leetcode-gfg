@@ -1,5 +1,62 @@
 class Solution {
 public:
+    
+    int mindis(vector<int> &dis,vector<bool> &vis,int n)
+    {
+        int mndis=INT_MAX,mnindex=1;
+        
+        for(int i=1;i<=n;i++)
+        {
+            if(!vis[i] && dis[i]<mndis)
+            {
+                mndis=dis[i];
+                mnindex=i;
+            }
+        }
+        
+        return mnindex;
+    }
+    
+    int networkDelayTime(vector<vector<int>>& times, int n, int k)
+    {
+        vector<vector<int>> g(n+1,(vector<int>(n+1,INT_MAX)));
+        vector<int> dis(n+1,INT_MAX);
+        vector<bool> vis(n+1,0);
+        
+        for(auto v:times)
+            g[v[0]][v[1]]=v[2];
+        
+        dis[k]=0;
+        
+        int i;
+        for(i=0;i<n;i++)
+        {
+            int u=mindis(dis,vis,n);
+            vis[u]=1;
+            if(dis[u]==INT_MAX)
+                continue;
+            
+            for(int j=1;j<=n;j++)
+            {
+                if(!vis[j] && g[u][j]!=INT_MAX && dis[u]+g[u][j]<dis[j])
+                    dis[j]=dis[u]+g[u][j];
+            }
+        }
+        
+        int mx=INT_MIN;
+        for(i=1;i<=n;i++)
+        {
+            // cout<<i<<":"<<dis[i]<<endl;
+            if(dis[i]==INT_MAX)
+                return -1;
+            
+            mx=max(mx,dis[i]);
+        }
+        
+        return mx;
+    }
+    
+    /*
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
         vector<pair<int,int>> g[N+1];
         for(int i=0;i<times.size();i++)
@@ -32,4 +89,5 @@ public:
         if(ans==1e9) return -1;
         return ans;
     }
+    */
 };
