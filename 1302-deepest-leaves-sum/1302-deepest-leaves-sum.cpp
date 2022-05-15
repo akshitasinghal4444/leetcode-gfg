@@ -11,6 +11,39 @@
  */
 class Solution {
 public:
+    
+    int deepestLeavesSum(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        
+        int ans=0;
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while(!q.empty())
+        {
+            ans=0;
+            int s=q.size();
+            
+            while(s--)
+            {
+                root=q.front();
+                q.pop();
+                
+                ans+=root->val;
+                
+                if(root->left)
+                    q.push(root->left);
+                if(root->right)
+                    q.push(root->right);
+            }
+        }
+        return ans;
+    }
+    
+    
+    /*
     int ans=0,mx=-1;
     
     void sum(TreeNode* root,int level)
@@ -34,4 +67,7 @@ public:
         sum(root,0);
         return ans;
     }
+    */
+    
+    
 };
