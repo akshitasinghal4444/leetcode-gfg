@@ -6,11 +6,12 @@ public:
     }
     
     int shortestPathBinaryMatrix(vector<vector<int>>& a) {
-        if(a[0][0]==1)
-            return -1;
         
         int m=a.size(),n=a[0].size();
         int i,j,k,ans=0;
+        
+        if(a[0][0]==1 || a[m-1][n-1]==1)
+            return -1;
         
         if(m==1 && n==1)
             return 1;
