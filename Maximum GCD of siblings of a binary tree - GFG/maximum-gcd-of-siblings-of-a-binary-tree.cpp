@@ -8,6 +8,24 @@ using namespace std;
 
 class Solution {
   public:
+  int maxBinTreeGCD(vector<vector<int>> a, int n)
+  {
+      unordered_map<int,vector<int>> m;
+      int ans=0;
+      
+      for(auto v:a)
+      m[v[0]].push_back(v[1]);
+      
+      for(auto it:m)
+      {
+         if(it.second.size()>=2)
+         ans=max(ans,__gcd(it.second[0],it.second[1]));
+      }
+      
+      return ans;
+  }
+  
+  /*
     int maxBinTreeGCD(vector<vector<int>> a, int n) {
         // code here
         int i,ans=0;
@@ -22,6 +40,8 @@ class Solution {
         
         return ans;
     }
+    */
+    
 };
 
 // { Driver Code Starts.
