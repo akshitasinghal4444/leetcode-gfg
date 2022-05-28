@@ -7,19 +7,33 @@ using namespace std;
 
 class Solution{
 public:
-   int solve(vector<int> &arr , int N , int K){
-       if(N == 0){
-           return K == 0;
-       }
-       int take = solve(arr , N - 1 , K ^ arr[N - 1]);
-       int leave = solve(arr , N - 1 , K);
-       return take + leave;
-   }
-   
-   int subsetXOR(vector<int> &arr, int N, int K) {
-       // code here
-       return solve(arr , N , K);
-   }
+
+    int subsets(int i,int n,vector<int> a,int k,int x,vector<vector<int>> &dp)
+    {
+        if(i==n)
+        {
+            if(x==k)
+            return 1;
+            else
+            return 0;
+        }
+        
+        if(dp[i][x]==-1)
+        dp[i][x]=subsets(i+1,n,a,k,x,dp)+subsets(i+1,n,a,k,x^a[i],dp);
+        
+        return dp[i][x];
+    }
+    
+    int subsetXOR(vector<int> a, int n, int k) {
+        // code here
+        int xn=*max_element(a.begin(),a.end());
+        xn=ceil(log2(xn))+1;
+        xn=(1<<xn)-1;
+        // cout<<xn<<endl;
+        vector<vector<int>> dp(n,vector<int>(xn,-1));
+        
+        return subsets(0,n,a,k,0,dp);
+    }
 };
 
 // { Driver Code Starts.
