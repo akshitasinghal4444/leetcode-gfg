@@ -5,7 +5,7 @@ public:
         int len=1<<k;
         unordered_set<string> st;
         
-        if(n<len)
+        if(n<k || n<len)
             return false;
         
         string t="";
