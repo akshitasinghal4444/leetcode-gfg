@@ -21,9 +21,7 @@ public:
     }
     
     int sumRegion(int r1, int c1, int r2, int c2) {
-        int sum=0;
-        sum+=a[r1][c1]-a[r1][c2+1]-a[r2+1][c1]+a[r2+1][c2+1];
-        return sum;
+        return a[r1][c1]-a[r1][c2+1]-a[r2+1][c1]+a[r2+1][c2+1];
     }
 };
 
