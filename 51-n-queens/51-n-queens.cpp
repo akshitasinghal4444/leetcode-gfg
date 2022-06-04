@@ -3,6 +3,72 @@ public:
     vector<vector<string>> ans;
     vector<string> t;
     
+    bool is_safe(int r,int c,int n)
+    {
+        int i,j;
+        int m=t.size();
+        
+        //col
+        for(i=0;i<m;i++)
+        {
+            if(t[i][c]=='Q')
+                return 0;
+        }
+        
+        //left diagnol
+        for(i=r-1,j=c-1;i>=0 && j>=0;i--,j--)
+        {
+            if(t[i][j]=='Q')
+                return 0;
+        }
+        
+        //right diagnol
+        for(i=r-1,j=c+1;i>=0 && j<n;i--,j++)
+        {
+            if(t[i][j]=='Q')
+                return 0;
+        }
+        
+        return 1;
+    }
+                 
+    
+    void solve(int n,int r)
+    {
+        if(r==n)
+        {
+            ans.push_back(t);
+            return;
+        }
+                  
+        string s(n,'.');
+        int i;
+        
+        for(i=0;i<n;i++)
+        {
+            if(is_safe(r,i,n))
+            {
+                s[i]='Q';
+                t.push_back(s);
+                
+                solve(n,r+1);
+                
+                s[i]='.';
+                t.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> solveNQueens(int n) {
+        
+        solve(n,0);
+        return ans;
+    }
+    
+    /*
+    vector<vector<string>> ans;
+    vector<string> t;
+    
     bool is_safe(vector<vector<int>> &a,int r,int c,int n)
     {
         int i,j;
@@ -66,4 +132,5 @@ public:
         solve(a,n,0);
         return ans;
     }
+    */
 };
