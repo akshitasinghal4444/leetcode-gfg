@@ -1,125 +1,33 @@
 class Solution {
 public:
-    
-    void expand(string &s,int l,int r,int len,int n,int &b,int &e,int &mx)
-    {
-        while(l>=0 && r<n && s[l]==s[r])
-        {
-            l--;
-            r++;
-            len+=2;
+    string longestPalindrome(string s) {
+        if(s.size() == 0) return "";
+        int n = s.size();
+        int table[n][n];
+        memset(table,-1,sizeof(table)); //Initializing table with -1
+        for (int i = 0; i < n; ++i) 
+            table[i][i] = 1;  //Filling up the table
+        int maxLen = 1;
+        int start = 0; 
+        for (int i = 0; i < n - 1; ++i) { //checking for substring of length 2.
+            if (s[i] == s[i + 1]) { 
+                table[i][i + 1] = 1; 
+                start = i;  //Updating the start
+                maxLen = 2; 
+            } 
         }
-        
-        if(len>mx)
-        {
-            mx=len;
-            b=l+1;
-            e=r-1;
-        }
-    }
-    
-    string longestPalindrome(string s)
-    {
-        int n=s.length();
-        int i;
-        int mx=1,b=0,e=0;
-        
-        for(i=0;i<n-1;i++)
-        {
-            expand(s,i,i+1,0,n,b,e,mx);
-            expand(s,i-1,i+1,1,n,b,e,mx);
-        }
-        
-        string ans="";
-        for(i=b;i<=e;i++)
-            ans+=s[i];
-        
-        return ans;
-    }
-    
-    /*
-    string longestPalindrome(string s)
-    {
-        int n=s.length();
-        bool palindrome[n][n];
-        int i,j,k;
-        int mx=0,b=-1,e=-1;
-        
-        for(k=0;k<n;k++)
-        {
-            for(i=0,j=k;j<n;i++,j++)
-            {
-                if(k==0)
-                    palindrome[i][j]=1;
-                else if(k==1)
-                    palindrome[i][j]=(s[i]==s[j]);
-                else
-                    palindrome[i][j]=((s[i]==s[j]) && palindrome[i+1][j-1]);
-                
-                if(palindrome[i][j] && k+1>mx)
-                {
-                    mx=k;
-                    b=i;
-                    e=j;
+        for(int k=3;k<=n;k++){ //Checking for length greater than 2 and k is length of substring 
+            for(int i=0;i<n - k + 1;i++){
+                int j = i + k - 1; //Initializing the end Index i.e j = i + k - 1
+                if(table[i+1][j-1] == 1 && s[i] == s[j]){ //Checking for the conditions i.e checking for sub-string from ith index to jth index.
+                    table[i][j] = 1;
+                    if (k > maxLen) { //Updating the maxLen
+                        start = i;  //Updating the start
+                        maxLen = k; 
+                    } 
                 }
             }
         }
-        
-        string ans="";
-        for(i=b;i<=e;i++)
-            ans+=s[i];
-        
-        return ans;
+        return s.substr(start, maxLen);
     }
-    */
-    
-    /*
-    string longestPalindrome(string s)
-    {
-        int n=s.length();
-        int i;
-        int mx=1,b=0,e=0;
-        
-        for(i=0;i<n-1;i++)
-        {
-            int l=i;
-            int r=i+1;
-            int len=0;
-            while(l>=0 && r<n && s[l]==s[r])
-            {
-                l--;
-                r++;
-                len+=2;
-            }
-            if(len>mx)
-            {
-                mx=len;
-                b=l+1;
-                e=r-1;
-            }
-            
-            l=i-1;
-            r=i+1;
-            len=1;
-            while(l>=0 && r<n && s[l]==s[r])
-            {
-                l--;
-                r++;
-                len+=2;
-            }
-            if(len>mx)
-            {
-                mx=len;
-                b=l+1;
-                e=r-1;
-            }            
-        }
-        
-        string ans="";
-        for(i=b;i<=e;i++)
-            ans+=s[i];
-        
-        return ans;
-    }
-    */
 };
