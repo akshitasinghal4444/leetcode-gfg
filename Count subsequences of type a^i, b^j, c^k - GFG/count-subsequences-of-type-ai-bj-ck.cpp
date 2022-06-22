@@ -8,28 +8,29 @@ using namespace std;
 
  // } Driver Code Ends
 //User function template 
-#define m 1000000007
+
 class Solution{
   public:
-    
-    int fun(string &s)
-    {
-        int a=0,b=0,c=0;
-        int n,i;
-        n=s.length();
+    int fun(string &s) {
+        const long long int MOD = 1e9 + 7;
+        long long int a = 0, ab = 0, abc = 0;
         
-        for(i=0;i<n;i++)
-        {
-            if(s[i]=='a')
-            a=((2*a)%m+1)%m;
-            else if(s[i]=='b')
-            b=((2*b)%m+a)%m;
-            else if(s[i]=='c')
-            c=((2*c)%m+b)%m;
+        for(char ch: s) {
+            // 1. Append a to a's
+            // 2. Start new string with a.
+            if(ch == 'a') a = (2 * a % MOD + 1) % MOD;
+            
+            // 1. Append b to ab's
+            // 2. Append b directly to a's
+            if(ch == 'b') ab = (2 * ab % MOD + a) % MOD;
+            
+            // 1. Append c to abc's
+            // 2. Append c directly to ab's
+            if(ch == 'c') abc = (2 * abc % MOD + ab) % MOD;
         }
-        return c;
+        
+        return abc;
     }
-
 };
 
 // { Driver Code Starts.
