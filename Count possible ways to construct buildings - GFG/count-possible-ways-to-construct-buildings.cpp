@@ -5,26 +5,17 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
-	int m=1e9+7;
-	
-	int TotalWays(int n)
+	int TotalWays(int N)
 	{
-	    long p=1,s=1;
-	    for(int i=2;i<=n;i++)
-	    {
-	        long np,ns;
-	        np=s;
-	        ns=(p+s)%m;
-	        
-	        p=np;
-	        s=ns;
+	    long long mod=1000000007;
+	    long long a=1,b=1;
+	    for(int i=1;i<=N;i++){
+	        a=(a+b)%mod;
+	        b=(a-b);
 	    }
 	    
-	    s=(s+p)%m;
-	    return (s*s)%m;
-	    
+	    return (a*a)%mod;
 	}
-	
 };
 
 // { Driver Code Starts.
