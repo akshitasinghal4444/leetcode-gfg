@@ -11,31 +11,14 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode *t1,*t2,*h1,*h2;
-        t1=new ListNode(0);
-        t2=new ListNode(0);
-        h1=t1;
-        h2=t2;
-        
-        while(head)
-        {
-            if(head->val<x)
-            {
-                t1->next=head;
-                t1=t1->next;
-            }
-            else
-            {
-                t2->next=head;
-                t2=t2->next;
-            }
-            
-            head=head->next;
+        ListNode *fdum = new ListNode(0), *bdum = new ListNode(0),
+                 *front = fdum, *back = bdum, *curr = head;
+        while (curr) {
+            if (curr->val < x) front->next = curr, front = curr;
+            else back->next = curr, back = curr;
+            curr = curr->next;
         }
-        
-        t1->next=h2->next;
-        t2->next=NULL;
-        
-        return h1->next;
+        front->next = bdum->next, back->next = nullptr;
+        return fdum->next;
     }
 };
