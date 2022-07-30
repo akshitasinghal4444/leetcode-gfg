@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void flatten(TreeNode* root)
+   void flatten(TreeNode* root)
     {
         if(!root)
             return;
@@ -32,61 +32,4 @@ public:
         }
         
     }
-    
-    /*
-    void flatten(TreeNode* root)
-    {
-        if(!root)
-            return;
-        
-        while(root)
-        {
-            TreeNode *r=root->right;
-            root->right=root->left;
-            root->left=NULL;
-            
-            TreeNode *t=root;
-            while(t->right)
-                t=t->right;
-            
-            t->right=r;
-            
-            root=root->right;
-        }
-    }
-    */
-    
-    /*
-    TreeNode *t;
-    
-    void preorder(TreeNode* root)
-    {
-        if(!root)
-            return ;
-        
-        TreeNode *l,*r;
-        l=root->left;
-        r=root->right;
-        
-        t->right=root;
-        root->left=NULL;
-        t=t->right;
-        
-        preorder(l);
-        preorder(r);
-    }
-    
-    void flatten(TreeNode* root) {
-        
-        if(!root)
-            return ;
-        
-        TreeNode *h;
-        t=new TreeNode(0);
-        h=t;
-        preorder(root);
-        
-        root=h->right;
-    }
-    */
 };
