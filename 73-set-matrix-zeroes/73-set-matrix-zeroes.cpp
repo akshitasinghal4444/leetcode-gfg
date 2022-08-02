@@ -8,13 +8,19 @@ public:
         for(i=0;i<m;i++)
         {
             if(a[i][0]==0)
+            {
                 c0=1;
+                break;
+            }
         }
         
         for(j=0;j<n;j++)
         {
             if(a[0][j]==0)
+            {
                 r0=1;
+                break;
+            }
         }
         
         for(i=0;i<m;i++)
