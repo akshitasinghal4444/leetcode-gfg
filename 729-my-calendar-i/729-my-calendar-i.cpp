@@ -1,6 +1,25 @@
 class MyCalendar {
 public:
     
+    vector<pair<int,int>> v;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int s, int e) {
+        
+        for(auto x:v)
+        {
+            if(x.first>=e || x.second<=s)
+                continue;
+            else
+                return 0;
+        }
+        
+        v.push_back({s,e});
+        return 1;
+    }
+    
     /*
     map<int,int> m;
     MyCalendar() { }
@@ -31,6 +50,7 @@ public:
     }
     */
     
+    /*
     map<int,int> m;
     MyCalendar() {}
     
@@ -45,6 +65,7 @@ public:
         }
         return 0;
     }
+    */
 };
 
 /**
