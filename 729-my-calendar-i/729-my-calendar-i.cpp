@@ -1,6 +1,7 @@
 class MyCalendar {
 public:
     
+    /*
     map<int,int> m;
     MyCalendar() { }
     
@@ -27,6 +28,22 @@ public:
         }
         
         return 1;
+    }
+    */
+    
+    map<int,int> m;
+    MyCalendar() {}
+    
+    bool book(int s, int e) {
+
+        auto it=m.lower_bound(e);
+        
+        if(it==m.begin() || (--it)->second<=s)
+        {
+            m[s]=e;
+            return 1;
+        }
+        return 0;
     }
 };
 
