@@ -6,7 +6,7 @@ public:
         
         for(i=0;i<n;i++)
         {
-            if(mp[s[i]]==-1 || mp[s[i]]<st)
+            if(mp[s[i]]<st)
                 mp[s[i]]=i;
             else
             {
