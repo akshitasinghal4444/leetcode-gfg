@@ -1,7 +1,7 @@
 class Solution {
 public:
     int combinationSum4(vector<int>& a, int t) {
-        int i,j,n=a.size(),m=1e9+7;
+        int i,j,n=a.size();
         vector<unsigned int> dp(t+1,0);
         dp[0]=1;
         
@@ -12,7 +12,7 @@ public:
                 if(a[j]>i)
                     continue;
                 
-                dp[i]=(dp[i]+dp[i-a[j]]);
+                dp[i]+=dp[i-a[j]];
             }
         }
         
