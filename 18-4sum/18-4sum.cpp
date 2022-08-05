@@ -10,13 +10,13 @@ public:
         i=0,j=n-1;
         for(i=0;i<n-3;i++)
         {
-            while(i>0 && i<n-3 && a[i]==a[i-1])
-                i++;
+            if(i>0 && a[i]==a[i-1])
+                continue;
             
             for(j=i+1;j<n-2;j++)
             {
-                while(j!=i+1 && j<n-2 && a[j]==a[j-1])
-                    j++;
+                if(j!=i+1 && a[j]==a[j-1])
+                    continue;
                 
                 int l=j+1,r=n-1;
                 
