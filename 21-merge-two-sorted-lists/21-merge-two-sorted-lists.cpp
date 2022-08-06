@@ -10,75 +10,42 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
-    {
-        if(!l1)
-            return l2;
-        if(!l2)
-            return l1;
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode *t1,*t2;
         
-        ListNode *t;
-        
-        if(l1->val<=l2->val)
-        {
-            t=l1;
-            l1=l1->next;
-        }
-        else
-        {
-            t=l2;
-            l2=l2->next;
-        }
-        
-        t->next=mergeTwoLists(l1,l2);
-        return t;
-    }
-    
-    /*
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
-    {
-        if(!l1)
-            return l2;
-        if(!l2)
-            return l1;
-        
-        ListNode *t,*h;
-        
-        if(l1->val<=l2->val)
-        {
-            t=l1;
-            l1=l1->next;
-        }
-        else
-        {
-            t=l2;
-            l2=l2->next;
-        }
-        h=t;
+        t1=new ListNode(0);
+        t2=t1;
         
         while(l1 && l2)
         {
             if(l1->val<=l2->val)
             {
-                t->next=l1;
+                t1->next=l1;
                 l1=l1->next;
             }
             else
             {
-                t->next=l2;
+                t1->next=l2;
                 l2=l2->next;
             }
             
-            t=t->next;
+            t1=t1->next;
         }
         
-        if(!l1)
-            t->next=l2;
-        else
-            t->next=l1;
+        while(l1)
+        {
+            t1->next=l1;
+            l1=l1->next;
+            t1=t1->next;
+        }
         
-        return h;
+        while(l2)
+        {
+            t1->next=l2;
+            l2=l2->next;
+            t1=t1->next;
+        }
+        
+        return t2->next;
     }
-    */
-   
 };
