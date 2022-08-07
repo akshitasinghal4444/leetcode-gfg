@@ -3,6 +3,28 @@ public:
     int countVowelPermutation(int n)
     {
         int m=1e9+7;
+        long a=1,e=1,i=1,o=1,u=1;
+        
+        for(int j=2;j<=n;j++)
+        {
+            long na,ne,ni,no,nu;
+            
+            na=(e+i+u)%m;
+            ne=(a+i)%m;
+            ni=(e+o)%m;
+            no=(i)%m;
+            nu=(o+i)%m;
+            
+            a=na,e=ne,i=ni,o=no,u=nu;
+        }
+        
+        return (a+e+i+o+u)%m;
+    }
+    
+    /*
+    int countVowelPermutation(int n)
+    {
+        int m=1e9+7;
         int j;
         long ans=0;
         long dp[5][n+1];
@@ -23,44 +45,6 @@ public:
         
         return ans;
     }
-    
-    /*
-    int countVowelPermutation(int n) {
-        if(n==1)
-            return 5;
-        
-        vector<vector<long>> dp(5,vector<long>(n+1));
-        
-        int i,j;
-        int m=1e9+7;
-        
-        for(j=1;j<=n;j++)
-        {
-            for(i=0;i<5;i++)
-            {
-                if(j==1)
-                    dp[i][j]=1;
-                else 
-                {
-                    if(i==0)
-                        dp[i][j]=(dp[1][j-1]+dp[2][j-1]+dp[4][j-1])%m;
-                    else if(i==1)
-                        dp[i][j]=(dp[0][j-1]+dp[2][j-1])%m;
-                    else if(i==2)
-                        dp[i][j]=(dp[1][j-1]+dp[3][j-1])%m;
-                    else if(i==3)
-                        dp[i][j]=dp[2][j-1]%m;
-                    else if(i==4)
-                        dp[i][j]=(dp[2][j-1]+dp[3][j-1])%m;
-                }
-            }
-        }
-        
-        long ans=0;
-        for(i=0;i<5;i++)
-            ans=(ans+dp[i][n])%m;
-        
-        return ans;
-    }
     */
+    
 };
