@@ -15,26 +15,22 @@ public:
         int c=0;
         
         while(l1 || l2 || c)
-        {
-            int x=0;
-            
+        {            
             if(l1)
             {
-                x+=l1->val;
+                c+=l1->val;
                 l1=l1->next;
             }
             
             if(l2)
             {
-                x+=l2->val;
+                c+=l2->val;
                 l2=l2->next;
             }
             
-            x+=c;
-            
-            t->next=new ListNode(x%10);
+            t->next=new ListNode(c%10);
             t=t->next;
-            c=x/10;
+            c=c/10;
         }
         
         return l3->next;
