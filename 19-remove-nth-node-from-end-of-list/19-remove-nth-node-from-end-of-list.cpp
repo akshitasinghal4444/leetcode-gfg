@@ -26,13 +26,8 @@ public:
             t2=t2->next;
         }
         
-        
-        
-        if(t2->next)
         t2->next=t2->next->next;
-        else
-            return NULL;
-        
+
         return head;
     }
 };
