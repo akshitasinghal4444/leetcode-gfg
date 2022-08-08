@@ -1,5 +1,25 @@
 class Solution {
 public:
+    int lengthOfLIS(vector<int>& a)
+    {
+        int i,n=a.size();
+        vector<int> dp;
+        
+        for(i=0;i<n;i++)
+        {
+            if(dp.size()==0 || a[i]>dp.back())
+                dp.push_back(a[i]);
+            else
+            {
+                int j=lower_bound(dp.begin(),dp.end(),a[i])-dp.begin();
+                dp[j]=a[i];
+            }
+        }
+        
+        return dp.size();
+    }
+    
+    /*
     int lengthOfLIS(vector<int>& a) {
         int n=a.size();
         int i,j,ans=1;
@@ -20,4 +40,5 @@ public:
         
         return ans;
     }
+    */
 };
