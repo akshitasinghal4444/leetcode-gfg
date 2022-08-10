@@ -16,6 +16,43 @@ public:
 
 class Solution {
 public:
+    Node* copyRandomList(Node* h1)
+    {
+        Node *t1=h1,*h2,*t2;
+        
+        while(t1)
+        {
+            t2=new Node(t1->val);
+            t2->next=t1->next;
+            t1->next=t2;
+            
+            t1=t2->next;
+        }
+        
+        t1=h1;
+        while(t1)
+        {
+            t2=t1->next;
+            if(t1->random)
+                t2->random=t1->random->next;
+            
+            t1=t2->next;
+        }
+        
+        t1=h1;
+        h2=new Node(0),t2=h2;
+        while(t1)
+        {
+            t2->next=t1->next;
+            t1->next=t1->next->next;
+            t2=t2->next;
+            t1=t1->next;
+        }
+        
+        return h2->next;
+    }
+    
+    /*
     Node* copyRandomList(Node* h1) {
         unordered_map<Node*,Node*> m;
         
@@ -44,4 +81,5 @@ public:
         
         return h2;
     }
+    */
 };
