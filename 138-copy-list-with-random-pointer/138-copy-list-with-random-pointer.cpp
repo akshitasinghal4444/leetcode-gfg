@@ -16,181 +16,32 @@ public:
 
 class Solution {
 public:
-    /*
-    Node* copyRandomList(Node* head) {
-        
-        if(!head)
-            return NULL;
-        
+    Node* copyRandomList(Node* h1) {
         unordered_map<Node*,Node*> m;
         
-        Node *h,*t1,*t2;
-        t1=new Node(0);
-        h=t1;  
-        t2=head;
-        
-        while(t2)
-        {
-            t1->next=new Node(t2->val);
-            t1=t1->next;
-            m[t2]=t1;
-            t2=t2->next;
-        }
-        
-        t2=head;
-        t1=h->next;
-        
-        while(t2)
-        {
-            if(t2->random)
-                t1->random=m[t2->random];
-            else
-                t2->random=NULL;
-            
-            t1=t1->next;
-            t2=t2->next;
-        }
-        
-        return h->next;
-    }
-    */
-    
-    Node* copyRandomList(Node* head)
-    {
-        
-        if(!head)
-            return NULL;
-        
-         Node *t1,*h,*t2;
-         t1=head;
-        
-         while(t1)
-         {
-             t2=new Node(t1->val);
-             t2->next=t1->next;
-             t1->next=t2;
-             
-             t1=t2->next;
-         }
-        
-         
-         t1=head;
-        
-         while(t1)
-         {
-             t2=t1->next;
-             
-             if(!t1->random)
-                 t2->random=NULL;
-             else
-                 t2->random=t1->random->next;
-             
-             t1=t2->next;
-         }
-        
-         h=head->next;
-         t1=head;
-         t2=h;
-         while(t1)
-         {
-             t1->next=t2->next;
-             
-             t1=t1->next;
-             if(t2->next)
-             t2->next=t2->next->next;
-             
-             t2=t2->next;
-         }
-        return h;
-    }
-};
-
-/*
-class Solution {
-public:
-    Node* copyRandomList(Node* h1)
-    {
-        Node *h2,*t1,*t2;
-        h2=new Node(0);
-        
-        t1=h1;
-        
+        Node *h2=new Node(0),*t2=h2,*t1=h1;
         while(t1)
         {
-            t2=new Node(t1->val);
-            t2->next=t1->next;
-            t1->next=t2;
+            t2->next=new Node(t1->val);
+            m[t1]=t2->next;
             
-            t1=t1->next->next;
+            t2=t2->next;
+            t1=t1->next;
         }
         
+        h2=h2->next;
         t1=h1;
-        while(t1)
-        {
-            t2=t1->next;
-            if(t1->random==NULL)
-                t2->random=NULL;
-            else
-                t2->random=t1->random->next;
-            
-            t1=t1->next->next;
-        }
-        
         t2=h2;
-        t1=h1;
-        while(t1)
-        {
-            t2->next=t1->next;
-            t1->next=t1->next->next;
-            t2=t2->next;
-            t1=t1->next;
-        }
-        return h2->next;
-    }
-    */
-    
-    
-    /*
-    Node* copyRandomList(Node* head) {
-        if(!head)
-            return NULL;
-        
-        Node *h2,*t1,*t2;
-        t1=head;
-        while(t1)
-        {
-            t2=new Node(t1->val);
-            t2->next=t1->next;
-            t1->next=t2;
-            t1=t1->next->next;
-        }
-        
-        t1=head;
-        h2=head->next;
         
         while(t1)
         {
-            t2=t1->next;
-            if(!t1->random)
-                t2->random=NULL;
-            else
-            t2->random=t1->random->next;
-            t1=t1->next->next;
-        }
-        
-        t1=head;
-        
-        
-        while(t1)
-        {
-            t2=t1->next;
-            t1->next=t2->next;
-            if(t2->next)
-            t2->next=t2->next->next;
+            if(t1->random)
+                t2->random=m[t1->random];
             
             t1=t1->next;
+            t2=t2->next;
         }
         
         return h2;
     }
-        */
+};
