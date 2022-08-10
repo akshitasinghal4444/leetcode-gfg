@@ -2,6 +2,30 @@ class Solution {
 public:
     int trap(vector<int>& a) {
         int i,j,n=a.size();
+        int w[n],mx;
+        int ans=0;
+        
+        mx=0;
+        for(i=0;i<n;i++)
+        {
+            mx=max(a[i],mx);
+            w[i]=mx-a[i];
+        }
+        
+        mx=0;
+        for(i=n-1;i>=0;i--)
+        {
+            mx=max(a[i],mx);
+            w[i]=min(w[i],mx-a[i]);
+            ans+=w[i];
+        }
+        
+        return ans;
+    }
+    
+    /*
+    int trap(vector<int>& a) {
+        int i,j,n=a.size();
         int l[n],r[n],mx;
         
         mx=0;
@@ -24,4 +48,5 @@ public:
         
         return ans;
     }
+    */
 };
