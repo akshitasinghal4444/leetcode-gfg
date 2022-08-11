@@ -11,6 +11,26 @@
  */
 class Solution {
 public:
+    TreeNode* t;
+    
+    bool inorder(TreeNode* root)
+    {
+        if(!root)
+            return 1;
+        
+        if(!inorder(root->left) || (t && root->val<=t->val))
+            return 0;
+        
+        t=root;
+        return inorder(root->right);
+        
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        t=NULL;
+        return inorder(root);
+    }
+    /*
     long x;
     
     bool inorder(TreeNode* root)
@@ -30,4 +50,5 @@ public:
         x=LONG_MIN;
         return inorder(root);
     }
+    */
 };
