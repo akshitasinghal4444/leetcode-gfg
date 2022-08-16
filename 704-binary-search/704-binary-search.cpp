@@ -2,11 +2,11 @@ class Solution {
 public:
     int search(vector<int>& a, int t) {
         int l=0,r=a.size()-1;
-        int i;
+        int mid;
         
         while(l<=r)
         {
-            int mid=(l+r)/2;
+            mid=(l+r)/2;
             
             if(a[mid]==t)
                 return mid;
