@@ -2,55 +2,39 @@ class Solution {
 public:
     string ans;
     
-    void add(int i,vector<bool> &vis,int n)
+    void permute(int n, int k,int *fact,vector<int> &a)
     {
-        for(int j=1;j<=n;j++)
+        if(n==1)
         {
-            if(i==1 && !vis[j])
-            {
-                ans+=j+'0';
-                vis[j]=1;
-                return;
-            }
-            if(!vis[j])
-            {
-                i--;
-            }
-        }
-    }
-    
-    void helper(int n,int k,int i,vector<bool> &vis,vector<int> &fact)
-    {
-        if(i==1)
-        {
-            add(1,vis,n);
-            return;
+            ans+=(a[0]+'0');
+            return ;
         }
         
-        int x=ceil((float)k/fact[i-1]);
-        x=x%i;
-        if(x==0)
-            x=i;
-        // cout<<x<<endl;
-        add(x,vis,n);
-        if(k%fact[i-1]!=0)
-            k=k-(x-1)*fact[i-1];
-        helper(n,k,i-1,vis,fact);
+        int blocksize=fact[n-1];
+        int in=k/blocksize;
+        
+        ans+=(a[in]+'0');
+        a.erase(a.begin()+in);
+        k=k%blocksize;
+        
+        permute(n-1,k,fact,a);
     }
     
-    string getPermutation(int n, int k)
-    {
-        vector<bool> vis(n+1,0);
-        vector<int> fact(n);
+    string getPermutation(int n, int k) {
+        int fact[n+1];
+        int i;
+        vector<int> a(n);
+        
         fact[0]=1;
-        ans="";
-        int i=n;
-        for(i=1;i<n;i++)
+        for(i=1;i<=n;i++)
         {
             fact[i]=fact[i-1]*i;
+            a[i-1]=i;
         }
-        helper(n,k,i,vis,fact);
+            
+        ans="";
+        permute(n,k-1,fact,a);
+        
         return ans;
     }
- 
 };
