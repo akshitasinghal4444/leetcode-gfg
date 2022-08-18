@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     void dfs(vector<vector<int>>& g,int m,int n,int sr,int sc,int nc,int oc)
     {
         if(sr<0 || sc<0 || sr>=m || sc>=n || g[sr][sc]!=oc)
@@ -21,8 +22,9 @@ public:
         dfs(g,m,n,sr,sc,col,g[sr][sc]);
         return g;
     }
+    */
     
-    /*
+    
     void bfs(vector<vector<int>>& g,int m,int n,int sr,int sc,int nc)
     {
         queue<pair<int,int>> q;
@@ -72,7 +74,6 @@ public:
         bfs(g,m,n,sr,sc,col);
         return g;
     }
-    */
     
     /*
     void dfs(vector<vector<int>>& g,int m,int n,int sr,int sc,int nc,int oc,vector<vector<bool>> &vis)
