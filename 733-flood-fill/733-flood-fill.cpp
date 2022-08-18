@@ -1,5 +1,27 @@
 class Solution {
 public:
+    void dfs(vector<vector<int>>& g,int m,int n,int sr,int sc,int nc,int oc,vector<vector<bool>> &vis)
+    {
+        if(sr<0 || sc<0 || sr>=m || sc>=n || g[sr][sc]!=oc || vis[sr][sc])
+            return;
+        
+        g[sr][sc]=nc;
+        vis[sr][sc]=1;
+        
+        dfs(g,m,n,sr-1,sc,nc,oc,vis);
+        dfs(g,m,n,sr+1,sc,nc,oc,vis);
+        dfs(g,m,n,sr,sc-1,nc,oc,vis);
+        dfs(g,m,n,sr,sc+1,nc,oc,vis);
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& g, int sr, int sc, int col) {
+        int m=g.size(),n=g[0].size();
+        vector<vector<bool>> vis(m,vector<bool>(n,0));
+        dfs(g,m,n,sr,sc,col,g[sr][sc],vis);
+        return g;
+    }
+    
+    /*
     void bfs(vector<vector<int>>& g,int m,int n,int sr,int sc,int nc)
     {
         vector<vector<bool>> vis(m,vector<bool>(n,0));
@@ -49,4 +71,5 @@ public:
         bfs(g,m,n,sr,sc,col);
         return g;
     }
+    */
 };
