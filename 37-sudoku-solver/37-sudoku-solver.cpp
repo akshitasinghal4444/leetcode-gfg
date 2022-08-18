@@ -1,93 +1,56 @@
 class Solution {
 public:
-    bool issafe(vector<vector<char>>& a,int r,int c,char k)
+    bool possible(vector<vector<char>>& b,int r,int c,char x,int n)
     {
         int i,j;
         
-        //row && col
-        for(i=0;i<9;i++)
-        {
-            if(a[r][i]==k)
-                return 0;
-            
-            if(a[i][c]==k)
+        //row && column
+        for(i=0;i<n;i++)
+        {   if(b[r][i]==x || b[i][c]==x)
                 return 0;
         }
         
         //box
-        int x=r%3,y=c%3;
-        
-        if(x==0)
-            x=r;
-        else if(x==1)
-            x=r-1;
-        else
-            x=r-2;
-        
-        if(y==0)
-            y=c;
-        else if(y==1)
-            y=c-1;
-        else
-            y=c-2;
-        
-        for(i=0;i<3;i++)
+        int br=3*(r/3),bc=3*(c/3);
+        for(i=br;i<br+3;i++)
         {
-            for(j=0;j<3;j++)
+            for(j=bc;j<bc+3;j++)
             {
-                if(a[i+x][j+y]==k)
+                if(b[i][j]==x)
                     return 0;
             }
         }
+        
         return 1;
     }
     
-    bool solve(vector<vector<char>>& a,int r,int c)
+    bool solve(vector<vector<char>>& b,int r,int c,int n)
     {
-        bool f=0;
-        if(a[r][c]=='.')
+        if(r==n)
+            return 1;
+        
+        if(c==n)
+            return solve(b,r+1,0,n);
+        
+        if(b[r][c]!='.')
+            return solve(b,r,c+1,n);
+        
+        for(char i='1';i<='9';i++)
         {
-            int i,j;
-            char k;
-            
-            for(k='1';k<='9';k++)
+            if(possible(b,r,c,i,n))
             {
-                if(issafe(a,r,c,k))
-                {
-                    a[r][c]=k;
-                    if(r==8 && c==8)
-                        return 1;
-                    
-                    if(c<8)
-                        f=solve(a,r,c+1);
-                    else
-                        f=solve(a,r+1,0);
-                
-                    if(f)
-                        return 1;
-                    a[r][c]='.';
-                }
+                b[r][c]=i;
+                if(solve(b,r,c+1,n))
+                    return 1;
+                b[r][c]='.';
             }
-            return 0;
         }
-        else
-        {
-            if(r==8 && c==8)
-                return 1;
-                    
-            if(c<8)
-                f=solve(a,r,c+1);
-            else
-                f=solve(a,r+1,0);
-            
-            if(f)
-                return 1;
-        }
+        
         return 0;
     }
-    void solveSudoku(vector<vector<char>>& a) {
-        int i,j;
-        bool f;
-        f=solve(a,0,0);
+    
+    void solveSudoku(vector<vector<char>>& b) {
+        bool x=solve(b,0,0,9);
+        return ;
     }
 };
