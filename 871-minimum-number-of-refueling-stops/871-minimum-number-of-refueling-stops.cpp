@@ -18,9 +18,8 @@ public:
             if(pq.empty())
                 break;
             
-            fuel=pq.top();
+            pos+=pq.top();
             pq.pop();
-            pos+=fuel;
         }
         
         if(pos>=t)
