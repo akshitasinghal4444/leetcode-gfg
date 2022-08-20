@@ -3,6 +3,16 @@ public:
     int minCostClimbingStairs(vector<int>& a) {
         int n=a.size(),i;
         
+        for(i=2;i<n;i++)
+            a[i]+=min(a[i-1],a[i-2]);
+        
+        return min(a[n-1],a[n-2]);
+    }
+    
+    /*
+    int minCostClimbingStairs(vector<int>& a) {
+        int n=a.size(),i;
+        
         int dp[n];
         dp[0]=a[0];
         dp[1]=a[1];
@@ -12,6 +22,7 @@ public:
         
         return min(dp[n-1],dp[n-2]);
     }
+    */
     
     /*
     int minCostClimbingStairs(vector<int>& a) {
