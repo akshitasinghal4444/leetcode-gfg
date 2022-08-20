@@ -6,7 +6,7 @@ public:
         int i=0,n=a.size();
         int ans=0;
         
-        while(pos<t && (i<n || !pq.empty()))
+        while(pos<t)
         {
             ans++;
             while(i<n && a[i][0]<=pos)
