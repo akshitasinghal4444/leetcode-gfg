@@ -1,5 +1,49 @@
 class Solution {
 public:
+    double findMedianSortedArrays(vector<int>& a1, vector<int>& a2)
+    {
+        int n1=a1.size(),n2=a2.size();
+        if((n1+n2)==1)
+        {
+            if(n1)
+                return a1[0];
+            return a2[0];
+        }
+        
+        int mid=(n1+n2)/2;
+        int i=0,j=0,c=-1;
+        int m1,m2;
+        
+        while((i<n1 || j<n2) && c<mid-1)
+        {
+            c++;
+            if(i==n1)
+                m1=a2[j++];
+            else if(j==n2)
+                m1=a1[i++];
+            else if(a1[i]<=a2[j])
+                m1=a1[i++];
+            else
+                m1=a2[j++];
+        }
+        
+        if(i==n1)
+            m2=a2[j++];
+        else if(j==n2)
+            m2=a1[i++];
+        else if(a1[i]<=a2[j])
+            m2=a1[i++];
+        else
+            m2=a2[j++];
+        
+        
+        if((n1+n2)%2==0)
+            return double(m1+m2)/2;
+        else
+            return m2;
+    }
+    
+    /*
     double findMedianSortedArrays(vector<int>& a1, vector<int>& a2) {
         int n1=a1.size(),n2=a2.size();
         if(n1>n2)
@@ -37,4 +81,5 @@ public:
         
         return ans;
     }
+    */
 };
