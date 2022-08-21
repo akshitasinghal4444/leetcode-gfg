@@ -1,30 +1,52 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        int n1,n2;
-        n1=s.length();
-        n2=p.length();
-        if(n2>n1)
-            return {};
-        vector<int> h1(26,0),h2(26,0);
+        int ns=s.length(),np=p.length();
+        int fs[26]={0},fp[26]={0};
+        int i,j;
         vector<int> ans;
-        int i,st=0;
-        for(i=0;i<n2;i++)
-            h1[p[i]-'a']++;
+        bool same=1;
         
-        for(i=0;i<n2;i++)
-            h2[s[i]-'a']++;
-        if(h1==h2)
-            ans.push_back(st);
+        if(ns<np)
+            return ans;
         
-        for(i;i<n1;i++)
+        for(i=0;i<np;i++)
+            fp[p[i]-'a']++;
+        
+        for(i=0;i<np;i++)
+            fs[s[i]-'a']++;
+        
+        for(j=0;j<26;j++)
         {
-            h2[s[st]-'a']--;
-            st++;
-            h2[s[i]-'a']++;
-            if(h1==h2)
-            ans.push_back(st);
+            if(fs[j]!=fp[j])
+            {
+                same=0;
+                break;
+            }
         }
+        
+        if(same)
+            ans.push_back(0);
+        
+        for(;i<ns;i++)
+        {
+            fs[s[i]-'a']++;
+            fs[s[i-np]-'a']--;
+            same=1;
+            
+            for(j=0;j<26;j++)
+            {
+                if(fs[j]!=fp[j])
+                {
+                    same=0;
+                    break;
+                }
+            }
+        
+            if(same)
+                ans.push_back(i-np+1);
+        }
+        
         return ans;
     }
 };
