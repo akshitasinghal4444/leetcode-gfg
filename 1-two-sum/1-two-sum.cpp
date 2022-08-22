@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& a, int t) {
-        unordered_map<int,int> m;
         int i,n=a.size();
+        unordered_map<int,int> m;
         
         for(i=0;i<n;i++)
         {
