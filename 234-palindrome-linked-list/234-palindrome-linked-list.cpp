@@ -10,18 +10,19 @@
  */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head)
-    {
-        ListNode *f,*s,*p,*n;
-        p=NULL,s=f=head;
+    bool isPalindrome(ListNode* head) {
+        ListNode *s,*f,*p,*n;
+        s=f=head;
+        p=NULL;
         
         while(f && f->next)
         {
             f=f->next->next;
+            
             n=s->next;
             s->next=p;
             p=s;
-            s=n;
+            s=n;         
         }
         
         if(f)
@@ -29,57 +30,12 @@ public:
         
         while(s)
         {
-            if(p->val!=s->val)
+            if(s->val!=p->val)
                 return 0;
-            
+            s=s->next;
             p=p->next;
-            s=s->next;
         }
         
         return 1;
     }
-    
-    /*
-    ListNode* reverse(ListNode* h)
-    {
-        ListNode *p,*c,*n;
-        p=NULL,c=h;
-        
-        while(c)
-        {
-            n=c->next;
-            c->next=p;
-            p=c;
-            c=n;
-        }
-        
-        return p;
-    }
-    
-    bool isPalindrome(ListNode* head) {
-        ListNode *s,*f;
-        s=f=head;
-        
-        while(f && f->next)
-        {
-            s=s->next;
-            f=f->next->next;
-        }
-        
-        if(f)
-        s=s->next;
-        
-        f=s=reverse(s);
-            
-        while(f)
-        {
-            if(head->val!=f->val)
-                return 0;
-            
-            f=f->next;
-            head=head->next;
-        }
-        return 1;
-    }
-    */
 };
