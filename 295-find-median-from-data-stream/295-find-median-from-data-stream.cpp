@@ -1,45 +1,37 @@
 class MedianFinder {
 public:
-    priority_queue<int> q1;
-    priority_queue<int,vector<int>,greater<int>> q2;
-    
-    void balance()
-    {
-        while(q1.size()<q2.size())
-        {
-            q1.push(q2.top());
-            q2.pop();
-        }
-        
-        if(q1.size()-q2.size()>1)
-        {
-            q2.push(q1.top());
-            q1.pop();
-        }
-    }
+    priority_queue<int> l;
+    priority_queue<int,vector<int>,greater<int>> r;
     
     MedianFinder() {
         
     }
     
     void addNum(int num) {
-        
-        if(q1.empty() || num<q1.top())
-            q1.push(num);
+        if(r.empty() || num<=r.top())
+            l.push(num);
         else
-            q2.push(num);
+            r.push(num);
         
-        balance();
+        if(r.size()>l.size())
+        {
+            l.push(r.top());
+            r.pop();
+        }
+        else if(l.size()>r.size()+1)
+        {
+            r.push(l.top());
+            l.pop();
+        }
     }
     
     double findMedian() {
-        if(q1.size()>q2.size())
-            return q1.top();
-        else
-            return ((float)q1.top()+q2.top())/2;
+        if(l.size()==r.size())
+            return ((double)l.top()+r.top())/2;
+        
+        return l.top();
     }
 };
-
 
 /**
  * Your MedianFinder object will be instantiated and called as such:
