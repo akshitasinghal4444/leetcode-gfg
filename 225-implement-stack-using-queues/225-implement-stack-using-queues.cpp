@@ -2,6 +2,40 @@ class MyStack {
 public:
     
     queue<int> q;
+    MyStack() { }
+    
+    void push(int x) {
+        
+        int s=q.size(); 
+        q.push(x);
+        
+        while(s--)
+        {
+            q.push(q.front());
+            q.pop();
+        }
+    }
+    
+    int pop() {
+        int x=q.front();
+        q.pop();
+        return x;
+    }
+    
+    int top() {
+        return q.front();
+    }
+    
+    bool empty() {
+        return q.empty();
+    }
+};
+
+/*
+class MyStack {
+public:
+    
+    queue<int> q;
     MyStack() {
         
     }
@@ -47,6 +81,7 @@ public:
         return q.empty();
     }
 };
+*/
 
 /**
  * Your MyStack object will be instantiated and called as such:
