@@ -1,5 +1,55 @@
 class MyQueue {
 public:
+    stack<int> s;
+    
+    MyQueue() {}
+    
+    void push(int x) {
+        s.push(x);
+    }
+    
+    int pop() {
+        if(s.empty())
+            return -1;
+        
+        if(s.size()==1)
+        {
+            int x=s.top();
+            s.pop();
+            return x;
+        }
+        
+        int x=s.top();
+        s.pop();
+        int ans=pop();
+        s.push(x);
+        
+        return ans;
+    }
+    
+    int peek() {
+        if(s.empty())
+            return -1;
+        
+        if(s.size()==1)
+            return s.top();
+        
+        int x=s.top();
+        s.pop();
+        int ans=peek();
+        s.push(x);
+        
+        return ans;
+    }
+    
+    bool empty() {
+        return s.empty();
+    }
+};
+
+/*
+class MyQueue {
+public:
     
     stack<int> s1,s2;
     
@@ -43,6 +93,7 @@ public:
         return s1.empty();
     }
 };
+*/
 
 /*
 class MyQueue {
