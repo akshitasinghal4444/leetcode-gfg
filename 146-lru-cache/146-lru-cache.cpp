@@ -1,5 +1,93 @@
 class LRUCache {
 public:
+    
+    struct node{
+        node *prev,*next;
+        int key,value;
+    }*head,*tail;
+    
+    int cap;
+    unordered_map<int,node*> m;
+    
+    LRUCache(int capacity) {
+        cap=capacity;
+        head=tail=NULL;
+    }
+    
+    void insert(int k,int v)
+    {
+        node *t=new node();
+        t->key=k;
+        t->value=v;
+        t->next=head;
+        
+        if(head)
+            head->prev=t;
+        
+        head=t;
+        
+        if(!tail)
+            tail=t;
+        
+        m[k]=head;
+    }
+    
+    void deletenode(int k)
+    {
+        node *t=m[k];
+        
+        if(t->prev)
+            t->prev->next=t->next;
+        
+        if(t->next)
+            t->next->prev=t->prev;
+        
+        if(t==tail)
+            tail=tail->prev;
+
+        t->prev=NULL;    
+        m.erase(k);
+        // delete(t);
+    }
+    
+    void movefront(int k,int v)
+    {
+        if(m[k]==head)
+        {
+            head->value=v;
+            return;
+        }
+        deletenode(k);
+        insert(k,v);
+    }
+    
+    int get(int key) {
+        
+        if(m.find(key)==m.end())
+            return -1;
+        
+        movefront(key,m[key]->value);
+        return head->value;
+    }
+    
+    void put(int key, int value) {
+        
+        if(m.find(key)!=m.end())
+            movefront(key,value);
+        else
+        {
+            insert(key,value);
+            
+            if(m.size()>cap)
+                deletenode(tail->key);
+        }
+    }
+};
+
+/*
+class LRUCache {
+public:
+    
     list<pair<int,int>> l;
     unordered_map<int,list<pair<int,int>>::iterator> m;
     int cap;
@@ -35,7 +123,8 @@ public:
         }
     }
 };
-
+*/
+    
 /*
 class LRUCache {
 public:
@@ -77,7 +166,6 @@ public:
     }
 };
 */
-
 /**
  * Your LRUCache object will be instantiated and called as such:
  * LRUCache* obj = new LRUCache(capacity);
