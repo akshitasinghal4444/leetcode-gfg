@@ -30,7 +30,7 @@ public:
         
         if(l.size()>cap)
         {
-            int k=*l.rbegin();
+            int k=l.back();
             l.pop_back();
             m1.erase(k);
             m2.erase(k);
