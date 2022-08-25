@@ -8,8 +8,7 @@ public:
         
         for(char c:r)
         {
-            f[c-'a']--;
-            if(f[c-'a']<0)
+            if(--f[c-'a']<0)
                 return 0;
         }
         
