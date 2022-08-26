@@ -1,5 +1,36 @@
 class Solution {
 public:
+    int largestRectangleArea(vector<int>& a)
+    {
+        int i,j,n=a.size();
+        int ans=0;
+        vector<int> r(n,n),l(n,-1);
+        
+        for(i=1;i<n;i++)
+        {
+            j=i-1;
+            while(j>=0 && a[j]>=a[i])
+                j=l[j];
+            
+            l[i]=j;
+        }
+        
+        for(i=n-2;i>=0;i--)
+        {
+            j=i+1;
+            while(j<n && a[j]>=a[i])
+                j=r[j];
+            
+            r[i]=j;
+        }
+        
+        for(i=0;i<n;i++)
+        ans=max(ans,a[i]*(r[i]-l[i]-1));
+        
+        return ans;
+    }
+    
+    /*
     int largestRectangleArea(vector<int>& a) {
         int i,n=a.size();
         int ans=0;
@@ -35,4 +66,5 @@ public:
         
         return ans;
     }
+    */
 };
