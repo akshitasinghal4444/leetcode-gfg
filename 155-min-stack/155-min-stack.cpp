@@ -1,117 +1,30 @@
 class MinStack {
 public:
-    long mn;
-    stack<long> s;
-    
-    MinStack() {
-    }
-    
-    void push(int val) {
-        if(s.empty())
-        {
-            mn=val;
-            s.push(val);
-        }
-        else if(val>mn)
-            s.push(val);
-        else
-        {
-            s.push((long)2*val-mn);
-            mn=val;
-        }  
-    }
-    
-    void pop() {
-        if(s.top()<mn)
-            mn=2*mn-s.top();
-        
-        s.pop();
-    }
-    
-    int top() {
-        if(s.top()>=mn)
-        return s.top();
-        
-        return mn;
-    }
-    
-    int getMin() {
-        return mn;
-    }
-};
-
-/*
-class MinStack {
-public:
-    stack<long> s;
-    int mn;
-    
-    MinStack() {
-        
-    }
-    
-    void push(int v) {
-        
-        if(s.empty())
-        {
-            s.push(v); 
-            mn=v;
-        }
-        else if(v>mn)
-        {
-            s.push(v);
-        }
-        else
-        {
-            long x=(long)2*v-mn;
-            s.push(x);
-            mn=v;
-        }
-    }
-    
-    void pop() {
-        
-        if(s.top()<mn)
-            mn=(long)2*mn-s.top();
-        
-        s.pop();
-    }
-    
-    int top() {
-        if(s.top()<mn)
-            return mn;
-        
-        return s.top();
-    }
-    
-    int getMin() {
-        return mn;
-    }
-};
-*/
-
-/*
-class MinStack {
-public:
     stack<int> s1,s2;
     
-    MinStack() {
-        
-    }
+    MinStack() {}
     
-    void push(int v) {
-        s1.push(v);
-        if(s2.empty() || s2.top()>=v)
-            s2.push(v);
+    void push(int val) {
+        s1.push(val);
+        
+        if(s2.empty() || s2.top()>=val)
+            s2.push(val);
     }
     
     void pop() {
+        if(s1.empty())
+            return;
+        
         if(s2.top()==s1.top())
             s2.pop();
+        
         s1.pop();
     }
     
     int top() {
+        if(s1.empty())
+            return -1;
+        
         return s1.top();
     }
     
@@ -119,7 +32,7 @@ public:
         return s2.top();
     }
 };
-*/
+
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack* obj = new MinStack();
