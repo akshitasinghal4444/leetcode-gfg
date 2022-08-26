@@ -1,73 +1,61 @@
 class LFUCache {
 public:
+    int cap,mn;
+    unordered_map<int,pair<int,int>> k_v_f;
+    unordered_map<int,list<int>> f_k;
+    unordered_map<int,list<int>::iterator> k_it;
     
-    unordered_map<int,pair<int,int>> key;
-    unordered_map<int,list<int>> freq;
-    unordered_map<int,list<int>::iterator> add;
-    
-    int s,cap,mn;
-    
-    LFUCache(int c) {
-        s=0;
-        cap=c;
-        mn=0;
+    LFUCache(int capacity) {
+        cap=capacity;
+        mn=INT_MAX;
     }
     
     void update(int k,int v)
     {
-        int f=key[k].second;
-        freq[f].erase(add[k]);
+        int f=k_v_f[k].second;
+        k_v_f[k]={v,f+1};
         
-        if(mn==f && freq[f].size()==0)
+        f_k[f].erase(k_it[k]);
+        f_k[f+1].push_front(k);
+        k_it[k]=f_k[f+1].begin();
+        
+        if(mn==f && f_k[f].empty())
             mn++;
-        
-        if(freq[f].size()==0)
-            freq.erase(f);
-        
-        f++;
-        key[k]={v,f};
-        freq[f].push_front(k);
-        add[k]=freq[f].begin();
-        
     }
     
-    int get(int k) {
-        
-        if(key.find(k)==key.end())
+    void remove()
+    {
+        int k=f_k[mn].back();
+        f_k[mn].pop_back();
+        k_v_f.erase(k);
+        k_it.erase(k);
+    }
+    
+    int get(int key) {
+        if(k_v_f.find(key)==k_v_f.end())
             return -1;
         
-        int v=key[k].first;
-        update(k,v);
+        int v=k_v_f[key].first;
+        update(key,v);
         return v;
-        
     }
     
-    void put(int k, int v) {
-        
+    void put(int key, int value) {
         if(cap<=0)
             return;
         
-        if(key.find(k)!=key.end())
-        {
-            update(k,v);
-        }
+        if(k_v_f.find(key)!=k_v_f.end())
+        update(key,value);
         else
         {
-            s++;
-            if(s>cap)
-            {
-                int k2=freq[mn].back();
-                freq[mn].pop_back();
-                key.erase(k2);
-                add.erase(k2);
-                s--;
-            }
+            if(k_v_f.size()==cap)
+                remove();
             
+            k_v_f[key]={value,1};
+            f_k[1].push_front(key);
+            k_it[key]=f_k[1].begin();
             mn=1;
-            key[k]={v,1};
-            freq[1].push_front(k);
-            add[k]=freq[1].begin();            
-        }        
+        }
     }
 };
 
