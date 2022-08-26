@@ -2,6 +2,9 @@ class Solution {
 public:
     string multiply(string n1, string n2) 
     {
+        if(n1=="0" || n2=="0")
+            return "0";
+        
         int l1=n1.length(),l2=n2.length();
         vector<int> res(l1+l2,0);
         string ans="";
@@ -25,9 +28,6 @@ public:
         
         for(i;i<l1+l2;i++)
             ans+=to_string(res[i]);
-        
-        if(ans.empty())
-            return "0";
         
         return ans;
     }
