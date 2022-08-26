@@ -1,5 +1,36 @@
 class Solution {
 public:
+    
+    int largestRectangleArea(vector<int>& a)
+    {
+        int i,n=a.size();
+        int ans=0;
+        stack<int> s;
+        a.push_back(0);
+        
+        for(i=0;i<=n;i++)
+        {
+            while(!s.empty() && a[s.top()]>a[i])
+            {
+                int l,r=i;
+                int j=s.top();
+                s.pop();
+                
+                if(s.empty())
+                    l=-1;
+                else
+                    l=s.top();
+                
+                ans=max(ans,a[j]*(r-l-1));
+            }
+            
+            s.push(i);
+        }
+        return ans;
+    }
+    
+    
+    /*
     int largestRectangleArea(vector<int>& a)
     {
         int i,j,n=a.size();
@@ -29,6 +60,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     int largestRectangleArea(vector<int>& a) {
