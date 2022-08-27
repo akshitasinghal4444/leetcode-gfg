@@ -1,4 +1,4 @@
- /**
+/**
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -11,23 +11,23 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *t1,*t2;
+        
+        ListNode* t1,*t2;
         t1=t2=head;
-        n++;
-        while(t1 && n-->0)
+        while(n--)
             t1=t1->next;
         
-        if(!t1 && n)
-            return t2->next;
+        if(!t1)
+            return head->next;
         
-        while(t1)
+        while(t1->next)
         {
-            t1=t1->next;
             t2=t2->next;
+            t1=t1->next;
         }
         
         t2->next=t2->next->next;
-
+        
         return head;
     }
 };
