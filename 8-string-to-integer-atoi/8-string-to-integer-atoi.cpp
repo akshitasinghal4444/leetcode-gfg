@@ -1,108 +1,40 @@
 class Solution {
 public:
-    int myAtoi(string s)
-    {
-        int n=s.length();
-        int i=0;
+    int myAtoi(string s) {
         long ans=0;
-        int sign=1;
+        bool neg=0;
+        int i=0,n=s.length();
         
-        while(s[i]==' ')
+        while(i<n && s[i]==' ')
             i++;
         
         if(s[i]=='+')
             i++;
         else if(s[i]=='-')
         {
-            sign=-1;
+            neg=1;
             i++;
         }
         
         for(i;i<n;i++)
         {
-            if(s[i]>='0' && s[i]<='9')
-            {
-                ans=(ans*10)+(s[i]-'0');
-            }
-            else
+            if(s[i]<'0' || s[i]>'9')
                 break;
+            
+            ans=(ans*10)+(s[i]-'0');
             
             if(ans>INT_MAX)
             {
-                if(sign==1)
-                    return INT_MAX;
-                else
+                if(neg)
                     return INT_MIN;
-            }                
+                return INT_MAX;
+            }
+            else if(ans==INT_MAX && !neg)
+                return INT_MAX;
         }
         
-        if(sign==1)
-            return ans;
-        else
+        if(neg)
             return -ans;
-        
-    }
-    
-    /*
-    int myAtoi(string s) {
-        int ans=0;
-        int n=s.length();
-        int i;
-        int sign=1;
-  
-        for(i=0;i<n;i++)
-        {
-            if(s[i]==' ')
-                continue;
-            else if(s[i]=='-')
-            {
-                sign=-1;
-                i++;
-                break;
-            }                
-            else if(s[i]=='+')
-            {
-                sign=1;
-                i++;
-                break;
-            }
-            else if(s[i]>='0' && s[i]<='9')
-                break;
-            else
-                break;
-                
-        }
-        
-        for(i;i<n;i++)
-        {
-            if(s[i]==' ')
-                break;
-            else if(s[i]=='-')
-                break;
-            else if(s[i]=='+')
-                break;
-            else if(s[i]>='0' && s[i]<='9')
-            {
-                if(((long)ans*10+s[i]-'0')>INT_MAX)
-                {
-                    if(sign==1)
-                        return INT_MAX;
-                    return INT_MIN;
-                }
-                ans=ans*10+(s[i]-'0');
-                
-            }
-            else
-                break;
-        }
-        ans*=sign;
-        if(ans>INT_MAX)
-            ans=INT_MAX;
-        else if(ans<INT_MIN)
-            ans=INT_MIN;
-        
         return ans;
     }
-    
-    */
 };
