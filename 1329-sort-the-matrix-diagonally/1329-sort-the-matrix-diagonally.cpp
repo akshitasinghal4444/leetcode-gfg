@@ -1,10 +1,34 @@
 class Solution {
 public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& a)
+    {
+        unordered_map<int,priority_queue<int,vector<int>,greater<int>>> mp;
+        int i,j;
+        int m=a.size(),n=a[0].size();
+        
+        for(i=0;i<m;i++)
+            for(j=0;j<n;j++)
+                mp[i-j].push(a[i][j]);
+        
+        for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                a[i][j]=mp[i-j].top();
+                mp[i-j].pop();
+            }
+        }
+            
+        return a;
+    }
+    
+    /*
     vector<vector<int>> diagonalSort(vector<vector<int>>& a) {
         int i,j,k;
         int m=a.size(),n=a[0].size();
         vector<vector<int>> ans(m,vector<int>(n));
         
+        //lower triangle
         for(k=0;k<m;k++)
         {
             vector<int> t;
@@ -18,6 +42,7 @@ public:
                 ans[i][j]=t[j];
         }
         
+        //upper triangle
         for(k=1;k<n;k++)
         {
             vector<int> t;
@@ -33,4 +58,5 @@ public:
         
         return ans;
     }
+    */
 };
