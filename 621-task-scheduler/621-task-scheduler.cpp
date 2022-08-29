@@ -1,5 +1,37 @@
 class Solution {
 public:
+    int leastInterval(vector<char>& tasks, int n)
+    {
+        int f[26]={0};
+        int ans=0,mf=0,in,i;
+        int idle,gaps;
+        
+        for(char c:tasks)
+            f[c-'A']++;
+        
+        for(i=0;i<26;i++)
+        {
+            if(f[i]>mf)
+            {
+                mf=f[i];
+                in=i;
+            }
+        }
+        f[in]=0;
+        
+        gaps=mf-1;
+        idle=gaps*n;
+        
+        for(i=0;i<26;i++)
+            idle-=min(f[i],gaps);
+        
+        if(idle<0)
+            return tasks.size();
+        
+        return idle+tasks.size();
+    }
+    
+    /*
     int leastInterval(vector<char>& tasks, int n) {
         int f[26]={0};
         priority_queue<int> pq;
@@ -41,5 +73,6 @@ public:
         
         return ans;
     }
+    */
 };
 
