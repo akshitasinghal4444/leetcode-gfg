@@ -3,7 +3,37 @@ public:
     int leastInterval(vector<char>& tasks, int n)
     {
         int f[26]={0};
-        int ans=0,mf=0,in,i;
+        int i,mf=0,c=0;
+        int req;
+        
+        for(char c:tasks)
+            f[c-'A']++;
+        
+        for(i=0;i<26;i++)
+        {
+            if(f[i]>mf)
+            {
+                mf=f[i];
+                c=1;
+            }
+            else if(f[i]==mf)
+                c++;
+        }
+        
+        req=(mf-1)*(n+1);
+        req+=c;
+        
+        if(tasks.size()>req)
+        return tasks.size();
+        
+        return req;
+    }
+    
+    /*
+    int leastInterval(vector<char>& tasks, int n)
+    {
+        int f[26]={0};
+        int mf=0,in,i;
         int idle,gaps;
         
         for(char c:tasks)
@@ -30,6 +60,7 @@ public:
         
         return idle+tasks.size();
     }
+    */
     
     /*
     int leastInterval(vector<char>& tasks, int n) {
