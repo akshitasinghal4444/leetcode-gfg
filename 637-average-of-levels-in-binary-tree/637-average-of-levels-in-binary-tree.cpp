@@ -23,15 +23,14 @@ public:
         while(!q.empty())
         {
             int s=q.size();
-            double sum=0,c=0;
+            double sum=0;
             
-            while(s--)
+            for(int i=0;i<s;i++)
             {
                 root=q.front();
                 q.pop();
                 
                 sum+=root->val;
-                c++;
                 
                 if(root->left)
                     q.push(root->left);
@@ -40,7 +39,7 @@ public:
                     q.push(root->right);
             }
             
-            ans.push_back(sum/c);
+            ans.push_back(sum/s);
         }
         
         return ans;
