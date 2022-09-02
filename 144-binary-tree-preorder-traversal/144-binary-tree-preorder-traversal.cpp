@@ -18,6 +18,33 @@ public:
         
         vector<int> ans;
         stack<TreeNode*> s;
+        s.push(root);
+        
+        while(!s.empty())
+        {
+            root=s.top();
+            s.pop();
+            
+            ans.push_back(root->val);
+            
+            if(root->right)
+            s.push(root->right);
+            
+            if(root->left)
+            s.push(root->left);
+            
+        }
+        return ans;
+    }
+    
+    /*
+    vector<int> preorderTraversal(TreeNode* root)
+    {
+        if(!root)
+            return {};
+        
+        vector<int> ans;
+        stack<TreeNode*> s;
         
         while(!s.empty() || root)
         {
@@ -35,6 +62,7 @@ public:
         }
         return ans;
     }
+    */
     
     /*
     vector<int> ans;
