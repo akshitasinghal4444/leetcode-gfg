@@ -20,8 +20,7 @@ public:
         
         inorder(root->left,k);
         
-        x++;
-        if(x==k)
+        if(++x==k)
             ans=root->val;
         
         inorder(root->right,k);
