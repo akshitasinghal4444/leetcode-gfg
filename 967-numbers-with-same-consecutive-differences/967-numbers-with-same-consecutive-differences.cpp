@@ -2,21 +2,21 @@ class Solution {
 public:
     vector<int> ans;
     
-    void helper(int in,int n,int k,int t)
+    void helper(int digit,int n,int k,int num)
     {
         if(n==0)
         {
-            if(t!=0)
-                ans.push_back(t);
+            if(num!=0)
+                ans.push_back(num);
             
             return;
         }
         
-        if(in-k>=0)
-            helper(in-k,n-1,k,t*10+in-k);
+        if(digit-k>=0)
+            helper(digit-k,n-1,k,num*10+digit-k);
         
-        if(in+k<=9 && k!=0)
-            helper(in+k,n-1,k,t*10+in+k);
+        if(digit+k<=9 && k!=0)
+            helper(digit+k,n-1,k,num*10+digit+k);
     }
     
     vector<int> numsSameConsecDiff(int n, int k) {
