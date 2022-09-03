@@ -1,5 +1,40 @@
 class Solution {
 public:
+    vector<int> numsSameConsecDiff(int n, int k)
+    {
+        vector<int> ans;
+        queue<int> q;
+        
+        for(int i=1;i<=9;i++)
+            q.push(i);
+        
+        while(--n)
+        {
+            int s=q.size();
+            while(s--)
+            {
+                int num=q.front();
+                int digit=num%10;
+                q.pop();
+                
+                if(digit+k<=9)
+                    q.push(num*10+digit+k);
+                
+                if(k!=0 && digit-k>=0)
+                    q.push(num*10+digit-k);
+            }
+        }
+        
+        while(!q.empty())
+        {
+            ans.push_back(q.front());
+            q.pop();
+        }
+        
+        return ans;
+    }
+    
+    /*
     vector<int> ans;
     
     void helper(int digit,int n,int k,int num)
@@ -26,4 +61,5 @@ public:
         
         return ans;
     }
+    */
 };
