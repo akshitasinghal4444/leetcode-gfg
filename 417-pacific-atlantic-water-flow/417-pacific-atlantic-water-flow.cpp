@@ -2,6 +2,54 @@ class Solution {
 public:
     vector<vector<int>> ans;
     
+    void dfs(vector<vector<int>>& a,int m,int n,vector<vector<bool>> &v1,int i,int j,vector<vector<bool>> &v2)
+    {
+        if(v1[i][j])
+            return;
+
+        v1[i][j]=1;
+            
+        if(v1[i][j] && v2[i][j])
+                ans.push_back({i,j});
+            
+        if(i+1<m && !v1[i+1][j] && a[i+1][j]>=a[i][j])
+            dfs(a,m,n,v1,i+1,j,v2);
+            
+        if(i-1>=0 && !v1[i-1][j] && a[i-1][j]>=a[i][j])
+            dfs(a,m,n,v1,i-1,j,v2);
+            
+        if(j+1<n && !v1[i][j+1] && a[i][j+1]>=a[i][j])
+            dfs(a,m,n,v1,i,j+1,v2);
+            
+        if(j-1>=0 && !v1[i][j-1] && a[i][j-1]>=a[i][j])
+            dfs(a,m,n,v1,i,j-1,v2);
+        
+    }
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& a) {
+        
+        int m=a.size(),n=a[0].size();
+        int i,j;
+        vector<vector<bool>> atlantic(m,vector<bool>(n,0)),pacific(m,vector<bool>(n,0));
+        
+        for(i=0;i<m;i++)
+        {
+            dfs(a,m,n,pacific,i,0,atlantic);
+            dfs(a,m,n,atlantic,i,n-1,pacific);
+        }
+        
+        for(j=0;j<n;j++)
+        {
+            dfs(a,m,n,pacific,0,j,atlantic);
+            dfs(a,m,n,atlantic,m-1,j,pacific);
+        }
+        
+        return ans;
+    }
+    
+    /*
+    vector<vector<int>> ans;
+    
     void bfs(vector<vector<int>>& a,int m,int n,vector<vector<bool>> &v1,int i,int j,vector<vector<bool>> &v2)
     {
         if(v1[i][j])
@@ -66,6 +114,7 @@ public:
         
         return ans;
     }
+    */
     
     /*
     void bfs(vector<vector<int>>& a,int m,int n,set<pair<int,int>> &s)
