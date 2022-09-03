@@ -1,6 +1,73 @@
 class Solution {
 public:
+    vector<vector<int>> ans;
     
+    void bfs(vector<vector<int>>& a,int m,int n,vector<vector<bool>> &v1,int i,int j,vector<vector<bool>> &v2)
+    {
+        if(v1[i][j])
+            return;
+        
+        queue<pair<int,int>> q;
+        q.push({i,j});
+        v1[i][j]=1;
+        
+        while(!q.empty())
+        {
+            i=q.front().first;
+            j=q.front().second;
+            q.pop();
+            
+            if(v1[i][j] && v2[i][j])
+                ans.push_back({i,j});
+            
+            if(i+1<m && !v1[i+1][j] && a[i+1][j]>=a[i][j])
+            {
+                v1[i+1][j]=1;
+                q.push({i+1,j});
+            }
+            
+            if(i-1>=0 && !v1[i-1][j] && a[i-1][j]>=a[i][j])
+            {
+                v1[i-1][j]=1;
+                q.push({i-1,j});
+            }
+            
+            if(j+1<n && !v1[i][j+1] && a[i][j+1]>=a[i][j])
+            {
+                v1[i][j+1]=1;
+                q.push({i,j+1});
+            }
+            
+            if(j-1>=0 && !v1[i][j-1] && a[i][j-1]>=a[i][j])
+            {
+                v1[i][j-1]=1;
+                q.push({i,j-1});
+            }
+        }
+    }
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& a) {
+        
+        int m=a.size(),n=a[0].size();
+        int i,j;
+        vector<vector<bool>> atlantic(m,vector<bool>(n,0)),pacific(m,vector<bool>(n,0));
+        
+        for(i=0;i<m;i++)
+        {
+            bfs(a,m,n,pacific,i,0,atlantic);
+            bfs(a,m,n,atlantic,i,n-1,pacific);
+        }
+        
+        for(j=0;j<n;j++)
+        {
+            bfs(a,m,n,pacific,0,j,atlantic);
+            bfs(a,m,n,atlantic,m-1,j,pacific);
+        }
+        
+        return ans;
+    }
+    
+    /*
     void bfs(vector<vector<int>>& a,int m,int n,set<pair<int,int>> &s)
     {
         queue<pair<int,int>> q;
@@ -74,18 +141,13 @@ public:
         bfs(a,m,n,pacific);
         bfs(a,m,n,atlantic);
         
-//         for(auto p:atlantic)
-//             cout<<p.first<<" "<<p.second<<endl;
-        
-//         cout<<endl;
         for(auto p:pacific)
-        {
-            // cout<<p.first<<" "<<p.second<<endl;
-            
+        {            
             if(atlantic.find(p)!=atlantic.end())
                 ans.push_back({p.first,p.second});
         }
         
         return ans;
     }
+    */
 };
