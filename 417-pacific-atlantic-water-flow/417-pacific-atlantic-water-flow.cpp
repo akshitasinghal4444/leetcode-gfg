@@ -1,28 +1,91 @@
 class Solution {
 public:
-    int m, n;
-    vector<vector<int> > ans;
-    vector<vector<bool> > atlantic, pacific;
-    queue<pair<int, int> > q;
-    vector<vector<int> > pacificAtlantic(vector<vector<int>>& mat) {
-        if(!size(mat)) return ans;
-        m = size(mat), n = size(mat[0]);
-        atlantic = pacific = vector<vector<bool> >(m, vector<bool>(n, false));
-        for(int i = 0; i < m; i++) bfs(mat, pacific, i, 0), bfs(mat, atlantic, i, n - 1);
-        for(int i = 0; i < n; i++) bfs(mat, pacific, 0, i), bfs(mat, atlantic, m - 1, i);             
-        return ans;
-    }
-    void bfs(vector<vector<int> >& mat, vector<vector<bool> >& visited, int i, int j){        
-        q.push({i, j});
-        while(!q.empty()){
-            tie(i, j) = q.front(); q.pop();
-            if(visited[i][j]) continue;
-            visited[i][j] = true;
-            if(atlantic[i][j] && pacific[i][j]) ans.push_back(vector<int>{i, j});
-            if(i + 1 <  m && mat[i + 1][j] >= mat[i][j]) q.push({i + 1, j});
-            if(i - 1 >= 0 && mat[i - 1][j] >= mat[i][j]) q.push({i - 1, j});
-            if(j + 1 <  n && mat[i][j + 1] >= mat[i][j]) q.push({i, j + 1});
-            if(j - 1 >= 0 && mat[i][j - 1] >= mat[i][j]) q.push({i, j - 1});
+    
+    void bfs(vector<vector<int>>& a,int m,int n,set<pair<int,int>> &s)
+    {
+        queue<pair<int,int>> q;
+        vector<vector<int>> vis(m,vector<int>(n,0));
+        int i,j;
+        
+        for(auto p:s)
+        {
+            i=p.first;
+            j=p.second;
+            q.push({i,j});
+            vis[i][j]=1;
         }
+        
+        while(!q.empty())
+        {
+            i=q.front().first;
+            j=q.front().second;
+            q.pop();
+            
+            if(i+1<m && !vis[i+1][j] && a[i+1][j]>=a[i][j])
+            {
+                vis[i+1][j]=1;
+                q.push({i+1,j});
+                s.insert({i+1,j});
+            }
+            
+            if(i-1>=0 && !vis[i-1][j] && a[i-1][j]>=a[i][j])
+            {
+                vis[i-1][j]=1;
+                q.push({i-1,j});
+                s.insert({i-1,j});
+            }
+            
+            if(j+1<n && !vis[i][j+1] && a[i][j+1]>=a[i][j])
+            {
+                vis[i][j+1]=1;
+                q.push({i,j+1});
+                s.insert({i,j+1});
+            }
+            
+            if(j-1>=0 && !vis[i][j-1] && a[i][j-1]>=a[i][j])
+            {
+                vis[i][j-1]=1;
+                q.push({i,j-1});
+                s.insert({i,j-1});
+            }
+        }
+    }
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& a) {
+        int m=a.size(),n=a[0].size();
+        set<pair<int,int>> pacific,atlantic;
+        vector<vector<int>> ans;
+        
+        int i,j;
+        
+        
+        for(i=0;i<m;i++)
+        {
+            pacific.insert({i,0});
+            atlantic.insert({i,n-1});
+        }
+        
+        for(j=0;j<n;j++)
+        {
+            pacific.insert({0,j});
+            atlantic.insert({m-1,j});
+        }
+        
+        bfs(a,m,n,pacific);
+        bfs(a,m,n,atlantic);
+        
+//         for(auto p:atlantic)
+//             cout<<p.first<<" "<<p.second<<endl;
+        
+//         cout<<endl;
+        for(auto p:pacific)
+        {
+            // cout<<p.first<<" "<<p.second<<endl;
+            
+            if(atlantic.find(p)!=atlantic.end())
+                ans.push_back({p.first,p.second});
+        }
+        
+        return ans;
     }
 };
