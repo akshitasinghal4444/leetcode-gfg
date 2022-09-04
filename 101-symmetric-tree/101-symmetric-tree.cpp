@@ -11,57 +11,21 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-        
-        if(!root)
-            return 1;
-        
-        queue<TreeNode*> q;
-        q.push(root->left);
-        q.push(root->right);
-        
-        while(!q.empty())
-        {
-            TreeNode *l,*r;
-            
-            l=q.front();
-            q.pop();
-            
-            r=q.front();
-            q.pop();
-            
-            if(!l && !r)
-                continue;
-            
-            if(!l || !r || l->val!=r->val)
-                return 0;
-            
-            q.push(l->left);
-            q.push(r->right);
-            
-            q.push(l->right);
-            q.push(r->left);
-        }
-        return 1;
-    }
-    
-    /*
-    bool isSymmetric(TreeNode* l,TreeNode* r)
+    bool check(TreeNode *r1,TreeNode *r2)
     {
-        if(!l && !r)
+        if(!r1 && !r2)
             return 1;
         
-        if(!l || !r || l->val!=r->val)
+        if(!r1 || !r2 || r1->val!=r2->val)
             return 0;
         
-        return isSymmetric(l->left,r->right) && isSymmetric(l->right,r->left);
+        return check(r1->left,r2->right) && check(r2->left,r1->right);
     }
     
     bool isSymmetric(TreeNode* root) {
         if(!root)
             return 1;
         
-        return isSymmetric(root->left,root->right);
+        return check(root->left,root->right);
     }
-    */
 };
