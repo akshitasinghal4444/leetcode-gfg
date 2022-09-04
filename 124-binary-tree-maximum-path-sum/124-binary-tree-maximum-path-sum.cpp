@@ -18,12 +18,12 @@ public:
         if(!root)
             return 0;
         
-        int l=sum(root->left);
-        int r=sum(root->right);
+        int l=max(0,sum(root->left));
+        int r=max(0,sum(root->right));
         
-        ans=max({ans,root->val,root->val+l,root->val+r,root->val+l+r});
+        ans=max(ans,root->val+l+r);
         
-        return root->val+max({0,l,r});
+        return root->val+max(l,r);
     }
     
     int maxPathSum(TreeNode* root) {
