@@ -18,13 +18,15 @@ public:
         if(!root)
             return;
         
-        TreeNode *x=root->right;
+        TreeNode *l=root->left;
+        TreeNode *r=root->right;
+        
         t->right=root;
         t=t->right;
+        t->left=NULL;
         
-        preorder(root->left);
-        root->left=NULL;
-        preorder(x); 
+        preorder(l);
+        preorder(r); 
     }
     
     void flatten(TreeNode* root) {
