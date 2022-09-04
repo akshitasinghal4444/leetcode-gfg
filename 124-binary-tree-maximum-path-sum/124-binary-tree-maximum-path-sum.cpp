@@ -18,53 +18,17 @@ public:
         if(!root)
             return 0;
         
-        int l,r;
-        l=max(0,sum(root->left));
-        r=max(0,sum(root->right));
+        int l=sum(root->left);
+        int r=sum(root->right);
         
-        ans=max(ans,l+r+root->val);
-        return max(l,r)+root->val;
-    }
-    
-    int maxPathSum(TreeNode* root)
-    {
-        if(!root)
-            return 0;
+        ans=max({ans,root->val,root->val+l,root->val+r,root->val+l+r});
         
-        ans=INT_MIN;
-        int x=sum(root);
-        return ans;
-    }
-    
-    /*
-    int m=INT_MIN;
-    int ms(TreeNode* root)
-    {
-        int l=0,r=0;
-        
-        if(root->left)
-        l=ms(root->left);
-        
-        if(root->right)
-        r=ms(root->right);
-        
-        if(l<0)
-            l=0;
-        if(r<0)
-            r=0;
-        
-        m=max(m,root->val+l+r);
-
-        return max(l,r)+root->val;
+        return root->val+max({0,l,r});
     }
     
     int maxPathSum(TreeNode* root) {
-        if(!root)
-            return 0;
-        m=max(ms(root),m);
-        return m;
-        
+        ans=INT_MIN;
+        int s=sum(root);
+        return ans;
     }
-    
-    */
 };
