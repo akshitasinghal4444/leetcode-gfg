@@ -12,30 +12,29 @@
 class Solution {
 public:
     unordered_map<int,int> m;
-    int i;
+    int j;
     
-    TreeNode* buildTree(vector<int>& in, vector<int>& post,int l,int r)
+    TreeNode* build(vector<int>& in, vector<int>& post,int l,int r)
     {
         if(l>r)
             return NULL;
         
-        TreeNode *root=new TreeNode(post[i]);
-        int mid=m[post[i]];
-        i--;
+        TreeNode *root=new TreeNode(post[j]);
+        int mid=m[post[j--]];
         
-        root->right=buildTree(in,post,mid+1,r);
-        root->left=buildTree(in,post,l,mid-1);
+        root->right=build(in,post,mid+1,r);
+        root->left=build(in,post,l,mid-1);
         
         return root;
     }
     
     TreeNode* buildTree(vector<int>& in, vector<int>& post) {
+        int i,n=in.size();
+        j=n-1;
         
-        int j,n=in.size();
-        for(j=0;j<n;j++)
-            m[in[j]]=j;
+        for(i=0;i<n;i++)
+            m[in[i]]=i;
         
-        i=n-1;
-        return buildTree(in,post,0,n-1);
+        return build(in,post,0,n-1);
     }
 };
