@@ -11,25 +11,28 @@
  */
 class Solution {
 public:
-   void flatten(TreeNode* root)
+    TreeNode *t; 
+    
+    void preorder(TreeNode* root)
     {
         if(!root)
             return;
         
-        flatten(root->left);
-        flatten(root->right);
+        TreeNode *x=root->right;
+        t->right=root;
+        t=t->right;
         
-        if(root->left)
-        {
-            TreeNode *l=root->left;
-            while(l->right)
-                l=l->right;
-            
-            l->right=root->right;
-            
-            root->right=root->left;
-            root->left=NULL;
-        }
+        preorder(root->left);
+        root->left=NULL;
+        preorder(x); 
+    }
+    
+    void flatten(TreeNode* root) {
+        t=new TreeNode(0);
+        TreeNode *h=t;
         
+        preorder(root);
+        
+        root=h->right;
     }
 };
