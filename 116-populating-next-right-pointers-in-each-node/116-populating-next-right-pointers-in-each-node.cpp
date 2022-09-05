@@ -23,6 +23,34 @@ public:
         if(!root)
             return root;
         
+        Node *t1=root;
+        
+        while(t1)
+        {
+            Node *t2=t1;
+            
+            while(t2)
+            {
+                if(t2->left)
+                    t2->left->next=t2->right;
+                
+                if(t2->right && t2->next)
+                    t2->right->next=t2->next->left;
+                
+                t2=t2->next;
+            }
+            
+            t1=t1->left;
+        }
+        return root;
+    }
+    
+    /*
+    Node* connect(Node* root)
+    {
+        if(!root)
+            return root;
+        
         queue<Node*> q;
         q.push(root);
         
@@ -48,6 +76,7 @@ public:
         
         return root;
     }
+    */
     
     /*
     Node* connect(Node* root) {
