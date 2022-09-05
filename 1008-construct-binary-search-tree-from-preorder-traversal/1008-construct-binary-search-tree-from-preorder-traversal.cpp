@@ -11,60 +11,35 @@
  */
 class Solution {
 public:
-    int i;
     
-    TreeNode* bstFromPreorder(vector<int>& p,int n,int mx)
-    {
-        if(i==n || p[i]>mx)
-            return NULL;
-        
-        TreeNode *root=new TreeNode(p[i]);
-        i++;
-        
-        root->left=bstFromPreorder(p,n,p[i-1]);
-        root->right=bstFromPreorder(p,n,mx);
-        
-        return root;
-    }
-    
-    TreeNode* bstFromPreorder(vector<int>& p) 
-    {
-        i=0;
-        int n=p.size();
-        return bstFromPreorder(p,n,INT_MAX);
-    }
-    
-    /*
-    int i;
     unordered_map<int,int> m;
+    int j;
     
-    
-    TreeNode* helper(vector<int>& p,vector<int>& in,int l,int r)
+    TreeNode *bst(vector<int>& pre,int l,int r)
     {
         if(l>r)
             return NULL;
         
-        TreeNode* root=new TreeNode(p[i]);
-        int mid=m[p[i]];
-        i++;
+        TreeNode *root=new TreeNode(pre[j]);
+        int mid=m[pre[j++]];
         
-        root->left=helper(p,in,l,mid-1);
-        root->right=helper(p,in,mid+1,r);
+        root->left=bst(pre,l,mid-1);
+        root->right=bst(pre,mid+1,r);
         
         return root;
     }
     
-    TreeNode* bstFromPreorder(vector<int>& p) {
+    
+    TreeNode* bstFromPreorder(vector<int>& pre) {
+        j=0;
         
-        vector<int> in(p.begin(),p.end());
+        vector<int> in=pre;
         sort(in.begin(),in.end());
         
-        for(int i=0;i<in.size();i++)
+        int n=in.size();
+        for(int i=0;i<n;i++)
             m[in[i]]=i;
-            
-        i=0;
-    
-        return helper(p,in,0,in.size()-1);
+        
+        return bst(pre,0,n-1);
     }
-    */
 };
