@@ -18,8 +18,7 @@ public:
         if(root->val==val)
             return root;
         
-        TreeNode *l=searchBST(root->left,val);
-        if(l)
+        if(TreeNode *l=searchBST(root->left,val))
             return l;
         
         return searchBST(root->right,val);
