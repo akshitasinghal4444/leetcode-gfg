@@ -1,21 +1,17 @@
 class Solution {
 public:
-    int rob(vector<int>& a)
-    {
-        int n=a.size(),i;
-        int in,ex,ni,ne;
-        in=a[0];
-        ex=0;
+    int rob(vector<int>& a) {
+        int inc=0,exc=0;
+        int n_inc,n_exc;
         
-        for(i=1;i<n;i++)
+        for(int n:a)
         {
-            ni=ex+a[i];
-            ne=max(ex,in);
+            n_inc=exc+n;
+            n_exc=max(inc,exc);
             
-            in=ni;
-            ex=ne;
+            inc=n_inc,exc=n_exc;
         }
-        return max(in,ex);
+        
+        return max(inc,exc);
     }
-    
 };
