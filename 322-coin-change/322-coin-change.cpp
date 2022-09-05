@@ -1,11 +1,12 @@
 class Solution {
 public:
-    int coinChange(vector<int>& a, int amt) {
-        int n=a.size(),i,j;
-        vector<int> dp(amt+1,INT_MAX);
+    int coinChange(vector<int>& a, int t) {
+        int n=a.size();
+        int i,j;
+        vector<int> dp(t+1,INT_MAX);
         dp[0]=0;
         
-        for(i=1;i<=amt;i++)
+        for(i=1;i<=t;i++)
         {
             for(j=0;j<n;j++)
             {
@@ -13,6 +14,7 @@ public:
                     dp[i]=min(dp[i],dp[i-a[j]]+1);
             }
         }
-        return dp[amt]!=INT_MAX?dp[amt]:-1;
+        
+        return dp[t]==INT_MAX?-1:dp[t];
     }
 };
