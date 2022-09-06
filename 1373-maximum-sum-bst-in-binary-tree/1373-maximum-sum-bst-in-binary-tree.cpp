@@ -11,43 +11,32 @@
  */
 class Solution {
 public:
-    int ans;
     
-    vector<int> bst(TreeNode* root)
+    int ans=0;
+    
+    vector<int> check(TreeNode* root)               // {min,max,sum}
     {
         if(!root)
-            return {INT_MIN,INT_MAX,INT_MIN};
+            return {INT_MAX,INT_MIN,0};
         
-        vector<int> l,r;
-    
-        l=bst(root->left);
-        r=bst(root->right);
-    
-        if(l[2]>=root->val || r[1]<=root->val)
-        	return {max(l[0],r[0]),INT_MIN,INT_MAX};
-    
-        int mn=min({root->val,l[1],r[1]});
-        int mx=max({root->val,l[2],r[2]});
-        int sum=root->val;
+        vector<int> l=check(root->left);
+        vector<int> r=check(root->right);
         
-        if(l[0]!=INT_MIN)
-            sum+=l[0];
+        if(l[1]<root->val && r[0]>root->val)
+        {
+            int s=l[2]+r[2]+root->val;
+            ans=max(ans,s);
+            
+            return {min(l[0],root->val),max(root->val,r[1]),s};
+        }   
         
-        if(r[0]!=INT_MIN)
-            sum+=r[0];
         
-        ans=max({ans,sum,l[0],r[0]});
-        
-        // cout<<root->val<<" "<<sum<<" "<<ans<<endl;
-        return {sum,mn,mx};
+        return {INT_MIN,INT_MAX,0};
     }
     
     int maxSumBST(TreeNode* root) {
-        if(!root)
-            return 0;
         
-        ans=0;
-        auto v=bst(root);
+        check(root);
         return ans;
     }
 };
