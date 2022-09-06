@@ -1,27 +1,22 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& a)
-    {
-        int lp=1,rp=1,ans=a[0];
-        int n=a.size();
-        int l=0,r=n-1;
+    int maxProduct(vector<int>& a) {
+        int l=1,r=1,ans=a[0];
+        int j,i,n=a.size();
         
-        while(l<n)
+        for(i=0,j=n-1;i<n;i++,j--)
         {
-            lp*=a[l];
-            rp*=a[r];
+            l*=a[i];
+            r*=a[j];
             
-            ans=max(ans,max(lp,rp));
+            ans=max({ans,l,r});
             
-            if(lp==0)
-                lp=1;
-            if(rp==0)
-                rp=1;
-            
-            l++;
-            r--;
+            if(l==0)
+                l=1;
+            if(r==0)
+                r=1;
         }
+        
         return ans;
     }
-    
 };
