@@ -9,7 +9,40 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+class BSTIterator {
+public:
+    TreeNode *t;
+    
+    void inorder(TreeNode *root)
+    {
+        if(!root)
+            return;
+        
+        inorder(root->left);
+        t->right=root;
+        t=t->right;
+        inorder(root->right);
+    }
+    
+    BSTIterator(TreeNode* root) {
+        TreeNode *h=t=new TreeNode();
+        inorder(root);
+        t=h;
+    }
+    
+    int next() {
+        if(!t->right)
+            return -1;
+        t=t->right;
+        return t->val;
+    }
+    
+    bool hasNext() {
+        return t->right!=NULL;
+    }
+};
 
+/*
 class BSTIterator {
 public:
     
@@ -44,6 +77,7 @@ public:
         return !q.empty();
     }
 };
+*/
 
 /*
 class BSTIterator {
@@ -80,7 +114,6 @@ public:
     }
 };
 */
-
 /**
  * Your BSTIterator object will be instantiated and called as such:
  * BSTIterator* obj = new BSTIterator(root);
