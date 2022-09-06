@@ -36,7 +36,7 @@ public:
     
     int maxSumBST(TreeNode* root) {
         
-        check(root);
+        auto v=check(root);
         return ans;
     }
 };
