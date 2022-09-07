@@ -1,16 +1,14 @@
 class Solution {
 public:
     int threeSumClosest(vector<int>& a, int t) {
-        int n=a.size();
         int ans=a[0]+a[1]+a[2];
+        int i,n=a.size();
         
         sort(a.begin(),a.end());
-        int i;
+        
         for(i=0;i<n-2;i++)
         {
-            int l,r;
-            l=i+1;
-            r=n-1;
+            int l=i+1,r=n-1;
             
             while(l<r)
             {
@@ -19,15 +17,16 @@ public:
                 if(s==t)
                     return s;
                 
-                if(abs(t-s)<abs(t-ans))
+                if(abs(s-t)<abs(ans-t))
                     ans=s;
                 
-                if(s>t)
-                    r--;
-                else
+                if(s<t)
                     l++;
+                else
+                    r--;
             }
         }
+        
         return ans;
     }
 };
