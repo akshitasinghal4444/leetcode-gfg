@@ -13,6 +13,74 @@ public:
     // Encodes a tree to a single string.
     string s;
     
+    void preorder(TreeNode* root)
+    {
+        if(!root)
+        {
+            s+="n,";
+            return;
+        }
+        
+        s+=to_string(root->val);
+        s+=",";
+        
+        preorder(root->left);
+        preorder(root->right);
+    }
+    
+    string serialize(TreeNode* root) {
+        s="";
+        preorder(root);
+        return s;
+    }
+
+    // Decodes your encoded data to tree.
+    int i;
+    
+    int get(string t,int n)
+    {
+        string x="";
+        
+        while(i<n && t[i]!=',')
+            x+=t[i++];
+        
+        i++;
+        
+        if(x=="n")
+            return INT_MAX;
+        
+        return stoi(x);
+    }
+    
+    TreeNode* deserialize(string t,int n)
+    {
+        if(i==n)
+            return NULL;
+        
+        int x=get(t,n);
+        if(x==INT_MAX) 
+            return NULL;
+        
+        TreeNode *root=new TreeNode(x);
+        root->left=deserialize(t,n);
+        root->right=deserialize(t,n);
+        
+        return root;
+    }
+    
+    TreeNode* deserialize(string t) {
+        i=0;
+        return deserialize(t,t.length());
+    }
+};
+
+/*
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string s;
+    
     void serialize1(TreeNode* root)
     {
         if(!root)
@@ -96,6 +164,7 @@ public:
         return root;
     }
 };
+*/
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
