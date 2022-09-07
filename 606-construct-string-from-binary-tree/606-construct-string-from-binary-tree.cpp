@@ -18,15 +18,11 @@ public:
         
         string s=to_string(root->val);
         
-        if(root->left)
+        if(root->left || root->right)
             s+="(" + tree2str(root->left) + ")";
         
         if(root->right)
-        {
-            if(!root->left)
-                s+="()";
             s+="(" + tree2str(root->right) + ")";
-        }
         
         return s;
     }
