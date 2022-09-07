@@ -11,7 +11,36 @@
  */
 class Solution {
 public:
+    string s;
     
+    void preorder(TreeNode* root)
+    {
+        if(!root)
+        {
+            s+="()";
+            return ;
+        }            
+        
+        s+='(';
+        s+=to_string(root->val);
+        
+        if(root->left || root->right)
+            preorder(root->left);
+        
+        if(root->right)
+            preorder(root->right);
+        
+        s+=')';
+    }
+    
+    string tree2str(TreeNode* root) {
+        s="";
+        preorder(root);
+        
+        return s.substr(1,s.length()-2);
+    }
+    
+    /*
     string tree2str(TreeNode* root) {
         if(!root)
             return "";
@@ -26,6 +55,7 @@ public:
         
         return s;
     }
+    */
     
     /*
     string s;
