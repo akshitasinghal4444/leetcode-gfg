@@ -9,82 +9,15 @@
  */
 class Codec {
 public:
-    
+
     // Encodes a tree to a single string.
     string s;
     
-    void preorder(TreeNode* root)
-    {
-        if(!root)
-        {
-            s+='n';
-            s+=',';
-            return ;
-        } 
-        
-        s+=to_string(root->val);
-        s+=',';
-        
-        preorder(root->left);
-        preorder(root->right);
-    }
-    
-    string serialize(TreeNode* root) {
-        
-        if(!root)
-            return "";
-        
-        s="";
-        preorder(root);
-        
-        return s;
-    }
-
-    // Decodes your encoded data to tree.
-    int i;
-    
-    TreeNode* deserialize(string s,int n)
-    {
-        string t="";
-        for(i;i<n;i++)
-        {
-            if(s[i]==',')
-                break;
-            
-            t+=s[i];
-        }
-        i++;
-        
-        if(t=="n")
-            return NULL;
-        
-        TreeNode *root=new TreeNode(stoi(t));
-        root->left=deserialize(s,n);
-        root->right=deserialize(s,n);
-        
-        return root;
-    }
-    
-    TreeNode* deserialize(string s) {
-        
-        if(s.size()==0)
-            return NULL;
-        
-        int n=s.size();  
-        i=0;
-        return deserialize(s,n);
-    }
-};
-
-/*
-class Codec {
-public:
-    
-    void serialize(TreeNode* root,string &s)
+    void serialize1(TreeNode* root)
     {
         if(!root)
             return;
-            
+        
         if(root->left)
             s+=to_string(root->left->val);
         else
@@ -99,84 +32,70 @@ public:
         
         s+=',';
         
-        serialize(root->left,s);
-        serialize(root->right,s);
+        serialize1(root->left);
+        serialize1(root->right);
     }
     
-    int j;
-    void deserialize(string s,int n,TreeNode *root)
-    {
-        if(!root)
-            return;
-        
-        string t="";
-        for(j;j<n;j++)
-        {
-            if(s[j]==',')
-                break;
-            
-            t+=s[j];
-        }
-        
-        if(t!="n" && t.size()>0)
-        root->left=new TreeNode(stoi(t));
-        
-        t="";
-        for(j=j+1;j<n;j++)
-        {
-            if(s[j]==',')
-                break;
-            
-            t+=s[j];
-        }
-        j++;
-        
-        if(t!="n" && t.size()>0)
-        root->right=new TreeNode(stoi(t));
-        
-        
-        deserialize(s,n,root->left);
-        deserialize(s,n,root->right);
-        
-    }
-    
-    // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
         if(!root)
             return "";
         
-        string s=to_string(root->val);
+        s=to_string(root->val);
         s+=',';
-        serialize(root,s);
+        serialize1(root);
+        
         return s;
+        
     }
 
     // Decodes your encoded data to tree.
-    TreeNode* deserialize(string s) {
+    int i;
+    
+    int get(string t,int n)
+    {
+        string x="";
         
-        if(s.size()==0)
+        while(i<n && t[i]!=',')
+            x+=t[i++];
+        
+        i++;
+        
+        if(x=="n")
+            return INT_MAX;
+        
+        return stoi(x);
+    }
+    
+    void deserialize(string t,int n,TreeNode *root)
+    {
+        if(i==n || !root)
+            return ;
+        
+        int x=get(t,n);
+        root->left=(x==INT_MAX)?NULL:new TreeNode(x);
+        
+        x=get(t,n);
+        root->right=(x==INT_MAX)?NULL:new TreeNode(x);
+        
+        deserialize(t,n,root->left);
+        deserialize(t,n,root->right);
+        
+    }
+    
+    TreeNode* deserialize(string t) {
+        if(t=="")
             return NULL;
         
-        int i,n=s.size();
-        string t="";
+        i=0;
+        int x=get(t,t.length());
+        if(x==INT_MAX)
+            return NULL;
         
-        for(i=0;i<n;i++)
-        {
-            if(s[i]==',')
-                break;
-            
-            t+=s[i];
-        }
-        
-        TreeNode *root=new TreeNode(stoi(t));
-        j=i+1;
-        deserialize(s,n,root);
-        
+        TreeNode *root=new TreeNode(x);
+        deserialize(t,t.length(),root);
         return root;
     }
 };
-*/
-
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
