@@ -11,6 +11,27 @@
  */
 class Solution {
 public:
+    vector<int> ans;
+    
+    void rightSideView(TreeNode* root,int level)
+    {
+        if(!root)
+            return;
+        
+        if(ans.size()==level)
+            ans.push_back(root->val);
+        
+        rightSideView(root->right,level+1);
+        rightSideView(root->left,level+1);
+    }
+    
+    vector<int> rightSideView(TreeNode* root)
+    {
+        rightSideView(root,0);
+        return ans;
+    }
+    
+    /*
     vector<int> rightSideView(TreeNode* root) {
         queue<TreeNode*> q;
         vector<int> ans;
@@ -38,4 +59,5 @@ public:
         
         return ans;
     }
+    */
 };
