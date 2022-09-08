@@ -21,60 +21,21 @@ public:
 
 class Solution {
 public:
-    
-    Node* dfs(Node *node,unordered_map<int,Node*> &m)
-    {
-        if(node==NULL)
-            return NULL;
-        
-        if(m.find(node->val)==m.end())
-        {
-            Node *t=new Node(node->val);
-            m[node->val]=t;
-            for(Node *n:node->neighbors)
-            {
-                t->neighbors.push_back(dfs(n,m));
-            }
-        }
-        return m[node->val];
-    }
+    unordered_map<int,Node *> m;
     
     Node* cloneGraph(Node* node) {
-        
-        if(node==NULL)
+        if(!node)
             return NULL;
+                
+        if(m.find(node->val)!=m.end())
+            return m[node->val];
         
-        unordered_map<int,Node*> m;
+        Node *n=new Node(node->val);
+        m[node->val]=n;
         
-        return dfs(node,m);
+        for(Node *t:node->neighbors)
+            n->neighbors.push_back(cloneGraph(t));
+        
+        return n;
     }
-    
-    /*
-    Node* dfs(Node *node,unordered_map<Node*,Node*> &m)
-    {
-        if(node==NULL)
-            return NULL;
-        
-        if(m.find(node)==m.end())
-        {
-            Node *t=new Node(node->val);
-            m[node]=t;
-            for(Node *n:node->neighbors)
-            {
-                t->neighbors.push_back(dfs(n,m));
-            }
-        }
-        return m[node];
-    }
-    
-    Node* cloneGraph(Node* node) {
-        
-        if(node==NULL)
-            return NULL;
-        
-        unordered_map<Node*,Node*> m;
-        
-        return dfs(node,m);
-    }
-    */
 };
