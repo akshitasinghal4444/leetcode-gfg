@@ -1,5 +1,31 @@
 class Solution {
 public:
+    vector<int> asteroidCollision(vector<int>& a)
+    {
+        int i,n=a.size();
+        vector<int> st;
+        
+        for(i=0;i<n;i++)
+        {
+            if(st.empty() || a[i]>0)
+                st.push_back(a[i]);
+            else
+            {
+                while(!st.empty() && st.back()>0 && st.back()<abs(a[i]))
+                    st.pop_back();
+                
+                if(st.empty() || st.back()<0)
+                    st.push_back(a[i]);
+                
+                if(!st.empty() && st.back()>0 && st.back()==abs(a[i]))
+                    st.pop_back();
+            }
+        }
+        
+        return st;
+    }
+    
+    /*
     vector<int> asteroidCollision(vector<int>& a) {
         vector<int> ans=a;
         
@@ -31,4 +57,5 @@ public:
         
         return a;
     }
+    */
 };
