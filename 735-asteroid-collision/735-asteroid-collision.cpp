@@ -3,26 +3,26 @@ public:
     vector<int> asteroidCollision(vector<int>& a)
     {
         int i,n=a.size();
-        vector<int> st;
+        vector<int> ans;
         
         for(i=0;i<n;i++)
         {
-            if(st.empty() || a[i]>0)
-                st.push_back(a[i]);
+            if(ans.empty() || a[i]>0)
+                ans.push_back(a[i]);
             else
             {
-                while(!st.empty() && st.back()>0 && st.back()<abs(a[i]))
-                    st.pop_back();
+                while(!ans.empty() && ans.back()>0 && ans.back()<abs(a[i]))
+                    ans.pop_back();
                 
-                if(st.empty() || st.back()<0)
-                    st.push_back(a[i]);
+                if(ans.empty() || ans.back()<0)
+                    ans.push_back(a[i]);
                 
-                if(!st.empty() && st.back()>0 && st.back()==abs(a[i]))
-                    st.pop_back();
+                if(!ans.empty() && ans.back()>0 && ans.back()==abs(a[i]))
+                    ans.pop_back();
             }
         }
         
-        return st;
+        return ans;
     }
     
     /*
