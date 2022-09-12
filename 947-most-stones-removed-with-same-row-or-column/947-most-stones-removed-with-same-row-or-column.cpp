@@ -1,17 +1,17 @@
 class Solution {
 public:
     
-    void topo_sort(vector<int> *g,int n,vector<bool> &vis,int in,int &c)
+    void dfs(vector<int> *g,int n,vector<bool> &vis,int in,int &c)
     {
         if(vis[in])
             return;
         
         vis[in]=1;
+        c++;
         
         for(int x:g[in])
-            topo_sort(g,n,vis,x,c);
+            dfs(g,n,vis,x,c);
         
-        c++;
     }
     
     int removeStones(vector<vector<int>>& a) {
@@ -37,7 +37,7 @@ public:
             if(!vis[i])
             {
                 int c=0;
-                topo_sort(g,n,vis,i,c);
+                dfs(g,n,vis,i,c);
                 ans+=c-1;
             }
         }
