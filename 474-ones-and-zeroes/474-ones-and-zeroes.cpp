@@ -1,6 +1,42 @@
 class Solution {
 public:
+    vector<int> count(string s)
+    {
+        int z=0,o=0;
+        for(char c:s)
+        {
+            if(c=='0')
+                z++;
+            else
+                o++;
+        }
+        
+        return {z,o};
+    }
     
+    int findMaxForm(vector<string>& a, int m, int n)
+    {
+        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+        int i,j;
+        
+        for(string s:a)
+        {
+            auto f=count(s);
+            
+            for(i=m;i>=0;i--)
+            {
+                for(j=n;j>=0;j--)
+                {
+                    if(i-f[0]>=0 && j-f[1]>=0)
+                    dp[i][j]=max(dp[i][j],dp[i-f[0]][j-f[1]]+1);
+                }
+            }
+        }
+        
+        return dp[m][n];
+    }
+    
+    /*
     int find(vector<string>& a, int m, int n,int in,int l,int f[][2],vector<vector<vector<int>>> &dp,int z,int o)
     {        
         if(in==l)
@@ -37,4 +73,5 @@ public:
         
         return find(a,m,n,0,l,f,dp,0,0);
     }
+    */
 };
