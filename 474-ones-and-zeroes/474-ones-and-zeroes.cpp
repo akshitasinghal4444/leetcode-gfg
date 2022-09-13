@@ -25,9 +25,12 @@ public:
             
             for(i=m;i>=0;i--)
             {
+                if(i-f[0]<0)
+                    continue;
+                
                 for(j=n;j>=0;j--)
                 {
-                    if(i-f[0]>=0 && j-f[1]>=0)
+                    if(j-f[1]>=0)
                     dp[i][j]=max(dp[i][j],dp[i-f[0]][j-f[1]]+1);
                 }
             }
