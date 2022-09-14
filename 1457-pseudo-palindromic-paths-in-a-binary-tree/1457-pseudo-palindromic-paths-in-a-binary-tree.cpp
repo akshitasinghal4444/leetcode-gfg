@@ -11,6 +11,44 @@
  */
 class Solution {
 public:
+    
+    unordered_set<int> s;
+    int ans;
+    
+    void find(TreeNode* root)
+    {   
+        if(!root)
+            return;
+        
+        if(s.find(root->val)==s.end())
+            s.insert(root->val);
+        else
+            s.erase(root->val);
+        
+        if(!root->left && !root->right)
+        {
+            if(s.size()<=1)
+                ans++;
+        }
+        else
+        {
+            find(root->left);
+            find(root->right);
+        }
+        
+        if(s.find(root->val)==s.end())
+            s.insert(root->val);
+        else
+            s.erase(root->val);
+    }
+    
+    int pseudoPalindromicPaths (TreeNode* root) {
+        ans=0;
+        find(root);
+        return ans;
+    }
+    
+    /*
     int f[10];
     int ans;
     
@@ -60,4 +98,5 @@ public:
         find(root);
         return ans;
     }
+    */
 };
