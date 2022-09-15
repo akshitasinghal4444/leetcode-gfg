@@ -2,34 +2,19 @@ class Solution {
 public:
     void rotate(vector<int>& a, int k) {
         int n=a.size();
+        int i;
+        vector<int> t;
+        
         k=k%n;
         
-        reverse(a.begin(),a.end());
-        reverse(a.begin(),a.begin()+k);
-        reverse(a.begin()+k,a.end());
-    }
-    
-    /*
-    void reverse(vector<int>& a,int l,int r)
-    {
-        while(l<r)
-        {
-            int t=a[l];
-            a[l]=a[r];
-            a[r]=t;
-            
-            l++;
-            r--;
-        }
-    }
-    
-    void rotate(vector<int>& a, int k) {
-        int n=a.size();
-        k=k%n;
+        for(i=n-k;i<n;i++)
+            t.push_back(a[i]);
         
-        reverse(a,0,n-k-1);
-        reverse(a,n-k,n-1);
-        reverse(a,0,n-1);
+        for(i=n-k-1;i>=0;i--)
+            a[i+k]=a[i];
+        
+        for(i=0;i<k;i++)
+            a[i]=t[i];
+         
     }
-    */
 };
