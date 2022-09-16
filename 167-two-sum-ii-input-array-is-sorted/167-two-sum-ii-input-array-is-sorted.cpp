@@ -1,21 +1,21 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& a, int t) {
-        int i=0;
-        int j=a.size()-1;
-        // vector<int> ans;
+        int l=0,r=a.size()-1;
         
-        while(i<j)
+        while(l<r)
         {
-            int s=a[i]+a[j];
+            int s=a[l]+a[r];
+            
             if(s==t)
-                return {i+1,j+1};
+                return {l+1,r+1};
+            
             if(s<t)
-                i++;
+                l++;
             else
-                j--;
+                r--;
         }
-        return {};
         
+        return {};
     }
 };
