@@ -7,7 +7,9 @@ public:
         {
             if(a[i]!=0)
             {
+                if(i!=j)
                 swap(a[i],a[j]);
+                
                 j++;
             }
         }
