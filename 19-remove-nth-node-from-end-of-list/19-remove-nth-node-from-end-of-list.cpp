@@ -10,10 +10,12 @@
  */
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        
-        ListNode* t1,*t2;
+    
+    ListNode* removeNthFromEnd(ListNode* head, int n)
+    {
+        ListNode *t1,*t2;
         t1=t2=head;
+        
         while(n--)
             t1=t1->next;
         
@@ -22,12 +24,13 @@ public:
         
         while(t1->next)
         {
-            t2=t2->next;
             t1=t1->next;
+            t2=t2->next;
         }
         
         t2->next=t2->next->next;
         
         return head;
     }
+    
 };
