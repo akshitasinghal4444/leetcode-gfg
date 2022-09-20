@@ -1,103 +1,61 @@
-/*
 class Solution {
 public:
-    struct trie
-    {
-        int end;
+    int ans;
+    
+    struct trie{
         trie *next[2];
     }*root;
     
     void insert(int n)
     {
         trie *t=root;
-        for(int i=31;i>=0;i--)
-        {
-            int x=(n>>i)&1;
-            if(!t->next[x])
-                t->next[x]=new trie();
-            t=t->next[x];
-        }
-        t->end=n;
-    }
-    
-    int getxor(int n)
-    {
-        trie *t=root;
-        for(int i=31;i>=0;i--)
-        {
-            int x=!((n>>i)&1);
-            if(!t->next[x])
-            t=t->next[!x];
-            else
-            t=t->next[x];
-        }
-        return (n^t->end);
-    }
-    
-    int findMaximumXOR(vector<int>& a) {
-        int n=a.size();
-        root=new trie();
-        int ans=0;
+        int i;
         
-        for(int x:a)
-            insert(x);
-        
-        for(int x:a)
-            ans=max(ans,getxor(x));
-        
-        return ans;
-    }
-};
-*/
-
-class Solution {
-public:
-    struct trie
-    {
-        trie *next[2];
-    }*root;
-    
-    void insert(int n)
-    {
-        trie *t=root;
-        for(int i=31;i>=0;i--)
+        for(i=31;i>=0;i--)
         {
-            int x=(n>>i)&1;
-            if(!t->next[x])
-                t->next[x]=new trie();
-            t=t->next[x];
-        }
-    }
-    
-    int getxor(int n)
-    {
-        trie *t=root;
-        int ans=0;
-        for(int i=31;i>=0;i--)
-        {
-            int x=!((n>>i)&1);
-            if(!t->next[x])
-            t=t->next[!x];
-            else
-            {
-                t=t->next[x];
-                ans+=(1<<i);
-            }
+            int in=(n>>i)&1;
             
+            if(!t->next[in])
+                t->next[in]=new trie();
+            
+            t=t->next[in];
         }
-        return ans;
     }
     
+    void check(int n)
+    {
+        int x=0;
+        trie *t=root;
+        int i;
+        
+        for(i=31;i>=0;i--)
+        {
+            int in=(n>>i)&1;
+            x=x*2;
+            
+            if(t->next[!in])
+            {
+                x++;
+                t=t->next[!in];
+            }
+            else
+                t=t->next[in];
+        }
+        
+        ans=max(ans,x);
+        
+    }
+    
+    
     int findMaximumXOR(vector<int>& a) {
-        int n=a.size();
+        ans=0;
         root=new trie();
-        int ans=0;
         
         for(int x:a)
             insert(x);
         
         for(int x:a)
-            ans=max(ans,getxor(x));
+            check(x);
         
         return ans;
     }
