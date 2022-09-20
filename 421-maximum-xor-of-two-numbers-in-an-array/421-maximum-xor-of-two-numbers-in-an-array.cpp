@@ -31,11 +31,12 @@ public:
         for(i=31;i>=0;i--)
         {
             int in=(n>>i)&1;
-            x=x*2;
+            // x=x*2;
             
             if(t->next[!in])
             {
-                x++;
+                // x++;
+                x+=(1<<i);
                 t=t->next[!in];
             }
             else
