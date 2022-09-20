@@ -1,39 +1,47 @@
 class Solution {
 public:
-    struct trie
-    {
+    
+    struct trie{
         trie *next[2];
     }*root;
     
+    static bool comp(vector<int> &a,vector<int> &b)
+    {
+        return a[1]<b[1];
+    }
+    
     void insert(int n)
     {
+        int i;
         trie *t=root;
         
-        for(int i=31;i>=0;i--)
+        for(i=31;i>=0;i--)
         {
-            int x=(n>>i)&1;
-            if(!t->next[x])
-                t->next[x]=new trie();
-            t=t->next[x];
+            int in=(n>>i)&1;
+            
+            if(!t->next[in])
+                t->next[in]=new trie();
+            
+            t=t->next[in];
         }
     }
     
-    int getxor(int n)
+    int check(int n)
     {
+        int i,ans=0;
         trie *t=root;
-        int ans=0;
         
-        for(int i=31;i>=0;i--)
+        for(i=31;i>=0;i--)
         {
-            int x=(n>>i)&1;
-                        
-            if(t->next[!x])
+            int in=(n>>i)&1;
+            
+            if(t->next[!in])
             {
                 ans+=(1<<i);
-                t=t->next[!x];
+                t=t->next[!in];
             }
-            else if(t->next[x])
-                t=t->next[x];
+            else if(t->next[in])
+                t=t->next[in];
             else
                 return -1;
         }
@@ -41,44 +49,27 @@ public:
         return ans;
     }
     
-    // static bool comp(pair<pair<int,int>int> a,pair<pair<int,int>int> b)
-    // {
-    //     return a[1]<b[1];
-    // }
-    
-    vector<int> maximizeXor(vector<int>& a, vector<vector<int>>& qu) {
+    vector<int> maximizeXor(vector<int>& a, vector<vector<int>>& q) {
+        vector<int> ans(q.size());
+        int i,n=a.size();
         
         root=new trie();
-        int n1=a.size(),n2=qu.size();
-        int i,j=0;        
         
-        vector<int> ans(n2);
-        vector<pair<pair<int,int>,int>> q;
+        for(i=0;i<q.size();i++)
+            q[i].push_back(i);
         
-        for(i=0;i<n2;i++)
-        {
-            q.push_back({{qu[i][1],qu[i][0]},i});
-        }
-        
+        sort(q.begin(),q.end(),comp);
         sort(a.begin(),a.end());
-        sort(q.begin(),q.end());
-           
-        for(i=0;i<n2;i++)
+        
+        i=0;
+        for(auto v:q)
         {
-            int x,m,in;
-            x=q[i].first.second;
-            m=q[i].first.first;
-            in=q[i].second;
+            while(i<n && a[i]<=v[1])
+                insert(a[i++]);
             
-            for(j;j<n1;j++)
-            {
-                if(a[j]>m)
-                    break;
-                insert(a[j]);
-                    
-            }
-            ans[in]=getxor(x);
+            ans[v[2]]=check(v[0]);
         }
+        
         return ans;
     }
 };
