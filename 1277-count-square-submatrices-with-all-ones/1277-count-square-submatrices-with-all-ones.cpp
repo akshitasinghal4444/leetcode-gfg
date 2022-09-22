@@ -1,28 +1,24 @@
 class Solution {
 public:
     int countSquares(vector<vector<int>>& a) {
-        int m,n,i,j;
-        m=a.size();
-        n=a[0].size();
-        int dp[m][n];
-        
-        int c=0;
+        int m=a.size(),n=a[0].size();
+        int ans=0;
+        int i,j;
         
         for(i=m-1;i>=0;i--)
         {
             for(j=n-1;j>=0;j--)
             {
-                if(i==m-1 || j==n-1)
-                    dp[i][j]=a[i][j];
-                else if(a[i][j])
-                    dp[i][j]=1+min(dp[i+1][j+1],min(dp[i+1][j],dp[i][j+1]));
-                else
-                    dp[i][j]=0;
+                if(a[i][j]==0)
+                    continue;
                 
-                c+=dp[i][j];
+                if(i!=m-1 && j!=n-1)
+                    a[i][j]=1+min({a[i+1][j],a[i][j+1],a[i+1][j+1]});
+                
+                ans+=a[i][j];
             }
         }
         
-        return c;
+        return ans;
     }
 };
