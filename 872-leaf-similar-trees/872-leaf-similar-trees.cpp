@@ -11,7 +11,48 @@
  */
 class Solution {
 public:
+    int i;
+    vector<int> a;
     
+    void traverse(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
+        if(!root->left && !root->right)
+            a.push_back(root->val);
+        else
+        {
+            traverse(root->left);
+            traverse(root->right);
+        }
+    }
+    
+    
+    bool check(TreeNode* root)
+    {
+        if(!root)
+            return 1;
+        
+        if(!root->left && !root->right)
+        {
+            if(i==a.size() || a[i]!=root->val)
+            return 0;
+            
+            i++;
+        }
+        
+        return check(root->left) && check(root->right);
+    }
+    
+    bool leafSimilar(TreeNode* r1, TreeNode* r2) {
+        
+        traverse(r1);
+        i=0;
+        return check(r2) && i==a.size();
+    }
+    
+    /*
     void traverse(TreeNode* root,vector<int> &a)
     {
         if(!root)
@@ -34,4 +75,5 @@ public:
         
         return a1==a2;
     }
+    */
 };
