@@ -1,26 +1,28 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        int n=s.length();
-        int i,j,st;
-        int ans=1,maxf=0;
-        int f[26]={0};
+        int i,n=s.length();
+        int st=0,mlen=1,mf=0;
+        int f[256]={0};
         
-        for(i=0,st=0;i<n;i++)
+        for(i=0;i<n;i++)
         {
-            f[s[i]-'A']++;
-            maxf=max(maxf,f[s[i]-'A']);
-            
+            f[s[i]]++;
+            mf=max(mf,f[s[i]]);
             int len=i-st+1;
-            if(len-maxf>k)
-            {
-                f[s[st]-'A']--;
-                st++;
-            }
+            
+            if(len-mf<=k)
+                mlen=max(mlen,len);
             else
-                ans=max(ans,len);
+            {
+                while(st<=i && i-st+1-mf>k)
+                {
+                    f[s[st]]--;
+                    st++;
+                }
+            }            
         }
         
-        return ans;
+        return mlen;
     }
 };
