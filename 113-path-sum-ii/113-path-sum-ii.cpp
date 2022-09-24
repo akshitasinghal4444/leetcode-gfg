@@ -16,11 +16,8 @@ public:
     
     void check(TreeNode* root, int t)
     {
-        if(!root)
-        {            
+        if(!root)         
             return;
-        }
-            
         
         a.push_back(root->val);
         t-=root->val;
@@ -40,9 +37,6 @@ public:
     }
     
     vector<vector<int>> pathSum(TreeNode* root, int t) {
-        
-        if(!root)
-            return {};
         
         check(root,t);
         return ans;
