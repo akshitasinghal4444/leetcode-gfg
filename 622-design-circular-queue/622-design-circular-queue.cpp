@@ -1,3 +1,66 @@
+class MyCircularQueue {
+public:
+    
+    int n,size,front,rear;
+    vector<int> a;
+    
+    MyCircularQueue(int k) {
+        n=0;
+        size=k;
+        a.resize(k);
+        front=rear=-1;
+    }
+    
+    bool enQueue(int value) {
+        if(isFull())
+            return 0;
+        
+        rear=(rear+1)%size;
+        a[rear]=value;
+        n++;
+        
+        if(front==-1)
+            front=0;
+        
+        return true;
+    }
+    
+    bool deQueue() {
+        if(isEmpty())
+            return 0;
+        
+        front=(front+1)%size;
+        n--;
+        
+        return 1;
+    }
+    
+    int Front() {
+        if(isEmpty())
+            return -1;
+        
+        return a[front];
+    }
+    
+    int Rear() {
+        if(isEmpty())
+            return -1;
+        
+        return a[rear];
+    }
+    
+    bool isEmpty() {
+        return n==0;
+    }
+    
+    bool isFull() {
+        return n==size;
+    }
+};
+
+
+
+/*
 struct node{
     int val;
     node *next;
@@ -79,7 +142,7 @@ public:
         return n==size;
     }
 };
-
+*/
 
 /*
 class MyCircularQueue {
