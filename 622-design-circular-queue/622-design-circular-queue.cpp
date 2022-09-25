@@ -1,5 +1,90 @@
+struct node{
+    int val;
+    node *next;
+}*front,*rear;
+
+
 class MyCircularQueue {
 public:
+    
+    int size,n;
+    
+    MyCircularQueue(int k) {
+        n=0;
+        size=k;
+        front=rear=NULL;
+    }
+    
+    bool enQueue(int value) {
+        
+        if(isFull())
+            return 0;
+        
+        if(!front)
+        {
+            rear=new node();
+            rear->val=value;
+            front=rear;
+        }
+        else
+        {
+            node *t=new node();
+            t->val=value;
+            rear->next=t;
+            rear=t;
+        }
+        
+        rear->next=front;
+        n++;
+        
+        return true;
+    }
+    
+    bool deQueue() {
+        
+        if(isEmpty())
+           return 0;
+        
+        n--;
+        if(n==0)
+            front=rear=NULL;
+        else
+        {
+            front=front->next;
+            rear->next=front;
+        }
+        
+        return 1;
+    }
+    
+    int Front() {
+        if(isEmpty())
+            return -1;
+        
+        return front->val;
+    }
+    
+    int Rear() {
+        if(isEmpty())
+            return -1;
+        
+        return rear->val;
+    }
+    
+    bool isEmpty() {
+        return n==0;
+    }
+    
+    bool isFull() {
+        return n==size;
+    }
+};
+
+
+/*
+class MyCircularQueue {
+public:
+    
     int n,front,rear;
     vector<int> a;
     
@@ -55,6 +140,7 @@ public:
         return (rear+1)%n==front;
     }
 };
+*/
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:
