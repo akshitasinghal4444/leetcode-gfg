@@ -4,6 +4,27 @@ public:
     {
         int i,j,n=a.size();
         
+        int dp[n];
+        dp[0]=a[0][0];
+        
+        for(i=1;i<n;i++)
+        {
+            dp[i]=a[i][i]+dp[i-1];
+            
+            for(j=i-1;j>0;j--)
+                dp[j]=a[i][j]+min(dp[j],dp[j-1]);
+            
+            dp[0]=a[i][0]+dp[0];
+        }
+        
+        return *min_element(dp,dp+n);
+    }
+    
+    /*
+    int minimumTotal(vector<vector<int>>& a)
+    {
+        int i,j,n=a.size();
+        
         vector<int> dp1;
         dp1=a[0];
         
@@ -19,15 +40,11 @@ public:
             dp2.push_back(a[i][j]+dp1[j-1]);
             
             dp1=dp2;
-            
-//             for(auto x:dp1)
-//                 cout<<x<<" ";
-            
-//             cout<<endl;
         }
         
         return *min_element(dp1.begin(),dp1.end());
     }
+    */
     
     /*
     int minimumTotal(vector<vector<int>>& a,int r,int c,int n,vector<vector<int>> &dp)
