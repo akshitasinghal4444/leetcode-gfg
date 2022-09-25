@@ -1,13 +1,22 @@
 class Solution {
 public:
-    int minimumTotal(vector<vector<int>>& triangle) {
-	int n = size(triangle), level = 1;
-	vector<vector<int> > dp(2, vector<int>(n, INT_MAX));
-	dp[0][0]=triangle[0][0];  // assign top-most row to dp[0] as we will be starting from level 1
-	for(; level < n; level++) 
-		for(int i = 0; i <= level; i++)
-			dp[level & 1][i] = triangle[level][i] + min(dp[(level - 1) & 1][min(i, n - 1)], dp[(level - 1) & 1][max(i - 1, 0)]); 
-	level--; // level becomes n after for loop ends. We need minimum value from level - 1
-	return *min_element(begin(dp[level & 1]), end(dp[level & 1])); 
-}
+    int minimumTotal(vector<vector<int>>& a,int r,int c,int n,vector<vector<int>> &dp)
+    {
+        if(r==n)
+            return 0;
+        
+        if(dp[r][c]==INT_MAX)
+        {
+            dp[r][c]=a[r][c]+min(minimumTotal(a,r+1,c,n,dp),minimumTotal(a,r+1,c+1,n,dp));
+        }
+        
+        return dp[r][c]; 
+    }
+    
+    int minimumTotal(vector<vector<int>>& a) {
+        int n=a.size();
+        vector<vector<int>> dp(n,vector<int>(n,INT_MAX));
+        
+        return minimumTotal(a,0,0,n,dp);
+    }
 };
