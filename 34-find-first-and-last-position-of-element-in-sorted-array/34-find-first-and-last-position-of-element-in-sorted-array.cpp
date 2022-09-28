@@ -1,5 +1,49 @@
 class Solution {
 public:
+    vector<int> searchRange(vector<int>& a, int t)
+    {
+        int n=a.size();
+        int l=0,r=n-1,mid;
+        int st=-1,end;
+        
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+            
+            if(a[mid]==t)
+            {
+                st=mid;
+                r=mid-1;
+            }            
+            else if(a[mid]<t)
+                l=mid+1;
+            else
+                r=mid-1;
+        }
+        
+        if(st==-1)
+            return {-1,-1};
+        
+        l=st,r=n-1;
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+            
+            if(a[mid]==t)
+            {
+                end=mid;
+                l=mid+1;
+            }            
+            else if(a[mid]<t)
+                l=mid+1;
+            else
+                r=mid-1;
+        }
+        
+        return {st,end};
+    }
+    
+     /*
      vector<int> searchRange(vector<int>& a, int t)
      {
          if(a.size()==0)
@@ -13,6 +57,7 @@ public:
          
          return {st,end-1};
      }
+     */
     
     /*
     vector<int> searchRange(vector<int>& a, int t) {
