@@ -5,6 +5,44 @@ public:
         int m=a.size(),n=a[0].size();
         int l,r,i,j,mid;
         
+        for(i=0;i<m;i++)
+        {
+            if(t<a[i][0])
+                return 0;
+            
+            if(t>a[i][n-1])
+                continue;
+            
+            break;
+        }
+        
+        if(i==m)
+            return 0;
+        
+        l=0,r=n-1;
+
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+            
+            if(t==a[i][mid])
+                return 1;
+            
+            if(t>a[i][mid])
+                l=mid+1;
+            else
+                r=mid-1;
+        }
+        
+        return 0;
+    }
+    
+    /*
+    bool searchMatrix(vector<vector<int>>& a, int t)
+    {
+        int m=a.size(),n=a[0].size();
+        int l,r,i,j,mid;
+        
         l=0,r=m-1;
         
         while(l<=r)
@@ -28,12 +66,11 @@ public:
         
         i=mid;
         l=0,r=n-1;
-        // cout<<l<<" "<<r<<endl;
+
         while(l<=r)
         {
             mid=(l+r)/2;
             
-            // cout<<mid<<endl;
             if(t==a[i][mid])
                 return 1;
             
@@ -45,6 +82,7 @@ public:
         
         return 0;
     }
+    */
     
     /*
     bool searchMatrix(vector<vector<int>>& a, int t) {
