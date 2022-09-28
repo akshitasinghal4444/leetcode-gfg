@@ -1,5 +1,20 @@
 class Solution {
 public:
+     vector<int> searchRange(vector<int>& a, int t)
+     {
+         if(a.size()==0)
+             return {-1,-1};
+         
+         int st=lower_bound(a.begin(),a.end(),t)-a.begin();
+         int end=upper_bound(a.begin(),a.end(),t)-a.begin();
+         
+         if(end==0 || a[end-1]!=t)
+             return {-1,-1};
+         
+         return {st,end-1};
+     }
+    
+    /*
     vector<int> searchRange(vector<int>& a, int t) {
         int n=a.size();
         int l=0,r=n-1,mid;
@@ -30,4 +45,5 @@ public:
         
         return {st+1,end-1};
     }
+    */
 };
