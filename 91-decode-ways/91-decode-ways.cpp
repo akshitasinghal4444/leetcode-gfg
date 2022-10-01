@@ -1,8 +1,6 @@
 class Solution {
 public:
-    
-    
-    
+
     int numDecodings(string s) {
         
         if(s[0]=='0')
@@ -19,10 +17,7 @@ public:
                 if(s[i-1]=='0' || s[i-1]>'2')
                     return 0;
                 
-                if(i-2>=0)
-                dp[i]=dp[i-2];
-                else
-                dp[i]=1;
+                dp[i]=(i-2>=0)?dp[i-2]:1;
             }
             else    
             {
@@ -31,16 +26,11 @@ public:
                 string t="";
                 t+=s[i-1];
                 t+=s[i];
+                    
                 if(s[i-1]!='0' && stoi(t)<=26)
-                {
-                    if(i-2>=0)
-                        dp[i]+=dp[i-2];
-                    else
-                        dp[i]+=1;
-                }
+                    dp[i]+=(i-2>=0)?dp[i-2]:1;
             } 
             
-            // cout<<i<<" "<<dp[i]<<endl;
         }
         
         return dp[n-1];
