@@ -14,27 +14,28 @@ public:
         if(!head || !head->next)
             return head;
         
-        ListNode *t=new ListNode(0);
-        t->next=head;
+        ListNode *h,*temp=new ListNode();
+        h=temp;
+        temp->next=head;
         
-        while(t->next && t->next->next)
+        ListNode *n,*nn;
+        
+        while(temp && temp->next)
         {
-            if(t->next->val==t->next->next->val)
+            n=temp->next;
+            nn=temp->next->next;
+            
+            if(nn && nn->val==n->val)
             {
-                ListNode *t1=t->next;
-                int x=t1->val;
-                while(t1 && t1->val==x)
-                    t1=t1->next;
+                while(nn && nn->val==n->val)
+                    nn=nn->next;
                 
-                if(head==t->next)
-                    head=t1;
-                
-                t->next=t1;
+                temp->next=nn;
             }
             else
-                t=t->next;
+                temp=temp->next;
         }
         
-        return head;
+        return h->next;
     }
 };
