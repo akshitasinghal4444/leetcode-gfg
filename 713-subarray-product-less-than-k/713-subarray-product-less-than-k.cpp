@@ -9,15 +9,13 @@ public:
         {
             p*=a[i];
             
-            if(p<k)
-                ans+=(i-st+1);
-            else
+            if(p>=k)
             {
                 while(st<=i && p>=k)
                     p/=a[st++];
-                
-                ans+=(i-st+1);
             }
+                
+            ans+=(i-st+1);
         }
         return ans;
     }
