@@ -15,10 +15,23 @@ public:
         if(!root)
             return 0;
         
+         t-=root->val;
+        if(!root->left && !root->right)
+            return t==0;
+        
+        return hasPathSum(root->left,t) || hasPathSum(root->right,t);
+    }
+    
+    /*
+    bool hasPathSum(TreeNode* root, int t) {
+        if(!root)
+            return 0;
+        
         if(!root->left && !root->right && t==root->val)
             return 1;
         
         t-=root->val;
         return hasPathSum(root->left,t) || hasPathSum(root->right,t);
     }
+    */
 };
