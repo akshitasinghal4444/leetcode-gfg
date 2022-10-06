@@ -13,11 +13,10 @@ public:
     }
     
     string get(string key, int time) {
-        if(m1[key].empty())
-        return "";
+//         if(m1[key].empty())
+//         return "";
         
         int in=upper_bound(m2[key].begin(),m2[key].end(),time)-m2[key].begin();
-        // cout<<time<<in<<endl;
         
         if(in==0)
             return "";
