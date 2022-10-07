@@ -2,21 +2,25 @@ class MyCalendarThree {
 public:
     
     map<int,int> m;
+    int ans;
     
     MyCalendarThree() {
-        
+        ans=0;
     }
     
     int book(int start, int end) {
         m[start]++;
         m[end]--;
         
-        int i=0,ans=0;
+        int t=0;
         
         for(auto it:m)
         {
-            i+=it.second;
-            ans=max(ans,i);
+            if(it.first>=end)
+                break;
+            
+            t+=it.second;
+            ans=max(ans,t);
         }
         
         return ans;
