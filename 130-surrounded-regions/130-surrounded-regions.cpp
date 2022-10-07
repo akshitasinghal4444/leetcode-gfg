@@ -21,19 +21,19 @@ public:
         
         for(i=0;i<m;i++)
         {
-            if(a[i][0]=='O' && !vis[i][0])
+            if(a[i][0]=='O')
                 dfs(a,i,0,m,n,vis,'O');
             
-            if(a[i][n-1]=='O' && !vis[i][n-1])
+            if(a[i][n-1]=='O')
                 dfs(a,i,n-1,m,n,vis,'O');                
         }
         
         for(j=0;j<n;j++)
         {
-            if(a[0][j]=='O' && !vis[0][j])
+            if(a[0][j]=='O')
                 dfs(a,0,j,m,n,vis,'O');
              
-            if(a[m-1][j]=='O' && !vis[m-1][j])
+            if(a[m-1][j]=='O')
                 dfs(a,m-1,j,m,n,vis,'O');
         }
         
@@ -41,7 +41,7 @@ public:
         {
             for(j=0;j<n;j++)
             {
-                if(a[i][j]=='O' && !vis[i][j])
+                if(a[i][j]=='O')
                     dfs(a,i,j,m,n,vis,'X');
             }
         }
