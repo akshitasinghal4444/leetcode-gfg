@@ -3,25 +3,27 @@ public:
     vector<vector<int>> ans;
     vector<int> t;
     
-    void subset(vector<int>& a,int n,int in)
+    void subsets(vector<int>& a,int in,int n)
     {
         if(in==n)
         {
             ans.push_back(t);
-            return;
+            return ;
         }
         
         if(t.empty() || t.back()!=a[in])
-            subset(a,n,in+1);
+            subsets(a,in+1,n);
         
         t.push_back(a[in]);
-        subset(a,n,in+1);
+        subsets(a,in+1,n);
         t.pop_back();
     }
     
     vector<vector<int>> subsetsWithDup(vector<int>& a) {
         sort(a.begin(),a.end());
-        subset(a,a.size(),0);
+        
+        subsets(a,0,a.size());
+        
         return ans;
     }
 };
