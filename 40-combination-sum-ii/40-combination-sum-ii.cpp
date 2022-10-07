@@ -1,37 +1,31 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    vector<int> x;
-    int s;
+    vector<int> v;
     
-    void sum(vector<int>& a, int t,int in,int n)
+    void combination(vector<int>& a, int t,int in,int n)
     {
-        if(s>t)
-            return;
-        
         if(in==n)
         {
-            if(s==t)
-                ans.push_back(x);
+            if(t==0)
+                ans.push_back(v);
             return;
-        
         }
         
-        if(x.empty() || x.back()!=a[in])
-        sum(a,t,in+1,n);
+        if(t<0)
+            return;
         
-        s+=a[in];
-        x.push_back(a[in]);
-        sum(a,t,in+1,n);
-        s-=a[in];
-        x.pop_back();
+        if(v.empty() || v.back()!=a[in])
+            combination(a,t,in+1,n);
+        
+        v.push_back(a[in]);
+        combination(a,t-a[in],in+1,n);
+        v.pop_back();
     }
     
     vector<vector<int>> combinationSum2(vector<int>& a, int t) {
-        s=0;
         sort(a.begin(),a.end());
-        
-        sum(a,t,0,a.size());
+        combination(a,t,0,a.size());
         
         return ans;
     }
