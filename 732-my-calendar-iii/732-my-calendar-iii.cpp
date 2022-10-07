@@ -1,27 +1,25 @@
 class MyCalendarThree {
 public:
+    
     map<int,int> m;
-    int mx;
     
     MyCalendarThree() {
-        mx=0;
+        
     }
     
-    int book(int s, int e) {
-        m[s]++;
-        m[e]--;
-        int t=0;
+    int book(int start, int end) {
+        m[start]++;
+        m[end]--;
+        
+        int i=0,ans=0;
         
         for(auto it:m)
         {
-            if(it.first>=e)
-                break;
-            
-            t+=it.second;
-            mx=max(mx,t);
+            i+=it.second;
+            ans=max(ans,i);
         }
-                
-        return mx;
+        
+        return ans;
     }
 };
 
