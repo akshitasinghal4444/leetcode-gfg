@@ -12,10 +12,11 @@ public:
         char c=a[i][j];
         a[i][j]='.';
         
-        bool x=dfs(a,s,m,n,i-1,j,l,in+1) || dfs(a,s,m,n,i+1,j,l,in+1) || dfs(a,s,m,n,i,j-1,l,in+1) || dfs(a,s,m,n,i,j+1,l,in+1);
+        if(dfs(a,s,m,n,i-1,j,l,in+1) || dfs(a,s,m,n,i+1,j,l,in+1) || dfs(a,s,m,n,i,j-1,l,in+1) || dfs(a,s,m,n,i,j+1,l,in+1))
+            return 1;
         
         a[i][j]=c;
-        return x;
+        return 0;
     }
     
     bool exist(vector<vector<char>>& a, string s) {
