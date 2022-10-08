@@ -1,17 +1,27 @@
 class Solution {
 public:
-    vector<string> mappings = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}, ans;    
-vector<string> letterCombinations(string digits) {
-	if(digits == "") return ans;         // no combinations formed without any digits
-	helper(digits, 0, "");              
-	return ans;
-}
-// recursive helper function
-void helper(string &digits, int i, string combi){	
-	if(i == size(digits))   // base condition - push when we have recursed for all digits
-		ans.push_back(move(combi));    
-	else // add and recurse for each character (chosen from current digit-charcter mapping)
-		for(auto c : mappings[digits[i] - '2']) // <= -2 bcoz digits are in range ['2','9']. We need to convert them to indices from 0 to 8 for indexing mappings.
-			helper(digits, i + 1, combi + c);
-}
+    vector<string> ans;
+    
+    void combination(string s,int in,int n,string t,unordered_map<char,vector<char>> &m)
+    {
+        if(in==n)
+        {
+            ans.push_back(t);
+            return;
+        }
+        
+        for(char c:m[s[in]])
+            combination(s,in+1,n,t+c,m);
+    }
+    
+    vector<string> letterCombinations(string s) {
+        
+        if(s.length()==0)
+            return ans;
+        
+        unordered_map<char,vector<char>> m={{'2',{'a','b','c'}},{'3',{'d','e','f'}},{'4',{'g','h','i'}},{'5',{'j','k','l'}},{'6',{'m','n','o'}},{'7',{'p','q','r','s'}},{'8',{'t','u','v'}},{'9',{'w','x','y','z'}}};
+        
+        combination(s,0,s.length(),"",m);
+        return ans;
+    }
 };
