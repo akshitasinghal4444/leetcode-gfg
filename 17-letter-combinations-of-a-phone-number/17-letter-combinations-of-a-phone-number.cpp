@@ -1,8 +1,10 @@
 class Solution {
 public:
-    vector<string> ans;
     
-    void combination(string s,int in,int n,string t,unordered_map<char,vector<char>> &m)
+    vector<string> ans;
+    vector<string> m={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    void combination(string s,int in,int n,string t)
     {
         if(in==n)
         {
@@ -10,8 +12,8 @@ public:
             return;
         }
         
-        for(char c:m[s[in]])
-            combination(s,in+1,n,t+c,m);
+        for(char c:m[s[in]-'2'])
+            combination(s,in+1,n,t+c);
     }
     
     vector<string> letterCombinations(string s) {
@@ -19,9 +21,7 @@ public:
         if(s.length()==0)
             return ans;
         
-        unordered_map<char,vector<char>> m={{'2',{'a','b','c'}},{'3',{'d','e','f'}},{'4',{'g','h','i'}},{'5',{'j','k','l'}},{'6',{'m','n','o'}},{'7',{'p','q','r','s'}},{'8',{'t','u','v'}},{'9',{'w','x','y','z'}}};
-        
-        combination(s,0,s.length(),"",m);
+        combination(s,0,s.length(),"");
         return ans;
     }
 };
