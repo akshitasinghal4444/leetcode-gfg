@@ -5,7 +5,7 @@ public:
     
     void generate(int l,int r)
     {
-        if(l==0 && r==0)
+        if(r==0)
         {
             ans.push_back(t);
             return;
