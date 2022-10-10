@@ -6,18 +6,13 @@ public:
         if(n==1)
             return "";
         
-        int l=0,r=n-1;
-        
-        while(l<r)
+        for(int i=0;i<n/2;i++)
         {
-            if(s[l]!='a')
+            if(s[i]!='a')
             {
-                s[l]='a';
+                s[i]='a';
                 return s;
             }
-            
-            l++;
-            r--;
         }
         
         s[n-1]='b';
