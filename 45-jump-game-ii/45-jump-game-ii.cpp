@@ -10,6 +10,9 @@ public:
         {
             for(j=min(n-1,i+a[i]);j>i;j--)
             {
+                if(j==n-1)
+                    return dp[i]+1;
+                
                 if(dp[j]>dp[i]+1)
                     dp[j]=dp[i]+1;
                 else
