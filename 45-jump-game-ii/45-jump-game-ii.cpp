@@ -3,6 +3,33 @@ public:
     int jump(vector<int>& a)
     {
         int i,j,n=a.size();
+        
+        if(n==1)
+        return 0;
+        
+        int mx=0,curr=0;
+        
+        for(i=0,j=0;i<n-1;i++)
+        {
+            mx=max(mx,i+a[i]);
+            
+            if(mx>=n-1)
+                return j+1;
+            
+            if(i==curr)
+            {
+                curr=mx;
+                j++;
+            }
+        }
+        
+        return j+1;
+    }
+    
+    /*
+    int jump(vector<int>& a)
+    {
+        int i,j,n=a.size();
         vector<int> dp(n,INT_MAX);
         dp[0]=0;
         
@@ -22,6 +49,7 @@ public:
         
         return dp[n-1];
     }
+    */
     
     /*
     int jump(vector<int>& a) {
