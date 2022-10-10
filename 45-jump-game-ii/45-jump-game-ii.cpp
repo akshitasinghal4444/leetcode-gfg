@@ -11,7 +11,12 @@ public:
                 continue;
             
             for(j=1;j<=a[i] && i+j<n;j++)
+            {
                 dp[i+j]=min(dp[i+j],dp[i]+1);
+                if(i+j==n-1)
+                    return dp[n-1];
+            }
+                
         }
         
         return dp[n-1];
