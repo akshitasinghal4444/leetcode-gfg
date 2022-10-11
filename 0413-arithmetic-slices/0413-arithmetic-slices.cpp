@@ -6,6 +6,31 @@ public:
         if(n<3)
             return 0;
         
+        int l=0,ans=0,d=a[1]-a[0];
+        
+        for(i=2;i<n;i++)
+        {
+            if(a[i]-a[i-1]==d)
+                l++;
+            else
+            {
+                l=0;
+                d=a[i]-a[i-1];
+            }
+            
+            ans+=l;
+        }
+        
+        return ans;
+    }
+    
+    /*
+    int numberOfArithmeticSlices(vector<int>& a) {
+        int i,n=a.size();
+        
+        if(n<3)
+            return 0;
+        
         int st=0,ans=0,d=a[1]-a[0];
         
         for(i=2;i<n;i++)
@@ -27,4 +52,5 @@ public:
         
         return ans;
     }
+    */
 };
