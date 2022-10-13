@@ -3,6 +3,8 @@ public:
     int findNumberOfLIS(vector<int>& a) {
         int i,j,n=a.size();
         int size[n],count[n];
+        int mx=1,c=1;
+        
         size[0]=1,count[0]=1;
         
         for(i=1;i<n;i++)
@@ -26,12 +28,7 @@ public:
             }
             
             size[i]++;
-        }
-        
-        int mx=1,c=0;
-        
-        for(i=0;i<n;i++)
-        {
+                        
             if(size[i]==mx)
                 c+=count[i];
             else if(size[i]>mx)
@@ -40,7 +37,7 @@ public:
                 c=count[i];
             }
         }
-        
+    
         return c;
     }
 };
