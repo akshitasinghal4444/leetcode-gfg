@@ -8,23 +8,30 @@ public:
         
         while(l<n)
         {
-            lp*=(a[l]>=0)?(a[l]==0?0:1):-1;
-            rp*=(a[r]>=0)?(a[r]==0?0:1):-1;
-            
-            if(lp>0)
-                ans=max(ans,l-lst+1);
-            else if(lp==0)
+            if(a[l]==0)
             {
                 lp=1;
                 lst=l+1;
             }
+            else
+            {
+                lp*=a[l]>0?1:-1;
+                
+                if(lp>0)
+                ans=max(ans,l-lst+1);
+            }
             
-            if(rp>0)
-                ans=max(ans,rst-r+1);
-            else if(rp==0)
+            if(a[r]==0)
             {
                 rp=1;
                 rst=r-1;
+            }
+            else
+            {
+                rp*=a[r]>0?1:-1;
+                
+                if(rp>0)
+                ans=max(ans,rst-r+1);
             }
             
             l++;
