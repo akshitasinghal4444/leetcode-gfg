@@ -8,6 +8,13 @@
  */
 class Solution {
 public:
+    void deleteNode(ListNode* node)
+    {
+        node->val=node->next->val;
+        node->next=node->next->next;
+    }
+    
+    /*
     void deleteNode(ListNode* node) {
         ListNode *t=node->next;
         
@@ -21,4 +28,5 @@ public:
         node->val=t->val;
         node->next=NULL;
     }
+    */
 };
