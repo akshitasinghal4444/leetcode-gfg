@@ -6,6 +6,36 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
+    
+    int maximizeSum(int a[], int n) 
+    {
+        // Complete the function
+        int ans=0;
+        int i,m=1e5+1;
+        int f[m]={0};
+        
+        for(i=0;i<n;i++)
+            f[a[i]]++;
+        
+        for(i=m-1;i>0;)
+        {
+            if(f[i]<=0)
+            {
+                i--;
+                continue;
+            }
+            
+            ans+=i;
+            
+            f[i]--;
+            f[i-1]--;
+
+        }
+        
+        return ans;
+    }
+    
+    /*
     int maximizeSum(int a[], int n) 
     {
         // Complete the function
@@ -34,7 +64,7 @@ class Solution{
         
         return ans;
     }
-
+    */
 };
 
 
