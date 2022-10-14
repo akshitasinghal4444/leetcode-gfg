@@ -16,23 +16,16 @@ class Solution{
         for(i=0;i<n;i++)
             m[a[i]]++;
             
-        // for(auto it:m)
-        // cout<<it.first<<" "<<it.second<<endl;
         
         for(auto it=m.rbegin();it!=m.rend();)
         {
-            
-            
             if(it->second<=0)
             {
                 it++;
                 continue;
             }
             
-            
             ans+=it->first;
-            
-            // cout<<it->first<<endl;
             
             m[it->first]--;
             m[it->first-1]--;
