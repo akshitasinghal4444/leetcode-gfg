@@ -15,10 +15,7 @@ public:
                     break;
                 }
                 
-                if(a[i][j]==1)
-                    j++;
-                else
-                    j--;
+                j+=a[i][j];
             }
             
             if(i==m)
