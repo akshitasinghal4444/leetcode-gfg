@@ -1,6 +1,30 @@
 class Solution {
 public:
+    bool isValidSudoku(vector<vector<char>>& b)
+    {
+        unordered_set<char> row[9],col[9],box[9];
+        int i,j;
+        
+        for(i=0;i<9;i++)
+        {
+            for(j=0;j<9;j++)
+            {
+                if(b[i][j]=='.')
+                    continue;
+                
+                if(b[i][j]<'1' || b[i][j]>'9' || row[i].find(b[i][j])!=row[i].end() || col[j].find(b[i][j])!=col[j].end() || box[i/3*3+j/3].find(b[i][j])!=box[i/3*3+j/3].end())
+                    return 0;
+                
+                row[i].insert(b[i][j]);
+                col[j].insert(b[i][j]);
+                box[i/3*3+j/3].insert(b[i][j]);
+            }
+        }
+        
+        return 1;
+    }
     
+    /*
     bool checkrows(vector<vector<char>>& b)
     {
         int i,j;
@@ -79,4 +103,5 @@ public:
     bool isValidSudoku(vector<vector<char>>& b) {
         return checkrows(b) && checkcols(b) && checkbox(b);
     }
+    */
 };
