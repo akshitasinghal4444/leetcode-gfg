@@ -9,15 +9,11 @@ public:
         if(i<0 || j<0 || i>=m || j>=n || s[in]!=b[i][j])
             return 0;
         
-        char c=b[i][j];
         b[i][j]='.';
         
-        bool x=0;
+        bool x=dfs(b,m,n,i-1,j,s,in+1) || dfs(b,m,n,i+1,j,s,in+1) || dfs(b,m,n,i,j-1,s,in+1) || dfs(b,m,n,i,j+1,s,in+1);
         
-        if(dfs(b,m,n,i-1,j,s,in+1) || dfs(b,m,n,i+1,j,s,in+1) || dfs(b,m,n,i,j-1,s,in+1) || dfs(b,m,n,i,j+1,s,in+1))
-            x=1;
-        
-        b[i][j]=c;
+        b[i][j]=s[in];
         return x;
     }
     
