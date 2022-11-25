@@ -1,6 +1,25 @@
 class Solution {
 public:
-    
+    int numRollsToTarget(int n, int k, int t) {
+        vector<vector<int>> dp(n+1,vector<int>(t+1,0));
+        int i,j,x;
+        int m=1e9+7;
+        dp[0][0]=1;
+        
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=t;j++)
+            {
+                for(x=1;x<=k && x<=j;x++)
+                {
+                    dp[i][j]=(dp[i][j]+dp[i-1][j-x])%m;
+                }
+            }
+        }
+        
+        return dp[n][t];
+    }
+    /*
     int m=1e9+7;
     
     int numRollsToTarget(int n, int k, int t,vector<vector<int>> &dp)
@@ -34,7 +53,6 @@ public:
             }
         }
         
-        // cout<<n<<" "<<k<<" "<<t<<" "<<dp[n][t]<<endl;
         return dp[n][t];
     }
     
@@ -42,4 +60,5 @@ public:
         vector<vector<int>> dp(n+1,vector<int>(t+1,-1));
         return numRollsToTarget(n,k,t,dp);
     }
+    */
 };
