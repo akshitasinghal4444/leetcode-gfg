@@ -1,23 +1,28 @@
 class Solution {
 public:
-    int minCost(string s, vector<int>& a) {
+    int minCost(string s, vector<int>& t) {
         int i,n=s.length();
         int ans=0;
+        char c=s[0];
+        int mx=t[0],sum=t[0];
         
         for(i=1;i<n;i++)
         {
-            if(s[i]!=s[i-1])
-                continue;
-            
-            int t=a[i-1],total=a[i-1];
-            while(i<n && s[i]==s[i-1])
+            if(s[i]==c)
             {
-                total+=a[i];
-                t=max(t,a[i++]);
+                mx=max(mx,t[i]);
+                sum+=t[i];
+            }
+            else
+            {
+                ans+=(sum-mx);
+                sum=mx=t[i];
+                c=s[i];
             }
             
-            ans+=total-t;
+            // cout<<i<<" "<<sum<<" "<<mx<<endl;
         }
+        ans+=(sum-mx);
         
         return ans;
     }
