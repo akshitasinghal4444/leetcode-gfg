@@ -11,6 +11,29 @@
  */
 class Solution {
 public:
+    
+    TreeNode* addOneRow(TreeNode* root, int val, int d)
+    {
+        if(!root)
+            return root;
+        
+        if(d==1)
+            root=new TreeNode(val,root,NULL);
+        else if(d==2)
+        {
+            root->left=new TreeNode(val,root->left,NULL);
+            root->right=new TreeNode(val,NULL,root->right);
+        }
+        else
+        {
+            addOneRow(root->left,val,d-1);
+            addOneRow(root->right,val,d-1);
+        }
+        
+        return root;
+    }
+    
+    /*
     TreeNode* addOneRow(TreeNode* root, int val, int d) {
         
         if(d==1)
@@ -57,4 +80,5 @@ public:
         
         return root;
     }
+    */
 };
