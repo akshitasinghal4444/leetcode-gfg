@@ -10,6 +10,8 @@ public:
             win.insert(v[0]);
             lose[v[1]]++;
             
+            if(lose[v[0]]>0)
+                win.erase(v[0]);
         }
         
         for(int x:win)
