@@ -1,5 +1,27 @@
 class TimeMap {
 public:
+    unordered_map<string,map<int,string>> ktv;    //key-(timestamps,value)
+    
+    TimeMap() {}
+    
+    void set(string key, string value, int timestamp) {
+        ktv[key][timestamp]=value;
+    }
+    
+    string get(string key, int timestamp) {
+        auto it=ktv[key].upper_bound(timestamp);
+        
+        if(it==ktv[key].begin())
+            return "";
+        
+        it--;
+        return it->second;
+    }
+};
+
+/*
+class TimeMap {
+public:
     unordered_map<string,vector<int>> kt;  //key-timestamps
     unordered_map<string,vector<string>> kv;  //key-values
     
@@ -19,6 +41,7 @@ public:
         return kv[key][in-1];
     }
 };
+*/
 
 /*
 class TimeMap {
