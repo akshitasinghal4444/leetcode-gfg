@@ -1,13 +1,19 @@
 class Solution {
 public:
-    string vowels = "aeiouAEIOU";
-    
-    bool halvesAreAlike(string S) {
-        int mid = S.size() / 2, ans = 0;
-        for (int i = 0, j = mid; i < mid; i++, j++) {
-            if (~vowels.find(S[i])) ans++;
-            if (~vowels.find(S[j])) ans--;
+    bool halvesAreAlike(string s) {
+        int i,j,n=s.length();
+        int l=0,r=0;
+        unordered_set<char> vowels={'a','e','i','o','u','A','E','I','O','U'};
+        
+        for(i=0,j=n-1;i<j;i++,j--)
+        {
+            if(vowels.find(s[i])!=vowels.end())
+                l++;
+            
+            if(vowels.find(s[j])!=vowels.end())
+                r++;
         }
-        return ans == 0;
+        
+        return l==r;
     }
 };
