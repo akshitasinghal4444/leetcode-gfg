@@ -5,6 +5,32 @@ public:
         if(s1.length()!=s2.length())
             return 0;
         
+        vector<int> f1(26,0),f2(26,0);
+        
+        for(char c:s1)
+            f1[c-'a']++;
+        
+        for(char c:s2)
+            f2[c-'a']++;
+        
+        for(int i=0;i<26;i++)
+        {
+            if((f1[i]==0 && f2[i]!=0) || (f1[i]!=0 && f2[i]==0))
+                return 0;
+        }
+         
+        sort(f1.begin(),f1.end());
+        sort(f2.begin(),f2.end());
+        
+        return f1==f2;
+    }
+    
+    /*
+    bool closeStrings(string s1, string s2) {
+        
+        if(s1.length()!=s2.length())
+            return 0;
+        
         int f1[26]={0},f2[26]={0};
         unordered_map<int,int> m;
         
@@ -34,4 +60,5 @@ public:
         
         return 1;
     }
+    */
 };
