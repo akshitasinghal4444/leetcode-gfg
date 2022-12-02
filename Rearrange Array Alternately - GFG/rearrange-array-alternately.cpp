@@ -13,6 +13,31 @@ class Solution{
     // arr: input array
     // n: size of array
     //Function to rearrange  the array elements alternately.
+    
+    void rearrange(long long *a, int n) 
+    {
+        int i,maxi=n-1,mini=0;
+        long long mx=a[n-1]+1;
+        
+        for(i=0;i<n;i++)
+        {
+            if(i%2==0)
+            {
+                a[i]=a[i]+(a[maxi]%mx)*mx;
+                maxi--;
+            }
+            else
+            {
+                a[i]=a[i]+(a[mini]%mx)*mx;
+                mini++;
+            }
+        }
+        
+        for(i=0;i<n;i++)
+        a[i]/=mx;
+    }
+    
+    /*
     void rearrange(long long *a, int n) 
     { 
     	// Your code here
@@ -25,6 +50,7 @@ class Solution{
     	for(i=1,j=0;i<n;i+=2,j++)
     	a[i]=t[j];
     }
+    */
 };
 
 //{ Driver Code Starts.
