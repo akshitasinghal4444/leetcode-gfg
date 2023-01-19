@@ -12,6 +12,45 @@ class Solution{
     public:
     int carpetBox(int a, int b, int c, int d){
         //code here
+        int ans=0;
+        if(a>b)
+            swap(a,b);
+        
+        if(c>d)
+            swap(c,d);
+            
+        while(a>c || b>d)
+        {
+            if(b<=d)
+            {
+                ans++;
+                a=a/2;
+            }
+            else if(a<=c || a<=d)
+            {
+                ans++;
+                b=b/2;
+            }
+            else
+            {
+                ans+=2;
+                a/=2;
+                b/=2;
+            }
+            
+            if(a>b)
+            swap(a,b);
+        
+            if(c>d)
+            swap(c,d);
+        }
+    
+        return ans;
+    }
+    
+    /*
+    int carpetBox(int a, int b, int c, int d){
+        //code here
         if(a>b)
         swap(a,b);
         
@@ -29,6 +68,7 @@ class Solution{
         
         return 2+carpetBox(a/2,b/2,c,d);
     }
+    */
 };
 
 
