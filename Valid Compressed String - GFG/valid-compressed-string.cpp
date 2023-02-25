@@ -19,6 +19,9 @@ class Solution {
             {
                 if(s[i]!=t[j])
                 return 0;
+                
+                i++;
+                j++;
             }
             else
             {
@@ -28,12 +31,7 @@ class Solution {
                 x+=t[j++];
                 
                 i+=stoi(x);
-                i--;
-                j--;
             }
-            
-            i++;
-            j++;
         }
         
         if(i==ns && j==nt)
