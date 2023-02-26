@@ -11,7 +11,7 @@ using namespace std;
 class Solution {
   public:
   
-    bool dfs(vector<vector<int>>& a,int v,int in,vector<int> &vis,int &n,int edges)
+    bool dfs(vector<vector<int>>& a,int in,vector<int> &vis,int &n,int edges)
     {
         bool x=a[in].size()==edges;
         
@@ -21,13 +21,13 @@ class Solution {
         for(int i:a[in])
         {
             if(!vis[i])
-            x&=dfs(a,v,i,vis,n,edges);
+            x&=dfs(a,i,vis,n,edges);
         }
         
         return x;
     }
   
-    bool good(vector<vector<int>>& a,int v,int in,vector<int> &vis)
+    bool good(vector<vector<int>>& a,int in,vector<int> &vis)
     {
         vis[in]=1;
         int edges=a[in].size(),n=1;
@@ -36,7 +36,7 @@ class Solution {
         for(int i:a[in])
         {
             if(!vis[i])
-            x&=dfs(a,v,i,vis,n,edges);
+            x&=dfs(a,i,vis,n,edges);
         }
         
         return x & n==edges+1;
@@ -49,12 +49,8 @@ class Solution {
         
         for(i=1;i<=v;i++)
         {
-            if(!vis[i] && good(a,v,i,vis))
-            {
-                // cout<<"y"<<i<<endl;
+            if(!vis[i] && good(a,i,vis))
                 ans++;
-            }
-                
         }
         
         return ans;
