@@ -71,31 +71,31 @@ public:
     Node *reverse(Node *head, int k)
     {
         // code here
-        Node *t1,*t2,*t3,*h;
-        t1=head->next;
-        t2=head;
+        Node *curr,*prev,*h;
+        curr=head;
+        prev=NULL;
         
-        while(--k)
+        while(k--)
         {
-            Node *t=t1->next;
-            t1->next=t2;
-            t2=t1;
+            Node *t=curr->next;
+            curr->next=prev;
+            prev=curr;
             
-            t1=t;
+            curr=t;
         }
-        h=t2;
+        h=prev;
         
-        t2=NULL;
-        while(t1)
+        prev=NULL;
+        while(curr)
         {
-            Node *t=t1->next;
-            t1->next=t2;
-            t2=t1;
+            Node *t=curr->next;
+            curr->next=prev;
+            prev=curr;
             
-            t1=t;
+            curr=t;
         }
         
-        head->next=t2;
+        head->next=prev;
         
         return h;
     }
