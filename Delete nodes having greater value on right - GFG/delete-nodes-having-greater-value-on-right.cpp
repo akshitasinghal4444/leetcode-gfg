@@ -46,6 +46,43 @@ struct Node
 class Solution
 {
     public:
+    
+    Node *reverse(Node *head)
+    {
+        Node *p=NULL;
+        
+        while(head)
+        {
+            Node *next=head->next;
+            head->next=p;
+            p=head;
+            head=next;
+        }
+        
+        return p;
+    }
+    
+    Node *compute(Node *head)
+    {
+        head=reverse(head);
+        Node *t=head;
+        int mx=t->data;
+        
+        while(t->next)
+        {
+            mx=max(mx,t->data);
+            
+            if(t->next->data<mx)
+            t->next=t->next->next;
+            else
+            t=t->next;
+        }
+        
+        return reverse(head);
+        
+    }
+    
+    /*
     Node *compute(Node *head)
     {
         // your code goes here
@@ -66,7 +103,7 @@ class Solution
         
         return head;
     }
-    
+    */
 };
    
 
